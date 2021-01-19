@@ -1,0 +1,19 @@
+<ion-row>
+  <ion-col size="12" class="ion-text-center">
+    <h2>Siguiente turno</h2>
+    <p>
+      Le toca a <strong>{{ currentShift.name }}</strong>
+    </p>
+    <p>Aciertos: {{ currentShift.positive }}</p>
+    <p>Fallos: {{ currentShift.negative }}</p>
+  </ion-col>
+
+  <ion-col size="12">
+    <ion-button expand="full" (click)="goToNextQuestion.emit()">Siguiente pregunta</ion-button>
+  </ion-col>
+  <ion-col size="12">
+    <ion-button color="warning" expand="full" (click)="goToClassification.emit()">
+      Clasificacion
+    </ion-button>
+  </ion-col>
+</ion-row>

@@ -1,0 +1,70 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="ios">
+    <ion-title class="ion-text-center">
+      Questions App<br />
+      <small style="font-size: 13px">
+        <countdown #cdGame [config]="countdownGameConfig"></countdown>
+      </small>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="dark" fill="clear" (click)="openPopover($event)">
+        <ion-icon name="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-row class="animate__animated animate__slideInUp animate__fast">
+    <ion-col size="12" sizeLg="8" offsetLg="2">
+      <ng-container *ngIf="states.question">
+        <ion-card *ngIf="participant && question">
+          <ion-card-content class="ion-text-center">
+            Pregunta para <strong>{{ participant.name }}</strong> <br /><br />
+            {{ question.text }}
+            <br /><br />
+
+            <div
+              *ngIf="this.states.countdownQuestion"
+              style="font-size: 20px; font-weight: 800; padding: 1rem; margin: auto; width: 50%"
+            >
+              <countdown #cdQuestion [config]="countdownQuestionConfig"></countdown>
+              <p>Segundos</p>
+            </div>
+            <br />
+
+            <ion-row>
+              <ion-col>
+                <ion-button *ngIf="states.buttonStart" expand="block" (click)="startQuestion()">
+                  Iniciar pregunta
+                </ion-button>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="!this.states.countdownQuestion">
+              <ion-col size="6">
+                <ion-button color="success" expand="block" (click)="voteQuestion('positive')">
+                  Acierta
+                </ion-button>
+              </ion-col>
+              <ion-col size="6">
+                <ion-button color="danger" expand="block" (click)="voteQuestion('negative')">
+                  Falla
+                </ion-button>
+              </ion-col>
+              <br />
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ng-container>
+
+      <ng-container *ngIf="!states.question">
+        <question-resume
+          [currentShift]="participant"
+          (goToNextQuestion)="nextQuestion()"
+          (goToClassification)="viewClassification()"
+        ></question-resume>
+      </ng-container>
+    </ion-col>
+  </ion-row>
+</ion-content>
