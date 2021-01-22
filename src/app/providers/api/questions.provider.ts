@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment';
 import { questionsMock } from './questions.mock';
 import { Injectable } from '@angular/core';
 import { ParticipantI } from '@interfaces/participant.interface';
@@ -16,10 +17,13 @@ export class QuestionsProvider {
     this.initSpeech();
   }
 
-  getRandomQuestion(options: OptionsI) {
+  getRandomQuestion(options: OptionsI): QuestionI {
     const questions = this.questions.filter((item) => item.type.indexOf(options.type) !== -1);
     const randomNumber = this.utilsProvider.randomNumber(questions.length - 1, 0, false);
     const randomQuestion = questions[randomNumber];
+    console.log(this.questions.length)
+    this.questions = questions.filter((_item, i) => i !== Number(randomNumber));
+    console.log(this.questions.length)
     return randomQuestion;
   }
 
@@ -27,13 +31,15 @@ export class QuestionsProvider {
     return this.questions.filter((item: QuestionI) => item.type.indexOf(type) !== -1).length;
   }
 
-  initSpeech() {
+  initSpeech(): void {
+    console.log(environment.sound);
     this.speech
       .init({
-        volume: 1,
+        volume: environment.sound ? 1 : 0.1,
         lang: 'es-ES',
-        rate: 1,
-        pitch: 1,
+        rate: .9,
+        pitch: 1.5,
+		    splitSentences: true,
       })
       .catch((e: any) => console.error('Error al iniciar speech: ', e));
   }
@@ -41,6 +47,12 @@ export class QuestionsProvider {
   readQuestion(participant: ParticipantI, question: QuestionI): Promise<void> {
     return new Promise((resolve, reject) => {
       const msg = `Pregunta para ${participant.name}.......${question.text}`;
+      if (participant.gender === 'male') {
+        this.speech.setVoice('Monica')
+      } else if (participant.gender === 'female') {
+        this.speech.setVoice('Jorge')
+      }
+        
       this.speech
         .speak({
           text: msg,
@@ -54,7 +66,7 @@ export class QuestionsProvider {
     });
   }
 
-  async voteQuestion(type: string, participant: ParticipantI) {
+  async voteQuestion(type: string, participant: ParticipantI): Promise<ParticipantI> {
     this.shifts = await this.storageProvider.get<ParticipantI[]>('shifts');
     for (const shift of this.shifts) {
       if (shift.name === participant.name) {
@@ -66,10 +78,10 @@ export class QuestionsProvider {
       }
     }
     this.storageProvider.set('shifts', this.shifts);
-    this.changeToNextShift(participant);
+    return this.changeToNextShift(participant);
   }
 
-  changeToNextShift(participant: ParticipantI) {
+  changeToNextShift(participant: ParticipantI): ParticipantI {
     let currentShift: ParticipantI;
     for (let i = 0; i < this.shifts.length; i++) {
       const shift = this.shifts[i];
@@ -82,6 +94,6 @@ export class QuestionsProvider {
       }
     }
     this.storageProvider.set('currentShift', currentShift);
-    console.log(currentShift);
+    return currentShift;
   }
 }

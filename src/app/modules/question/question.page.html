@@ -1,5 +1,5 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar mode="ios">
+  <ion-toolbar mode="ios" color="primary">
     <ion-title class="ion-text-center">
       Questions App<br />
       <small style="font-size: 13px">
@@ -18,9 +18,21 @@
   <ion-row class="animate__animated animate__slideInUp animate__fast">
     <ion-col size="12" sizeLg="8" offsetLg="2">
       <ng-container *ngIf="states.question">
-        <ion-card *ngIf="participant && question">
+        <ion-card *ngIf="participant && question" color="primary">
           <ion-card-content class="ion-text-center">
-            Pregunta para <strong>{{ participant.name }}</strong> <br /><br />
+            <ion-item color="primary" lines="none">
+              <ion-avatar slot="start">
+                <img [src]="participant.photo | imagePipe" />
+              </ion-avatar>
+              <ion-label>
+                <strong>{{ participant.name }}</strong><br />
+                <small>
+                  <strong>Aciertos</strong>: {{ participant.positive }} - <strong>Fallos</strong>:
+                  {{ participant.negative }}
+                </small>
+              </ion-label>
+            </ion-item>
+            <br />
             {{ question.text }}
             <br /><br />
 
@@ -35,7 +47,12 @@
 
             <ion-row>
               <ion-col>
-                <ion-button *ngIf="states.buttonStart" expand="block" (click)="startQuestion()">
+                <ion-button
+                  *ngIf="states.buttonStart && !isFirstQuestion"
+                  color="light"
+                  expand="block"
+                  (click)="startQuestion()"
+                >
                   Iniciar pregunta
                 </ion-button>
               </ion-col>
@@ -58,12 +75,16 @@
         </ion-card>
       </ng-container>
 
-      <ng-container *ngIf="!states.question">
+      <ng-container *ngIf="!states.question && !states.classification">
         <question-resume
           [currentShift]="participant"
           (goToNextQuestion)="nextQuestion()"
-          (goToClassification)="viewClassification()"
+          (goToClassification)="goToClassification()"
         ></question-resume>
+      </ng-container>
+
+      <ng-container *ngIf="states.classification">
+        <question-classification (goToResume)="goToResume()"></question-classification>
       </ng-container>
     </ion-col>
   </ion-row>

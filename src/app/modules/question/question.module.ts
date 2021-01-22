@@ -9,6 +9,7 @@ import { QuestionPageRoutingModule } from './question-routing.module';
 import { CountdownModule } from 'ngx-countdown';
 import { QuestionResumeComponent } from './components/resume/question-resume.component';
 import { QuestionClassificationComponent } from './components/classification/question-classification.component';
+import { QuestionMenuComponent } from './components/menu-popover/question-menu.component';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { QuestionClassificationComponent } from './components/classification/que
   declarations: [
     QuestionPage,
     QuestionResumeComponent,
+    QuestionMenuComponent,
     QuestionClassificationComponent,
   ],
 })

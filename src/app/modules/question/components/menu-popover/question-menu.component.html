@@ -1,17 +1,15 @@
 <ion-list>
-  <!-- <ion-item *ngIf="!state" lines="full" (click)="pause()"> -->
-  <ion-item lines="full" (click)="pause()" class="pointer">
+  <ion-item button *ngIf="!state" lines="full" (click)="pause()">
     <ion-icon slot="start" name="pause"></ion-icon>
     <ion-label>Pausar</ion-label>
   </ion-item>
 
-  <!-- <ion-item *ngIf="state" lines="full" (click)="play()"> -->
-  <ion-item lines="full" (click)="play()" class="pointer">
+  <ion-item button *ngIf="state" lines="full" (click)="play()">
     <ion-icon slot="start" name="play"></ion-icon>
     <ion-label>Reanudar</ion-label>
   </ion-item>
 
-  <ion-item lines="full" (click)="reload()" class="pointer">
+  <ion-item button lines="full" (click)="reload()">
     <ion-icon slot="start" name="reload"></ion-icon>
     <ion-label>Reiniciar</ion-label>
   </ion-item>

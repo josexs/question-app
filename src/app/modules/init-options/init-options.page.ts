@@ -60,15 +60,24 @@ export class InitOptionsPage {
     }
   }
 
-  changeName(event: any, i: number) {
+  changeName(event: any) {
+    const i = event.srcElement.id;
+    console.log('name',i)
+    console.log(this.options.participants)
     this.options.participants[i].name = event.detail.value;
   }
 
-  changeGender(event: any, i: number) {
+  changeGender(event: any) {
+    const i = event.srcElement.id;
+    console.log('gender',i)
+    console.log(this.options.participants)
     this.options.participants[i].gender = event.detail.value;
   }
 
-  saveInitOptions(): void {
+  saveInitOptions(participants: ParticipantI[]): void {
+    console.log(participants.length);
+    this.options.participants = participants;
+    this.generateShifts();
     const validations = this.checkValidations();
     if (validations.state) {
       this.onSaveInitOptionsSuccess();
@@ -124,7 +133,7 @@ export class InitOptionsPage {
       ],
     };
     this.generateShifts();
-    this.saveInitOptions();
+    this.saveInitOptions([]);
   }
 
   resetGame() {

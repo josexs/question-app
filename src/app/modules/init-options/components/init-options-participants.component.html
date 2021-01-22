@@ -1,0 +1,34 @@
+<ng-container *ngIf="participants > 0">
+  <h4>Participantes</h4>
+  <ion-row>
+    <ng-container *ngFor="let user of users; let index = index">
+      <ion-col *ngIf="index < participants" size="6" sizeMd="6">
+        <ion-card>
+          <img src="assets/images/no-image.jpg" />
+          <ion-card-content>
+            <ion-item>
+              <ion-label>Nombre</ion-label>
+              <ion-input
+                class="ion-text-right"
+                placeholder="Introduce nombre"
+                [(ngModel)]="user.name"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Genero</ion-label>
+              <ion-select slot="end" placeholder="Selecciona Genero" [(ngModel)]="user.gender">
+                <ion-select-option value="male">Hombre</ion-select-option>
+                <ion-select-option value="female">Mujer</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ng-container>
+  </ion-row>
+  <br />
+  <ion-button expand="block" (click)="goToConfirm()">Confirmar</ion-button>
+  <ion-button color="warning" expand="block" (click)="simulate.emit()">
+    Simular opciones
+  </ion-button>
+</ng-container>

@@ -28,13 +28,14 @@ export class QuestionPage {
     countdownGame: true,
     question: true,
     pause: false,
+    classification: false
   };
   constructor(
     private questionsProvider: QuestionsProvider,
     private storageProvider: StorageProvider,
-    public popoverController: PopoverController,
     private navCtrl: NavController,
-    private alertProvider: AlertProvider
+    private alertProvider: AlertProvider,
+    public popoverController: PopoverController,
   ) {}
 
   async ionViewWillEnter(): Promise<void> {
@@ -42,6 +43,7 @@ export class QuestionPage {
     await this.getOptions();
     await this.getRandomQuestion();
     await this.checkFirstQuestion();
+    this.startFirstQuestion();
   }
 
   async getOptions(): Promise<void> {
@@ -72,9 +74,7 @@ export class QuestionPage {
     }
   }
 
-  async startQuestion(): Promise<void> {
-    this.states.countdownQuestion = true;
-    this.states.buttonStart = false;
+  startFirstQuestion(): void {
     if (this.isFirstQuestion) {
       this.storageProvider.set('firstQuestion', false);
       this.isFirstQuestion = false;
@@ -82,7 +82,13 @@ export class QuestionPage {
       this.countdownGame.event.subscribe(() => {
         this.alertProvider.presentAlert('¡Ole!', '¡El juego ha terminado!')
       });
+      this.startQuestion()
     }
+  }
+
+  async startQuestion(): Promise<void> {
+    this.states.countdownQuestion = true;
+    this.states.buttonStart = false;
     await this.questionsProvider.readQuestion(this.participant, this.question);
     this.countdownQuestion.begin();
     this.countdownQuestion.event.subscribe(() => {
@@ -95,9 +101,8 @@ export class QuestionPage {
     this.navCtrl.navigateForward(['/']);
   }
 
-  voteQuestion(type: string): void {
-    console.error(type);
-    this.questionsProvider.voteQuestion(type, this.participant);
+  async voteQuestion(type: string): Promise<void> {
+    this.participant = await this.questionsProvider.voteQuestion(type, this.participant);
     this.states.question = false;
   }
 
@@ -108,7 +113,14 @@ export class QuestionPage {
     this.states.buttonStart = true;
   }
 
-  viewClassification(): void {}
+  goToClassification(): void { 
+    this.states.classification = true;
+  }
+
+  goToResume() {
+    this.states.classification = false;
+  }
+  
 
   async openPopover(ev: any) {
     const popover = await this.popoverController.create({
