@@ -5,9 +5,6 @@
       <ion-col *ngIf="index < participants" size="12" sizeMd="6">
         <ion-card>
           <img src="assets/images/no-image.jpg" />
-          <!-- <input style="display:none" onchange="onTakePhoto($event)" id="image-{{index}}" type="file" accept="image/*;capture=camera"> -->
-          <!-- <ion-button expand="full" type="file" accept="image/*;capture=camera">Añadir imagen</ion-button> -->
-          <!-- <input onchange="onTakePhoto($event)" id="image-{{index}}" type="file" accept="image/*;capture=camera"> -->
           <input type="file" id="pwaphoto" #pwaphoto accept="image/x-png,image/jpeg" (change)="uploadPWA(index)">
 
           <ion-card-content>
