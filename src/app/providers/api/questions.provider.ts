@@ -1,3 +1,4 @@
+import { Platform } from '@ionic/angular';
 import { environment } from './../../../environments/environment';
 import { questionsMock } from './questions.mock';
 import { Injectable } from '@angular/core';
@@ -13,7 +14,13 @@ export class QuestionsProvider {
   questions = questionsMock;
   shifts: ParticipantI[] = [];
   speech = new Speech();
-  constructor(private utilsProvider: UtilsProvider, private storageProvider: StorageProvider) {
+  voicesSupported = [];
+
+  constructor(
+    private utilsProvider: UtilsProvider,
+    private storageProvider: StorageProvider,
+    private platform: Platform
+  ) {
     this.initSpeech();
   }
 
@@ -21,9 +28,7 @@ export class QuestionsProvider {
     const questions = this.questions.filter((item) => item.type.indexOf(options.type) !== -1);
     const randomNumber = this.utilsProvider.randomNumber(questions.length - 1, 0, false);
     const randomQuestion = questions[randomNumber];
-    console.log(this.questions.length)
     this.questions = questions.filter((_item, i) => i !== Number(randomNumber));
-    console.log(this.questions.length)
     return randomQuestion;
   }
 
@@ -32,27 +37,50 @@ export class QuestionsProvider {
   }
 
   initSpeech(): void {
-    console.log(environment.sound);
-    this.speech
-      .init({
+    if (this.speech.hasBrowserSupport()) {
+      const options = {
         volume: environment.sound ? 1 : 0.1,
-        lang: 'es-ES',
-        rate: .9,
+        lang: 'es_ES',
+        rate: 0.9,
         pitch: 1.5,
-		    splitSentences: true,
-      })
-      .catch((e: any) => console.error('Error al iniciar speech: ', e));
+        splitSentences: true,
+      };
+      this.speech
+        .init(options)
+        .then((data: any) => {
+          this.setVoicesSupported(data.voices);
+        })
+        .catch((e: any) => console.error('Error al iniciar speech: ', e));
+    } else {
+      console.error('speak-tts no soportado');
+    }
+  }
+
+  setVoicesSupported(voices: any[]) {
+    for (const voice of voices) {
+      this.voicesSupported.push(voice.name);
+    }
   }
 
   readQuestion(participant: ParticipantI, question: QuestionI): Promise<void> {
     return new Promise((resolve, reject) => {
       const msg = `Pregunta para ${participant.name}.......${question.text}`;
       if (participant.gender === 'male') {
-        this.speech.setVoice('Monica')
+        if (this.voicesSupported.indexOf('Monica') !== -1) {
+          this.speech.setVoice('Monica');
+        } else {
+          this.speech.setRate(1.3);
+          this.speech.setVoice('español España');
+        }
       } else if (participant.gender === 'female') {
-        this.speech.setVoice('Jorge')
+        if (this.voicesSupported.indexOf('Jorge') !== -1) {
+          this.speech.setVoice('Jorge');
+        } else {
+          this.speech.setRate(1.2);
+          this.speech.setVoice('español España');
+        }
       }
-        
+      this.speech.setPitch(this.utilsProvider.rand(2, true, 2));
       this.speech
         .speak({
           text: msg,

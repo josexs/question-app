@@ -1,5 +1,4 @@
 import { QuestionsProvider } from '@providers/api/questions.provider';
-import { UtilsProvider } from '@providers/utils.provider';
 import { Component } from '@angular/core';
 import { AlertProvider } from '@providers/ionic/alert.provider';
 import { StorageProvider } from '@providers/ionic/storage.provider';
@@ -31,7 +30,7 @@ export class InitOptionsPage {
     private alertProvider: AlertProvider,
     private storageProvider: StorageProvider,
     private navCtrl: NavController,
-    private questionsProvider: QuestionsProvider
+    private questionsProvider: QuestionsProvider,
   ) {}
 
   async ionViewWillEnter() {
@@ -62,20 +61,15 @@ export class InitOptionsPage {
 
   changeName(event: any) {
     const i = event.srcElement.id;
-    console.log('name',i)
-    console.log(this.options.participants)
     this.options.participants[i].name = event.detail.value;
   }
 
   changeGender(event: any) {
     const i = event.srcElement.id;
-    console.log('gender',i)
-    console.log(this.options.participants)
     this.options.participants[i].gender = event.detail.value;
   }
 
   saveInitOptions(participants: ParticipantI[]): void {
-    console.log(participants.length);
     this.options.participants = participants;
     this.generateShifts();
     const validations = this.checkValidations();
@@ -84,6 +78,9 @@ export class InitOptionsPage {
     } else {
       this.onSaveInitOptionsError(validations);
     }
+  }
+
+  takePhoto() {
   }
 
   onSaveInitOptionsSuccess() {
@@ -116,24 +113,6 @@ export class InitOptionsPage {
     }
 
     return validation;
-  }
-
-  simulateOptions() {
-    this.options = {
-      numberParticipants: '2',
-      type: 'hard',
-      state: 'resume',
-      durationGame: '30',
-      durationQuestion: '1',
-      participants: [
-        { name: 'Jose', gender: 'male', photo: '', positive: 0, negative: 0 },
-        { name: 'Black', gender: 'male', photo: '', positive: 0, negative: 0 },
-        { name: 'Manola', gender: 'female', photo: '', positive: 0, negative: 0 },
-        { name: 'Eustaquia', gender: 'female', photo: '', positive: 0, negative: 0 },
-      ],
-    };
-    this.generateShifts();
-    this.saveInitOptions([]);
   }
 
   resetGame() {

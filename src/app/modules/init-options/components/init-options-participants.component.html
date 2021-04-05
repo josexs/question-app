@@ -2,9 +2,14 @@
   <h4>Participantes</h4>
   <ion-row>
     <ng-container *ngFor="let user of users; let index = index">
-      <ion-col *ngIf="index < participants" size="6" sizeMd="6">
+      <ion-col *ngIf="index < participants" size="12" sizeMd="6">
         <ion-card>
           <img src="assets/images/no-image.jpg" />
+          <!-- <input style="display:none" onchange="onTakePhoto($event)" id="image-{{index}}" type="file" accept="image/*;capture=camera"> -->
+          <!-- <ion-button expand="full" type="file" accept="image/*;capture=camera">Añadir imagen</ion-button> -->
+          <!-- <input onchange="onTakePhoto($event)" id="image-{{index}}" type="file" accept="image/*;capture=camera"> -->
+          <input type="file" id="pwaphoto" #pwaphoto accept="image/x-png,image/jpeg" (change)="uploadPWA(index)">
+
           <ion-card-content>
             <ion-item>
               <ion-label>Nombre</ion-label>
@@ -16,7 +21,7 @@
             </ion-item>
             <ion-item>
               <ion-label>Genero</ion-label>
-              <ion-select slot="end" placeholder="Selecciona Genero" [(ngModel)]="user.gender">
+              <ion-select slot="end" placeholder="Selecciona" [(ngModel)]="user.gender">
                 <ion-select-option value="male">Hombre</ion-select-option>
                 <ion-select-option value="female">Mujer</ion-select-option>
               </ion-select>
@@ -28,7 +33,4 @@
   </ion-row>
   <br />
   <ion-button expand="block" (click)="goToConfirm()">Confirmar</ion-button>
-  <ion-button color="warning" expand="block" (click)="simulate.emit()">
-    Simular opciones
-  </ion-button>
 </ng-container>

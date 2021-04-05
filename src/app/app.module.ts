@@ -1,3 +1,4 @@
+import { Camera } from '@ionic-native/camera/ngx';
 import { GameProvider } from './providers/api/game.provider';
 import { LoadingProvider } from './providers/ionic/loading.provider';
 import { AlertProvider } from './providers/ionic/alert.provider';
@@ -15,6 +16,8 @@ import { FormsModule } from '@angular/forms';
 import { QuestionsProvider } from '@providers/api/questions.provider';
 import { UtilsProvider } from '@providers/utils.provider';
 import { HttpClientModule } from '@angular/common/http';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,8 +29,10 @@ import { HttpClientModule } from '@angular/common/http';
     IonicStorageModule.forRoot(),
     IonicModule.forRoot(),
     AppRoutingModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
+    Camera,
     GameProvider,
     QuestionsProvider,
     UtilsProvider,

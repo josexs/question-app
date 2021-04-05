@@ -21,6 +21,14 @@ export class UtilsProvider {
     }
   }
 
+  rand(maxLimit = 100, decimals = false, numberDecimals?: number): number {
+    if (!decimals) {
+      return Number(Math.random() * maxLimit);
+    } else {
+      return Number((Math.random() * maxLimit).toFixed(numberDecimals));
+    }
+  }
+
   shuffle(array: any[]): any[] {
     let currentIndex = array.length;
     let temporaryValue: any;
