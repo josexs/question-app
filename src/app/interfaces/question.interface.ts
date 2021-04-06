@@ -3,5 +3,6 @@ export interface QuestionI {
   gender: string;
   type: string[];
   created: string;
+  author: string;
   _id?: string;
 }
