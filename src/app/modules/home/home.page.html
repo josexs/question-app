@@ -1,16 +1,18 @@
 <ion-content [fullscreen]="true">
   <div id="container">
-    <ion-row class="animate__animated animate__slideInUp animate__fast">
+    <ion-row>
       <ion-col size="12" sizeLg="8" offsetLg="2">
-        <div class="img-logo">
-          <img src="assets/images/question.svg">
+        <div class="img-logo animate__animated animate__slideInDown animate__fast">
+          <img src="assets/images/question.svg" />
         </div>
-        <br><br>
-        El juego consiste en contestar reunirse entre varias personas, contestar preguntas y decidir
-        vosotros mismos si es correcta la respuesta o no. Tienes diferentes modos y en el fuerte,
-        las preguntas seran mas picantes.
         <br /><br />
-        <ion-button [routerLink]="['/init-options']">Empezamos</ion-button>
+        <div class="animate__animated animate__slideInUp animate__fast">
+          El juego consiste en contestar reunirse entre varias personas, contestar preguntas y
+          decidir vosotros mismos si es correcta la respuesta o no. Tienes diferentes modos y en el
+          fuerte, las preguntas seran mas picantes.
+          <br /><br />
+          <ion-button [routerLink]="['/init-options']">Empezamos</ion-button>
+        </div>
       </ion-col>
     </ion-row>
   </div>

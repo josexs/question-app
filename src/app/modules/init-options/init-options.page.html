@@ -9,12 +9,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-row class="animate__animated animate__slideInUp animate__fast">
+<ion-content>
+  <ion-row class="animate slideInUp">
     <ion-col size="12" sizeLg="8" offsetLg="2">
       <ng-container *ngIf="options.state === 'todo'">
         <h2>Opciones</h2>
-        <ion-card color="warning">
+        <ion-card color="warning" class="animate__animated animate__slideInUp animate__fast">
           <ion-card-content color="warning" class="ion-no-padding">
             <ion-item color="warning" lines="none">
               <ion-icon name="warning" slot="start"></ion-icon>
