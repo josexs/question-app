@@ -15,13 +15,11 @@ export class InitOptionsPage {
     numberParticipants: '2',
     type: 'normal',
     state: 'todo',
-    durationGame: '30',
     durationQuestion: '15',
     participants: [],
   };
   shifts: ParticipantI[] = [];
   typesOfGame = [
-    { name: 'Suave', value: 'light' },
     { name: 'Normal', value: 'normal' },
     { name: 'Fuerte', value: 'hard' },
   ];
@@ -43,6 +41,7 @@ export class InitOptionsPage {
         this.navCtrl.navigateForward(['/question']);
       }
     } else {
+      await this.questionsProvider.getQuestions();
       this.getTotalOfQuestionOfType();
     }
   }
@@ -121,7 +120,6 @@ export class InitOptionsPage {
       numberParticipants: '2',
       type: 'hard',
       state: 'todo',
-      durationGame: '30',
       durationQuestion: '15',
       participants: [],
     };
@@ -138,5 +136,9 @@ export class InitOptionsPage {
   generateShifts() {
     this.shifts = this.options.participants.sort(() => Math.random() - 0.5);
     this.storageProvider.set('shifts', this.shifts);
+  }
+
+  goToAdmin() {
+    this.navCtrl.navigateForward('login');
   }
 }

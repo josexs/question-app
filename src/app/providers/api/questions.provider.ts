@@ -8,6 +8,7 @@ import { QuestionI } from '@interfaces/question.interface';
 import { StorageProvider } from '@providers/ionic/storage.provider';
 import Speech from 'speak-tts';
 import { OptionsI } from '@interfaces/init-options.interface';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class QuestionsProvider {
@@ -19,9 +20,20 @@ export class QuestionsProvider {
   constructor(
     private utilsProvider: UtilsProvider,
     private storageProvider: StorageProvider,
-    private platform: Platform
+    private platform: Platform,
+    private httpClient: HttpClient
   ) {
     this.initSpeech();
+  }
+
+  async getQuestions(): Promise<QuestionI[]> {
+    const url = `${environment.path.api}/questions/getAll`;
+    return this.httpClient.post<QuestionI[]>(url, {}).toPromise();
+  }
+
+  async getQuestionsSent(): Promise<QuestionI[]> {
+    const url = `${environment.path.api}/questions/getSend`;
+    return this.httpClient.post<QuestionI[]>(url, {}).toPromise();
   }
 
   getRandomQuestion(options: OptionsI): QuestionI {
@@ -123,5 +135,27 @@ export class QuestionsProvider {
     }
     this.storageProvider.set('currentShift', currentShift);
     return currentShift;
+  }
+
+  updateQuestion(item: QuestionI) {
+    const url = `${environment.path.api}/questions/update`;
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'x-token': localStorage.getItem('token'),
+    });
+    return this.httpClient
+      .put<QuestionI>(url, item, { headers })
+      .toPromise();
+  }
+
+  deleteQuestion(id: string) {
+    const url = `${environment.path.api}/questions/one/${id}`;
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'x-token': localStorage.getItem('token'),
+    });
+    return this.httpClient
+      .delete<QuestionI>(url, { headers })
+      .toPromise();
   }
 }

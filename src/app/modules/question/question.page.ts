@@ -15,17 +15,14 @@ import { QuestionMenuComponent } from './components/menu-popover/question-menu.c
 })
 export class QuestionPage {
   @ViewChild('cdQuestion', { static: false }) private countdownQuestion: CountdownComponent;
-  @ViewChild('cdGame', { static: false }) countdownGame: CountdownComponent;
   options: OptionsI;
   question: QuestionI;
   participant: ParticipantI;
-  countdownGameConfig: CountdownConfig = {};
   countdownQuestionConfig: CountdownConfig = {};
   isFirstQuestion: boolean;
   states = {
     buttonStart: true,
     countdownQuestion: true,
-    countdownGame: true,
     question: true,
     pause: false,
     classification: false
@@ -53,11 +50,6 @@ export class QuestionPage {
       format: 's',
       demand: true,
     };
-    this.countdownGameConfig = {
-      leftTime: Number(this.options.durationGame) * 60,
-      format: 'm:ss',
-      demand: true,
-    };
   }
 
   async getRandomQuestion(): Promise<void> {
@@ -78,10 +70,6 @@ export class QuestionPage {
     if (this.isFirstQuestion) {
       this.storageProvider.set('firstQuestion', false);
       this.isFirstQuestion = false;
-      this.countdownGame.begin();
-      this.countdownGame.event.subscribe(() => {
-        this.alertProvider.presentAlert('¡Ole!', '¡El juego ha terminado!')
-      });
       this.startQuestion()
     }
   }
@@ -113,14 +101,14 @@ export class QuestionPage {
     this.states.buttonStart = true;
   }
 
-  goToClassification(): void { 
+  goToClassification(): void {
     this.states.classification = true;
   }
 
   goToResume() {
     this.states.classification = false;
   }
-  
+
 
   async openPopover(ev: any) {
     const popover = await this.popoverController.create({

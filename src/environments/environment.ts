@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  sound: true
+  sound: true,
+  path: {
+    api: 'http://localhost:6003/api'
+  }
 };
 
 /*

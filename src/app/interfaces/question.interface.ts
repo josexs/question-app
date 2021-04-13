@@ -1,8 +1,11 @@
 export interface QuestionI {
+  _id: string;
   text: string;
   gender: string;
-  type: string[];
-  created: string;
+  type: string;
   author: string;
-  _id?: string;
+  state: boolean;
+  created?: string;
+  updated?: string;
+  id?: string;
 }

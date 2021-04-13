@@ -7,6 +7,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/home/home.module').then((m) => m.HomePageModule),
   },
   {
+    path: 'login',
+    loadChildren: () => import('./modules/login/login.module').then((m) => m.LoginPageModule),
+  },
+  {
     path: 'init-options',
     loadChildren: () =>
       import('./modules/init-options/init-options.module').then((m) => m.InitOptionsPageModule),
@@ -15,6 +19,11 @@ const routes: Routes = [
     path: 'question',
     loadChildren: () =>
       import('./modules/question/question.module').then((m) => m.QuestionPageModule),
+  },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./modules/admin/admin.module').then((m) => m.AdminModule),
   },
   {
     path: '',
