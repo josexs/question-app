@@ -1,21 +1,15 @@
-<ion-row>
-  <ion-col>
-    <ion-item *ngFor="let item of shifts">
+<ion-card style="margin: 0.5rem 0 0 0" color="primary">
+  <ion-card-content>
+    <ion-item color="primary" *ngFor="let item of shifts">
       <ion-avatar slot="start">
         <img [src]="item.photo | imagePipe" />
       </ion-avatar>
       <ion-label>
         <strong>{{ item.name }}</strong>
       </ion-label>
-      <ion-label color="primary" class="ion-text-right" slot="end">
+      <ion-label class="ion-text-right" slot="end">
         {{ item.positive - item.negative }} puntos
       </ion-label>
     </ion-item>
-  </ion-col>
-</ion-row>
-
-<ion-row>
-  <ion-col>
-    <ion-button expand="block" (click)="goToResume.emit()">Volver</ion-button>
-  </ion-col>
-</ion-row>
+  </ion-card-content>
+</ion-card>

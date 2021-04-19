@@ -1,19 +1,36 @@
-<ion-row>
-  <ion-col size="12" class="ion-text-center">
-    <h2>Siguiente turno</h2>
-    <p>
-      Le toca a <strong>{{ currentShift.name }}</strong>
-    </p>
-    <p>Aciertos: {{ currentShift.positive }}</p>
-    <p>Fallos: {{ currentShift.negative }}</p>
-  </ion-col>
+<ion-card style="margin: 0.5rem 0 0 0" color="dark">
+  <ion-card-content>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <h2 style="font-size: 20px; font-weight: 700; padding-bottom: 0.5rem">Siguiente turno</h2>
+        <p>
+          Le toca a <strong>{{ currentShift.name }}</strong>
+        </p>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+</ion-card>
 
-  <ion-col size="12">
-    <ion-button expand="block" (click)="goToNextQuestion.emit()">Siguiente pregunta</ion-button>
+<ion-row style="margin: 0.5rem 0 0 0">
+  <ion-col style="padding: 0 0.25rem 0 0" size="6" class="ion-text-center">
+    <ion-card style="margin: 0" color="success">
+      <ion-card-content class="ion-text-center">
+        <ion-icon style="zoom: 3; padding-top: 0.1rem; color: white" name="checkmark"></ion-icon>
+        <br />
+        <p style="font-size: 20px; font-weight: 700; color: white">{{ currentShift.positive }}</p>
+      </ion-card-content>
+    </ion-card>
   </ion-col>
-  <ion-col size="12">
-    <ion-button color="warning" expand="block" (click)="goToClassification.emit()">
-      Clasificacion
-    </ion-button>
+  <ion-col style="padding: 0 0 0 0.25rem" size="6" class="ion-text-center">
+    <ion-card style="margin: 0" color="primary">
+      <ion-card-content class="ion-text-center">
+        <ion-icon
+          style="zoom: 3; padding-top: 0.1rem; color: white"
+          name="close-outline"
+        ></ion-icon>
+        <br />
+        <p style="font-size: 20px; font-weight: 700; color: white">{{ currentShift.negative }}</p>
+      </ion-card-content>
+    </ion-card>
   </ion-col>
 </ion-row>
