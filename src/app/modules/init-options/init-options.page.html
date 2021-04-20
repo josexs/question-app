@@ -15,19 +15,9 @@
       <ng-container *ngIf="options.state === 'todo'">
         <ion-card style="margin: 0.5rem 0 0 0" color="primary">
           <ion-card-header style="padding: 0 0 0.25rem 0.5rem">
-            <h2>Opciones</h2>
+            <h4 style="padding-left: 0.5rem">Opciones</h4>
           </ion-card-header>
           <ion-card-content style="padding: 0">
-            <ion-card color="warning" class="animate__animated animate__slideInUp animate__fast">
-              <ion-card-content color="warning" class="ion-no-padding">
-                <ion-item color="warning" lines="none">
-                  <ion-icon name="warning" slot="start"></ion-icon>
-                  <ion-label class="ion-text-wrap">
-                    {{ totalQuestions }} preguntas disponibles
-                  </ion-label>
-                </ion-item>
-              </ion-card-content>
-            </ion-card>
             <ion-item color="primary" lines="none">
               <ion-label>Tipo de juego</ion-label>
               <ion-select
@@ -87,6 +77,17 @@
           </ion-card-content>
         </ion-card>
 
+        <ion-card style="margin: 0.75rem 0 0 0" color="primary">
+          <ion-card-content color="warning" class="ion-no-padding">
+            <ion-item color="warning" lines="none">
+              <ion-icon name="warning"></ion-icon>&nbsp;&nbsp;
+              <ion-label class="ion-text-wrap">
+                {{ totalQuestions }} preguntas disponibles
+              </ion-label>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+
         <init-options-participants
           [participants]="options.numberParticipants"
           (confirm)="saveInitOptions($event)"
@@ -95,23 +96,26 @@
       </ng-container>
 
       <ng-container *ngIf="options.state === 'resume'">
-        <ion-card>
+        <ion-card style="margin: 0.5rem 0 0 0" color="dark">
           <ion-card-content>
-            <ion-item lines="none">
+            <ion-item color="dark" lines="none">
               <ion-label><strong>Tipo de juego</strong></ion-label>
               <ion-label class="ion-text-right">{{ options.type | typePipe }}</ion-label>
             </ion-item>
 
-            <ion-item lines="none">
+            <ion-item color="dark" lines="none">
               <ion-label><strong>Duracion Pregunta</strong></ion-label>
               <ion-label class="ion-text-right">{{ options.durationQuestion }} segundos</ion-label>
             </ion-item>
+          </ion-card-content>
+        </ion-card>
 
-            <br />
+        <ion-card style="margin: 1rem 0 0 0" color="primary">
+          <ion-card-content>
             <h2>Participantes</h2>
             <ion-row>
-              <ion-col size="6" *ngFor="let participant of shifts">
-                <ion-item lines="none">
+              <ion-col size="12" *ngFor="let participant of shifts">
+                <ion-item color="primary" lines="none">
                   <ion-avatar slot="start">
                     <img src="assets/images/no-image.jpg" />
                   </ion-avatar>
@@ -127,10 +131,14 @@
           </ion-card-content>
         </ion-card>
         <br />
-        <ion-button expand="block" (click)="startGame()">Empezar juego</ion-button>
-        <br />
-        <ion-button color="warning" expand="block" (click)="resetGame()">Resetear</ion-button>
+
+        <!-- <br />
+        <ion-button color="warning" expand="block" (click)="resetGame()">Resetear</ion-button> -->
       </ng-container>
     </ion-col>
   </ion-row>
 </ion-content>
+
+<ion-footer *ngIf="options.state === 'resume'">
+  <ion-button class="big-button" expand="block" color="warning" (click)="startGame()">Empezar juego</ion-button>
+</ion-footer>

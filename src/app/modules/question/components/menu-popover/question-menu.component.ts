@@ -1,3 +1,4 @@
+import { AlertProvider } from '@providers/ionic/alert.provider';
 import { Component } from '@angular/core';
 import { NavParams, PopoverController } from '@ionic/angular';
 
@@ -7,17 +8,22 @@ import { NavParams, PopoverController } from '@ionic/angular';
 })
 export class QuestionMenuComponent {
   state: boolean;
-  constructor(private navParams: NavParams, private popoverCtrl: PopoverController) {
+  constructor(
+    private navParams: NavParams,
+    private popoverCtrl: PopoverController,
+    private alertProvider: AlertProvider
+  ) {
     this.state = this.navParams.get('state');
   }
 
-  play() {
-    this.popoverCtrl.dismiss({action: 'play'});
+  reload(): void {
+    this.alertProvider.presentAlertWithButtons('¿Estas seguro?', 'Vas a terminar el juego', [
+      { text: 'No', role: 'cancel' },
+      { text: 'Si', handler: () => this.confirmReload() },
+    ]);
   }
-  pause() {
-    this.popoverCtrl.dismiss({action: 'pause'});
-  }
-  reload() {
-    this.popoverCtrl.dismiss({action: 'reload'});
+
+  confirmReload(): void {
+    this.popoverCtrl.dismiss({ action: 'reload' });
   }
 }

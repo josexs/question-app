@@ -1,7 +1,7 @@
 <ng-container *ngIf="participants > 0">
-  <ion-card style="margin: 0.5rem 0 0 0" color="primary">
+  <ion-card style="margin: 0.75rem 0 0 0" color="light">
     <ion-card-header style="padding: 0 0 0.25rem 0.5rem">
-      <h4>Participantes</h4>
+      <h4 style="padding-left: 0.5rem">Participantes</h4>
     </ion-card-header>
     <ion-card-content style="padding: 0">
       <ion-row>
@@ -11,7 +11,7 @@
               <!-- <img src="assets/images/no-image.jpg" />
           <input type="file" id="pwaphoto" #pwaphoto accept="image/x-png,image/jpeg" (change)="uploadPWA(index)"> -->
 
-              <ion-item color="primary">
+              <ion-item color="light">
                 <ion-label>Nombre</ion-label>
                 <ion-input
                   class="ion-text-right"
@@ -19,7 +19,7 @@
                   [(ngModel)]="user.name"
                 ></ion-input>
               </ion-item>
-              <ion-item color="primary">
+              <ion-item color="light">
                 <ion-label>Genero</ion-label>
                 <ion-select slot="end" placeholder="Selecciona" [(ngModel)]="user.gender">
                   <ion-select-option value="male">Hombre</ion-select-option>
@@ -32,6 +32,7 @@
       </ion-row>
     </ion-card-content>
   </ion-card>
-
-  <ion-button expand="block" color="warning" (click)="goToConfirm()">Confirmar</ion-button>
+  <ion-button class="big-button-2" expand="block" color="warning" (click)="goToConfirm()">
+    Confirmar
+  </ion-button>
 </ng-container>

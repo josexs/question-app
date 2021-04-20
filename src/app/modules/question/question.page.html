@@ -73,11 +73,12 @@
 </ion-content>
 
 <ion-footer *ngIf="states.buttonStart && !isFirstQuestion">
-  <ion-button style="margin: 0.5rem" color="primary" expand="block" (click)="startQuestion()">
+  <ion-button class="big-button" color="warning" expand="block" (click)="startQuestion()">
     Iniciar pregunta
   </ion-button>
 </ion-footer>
 
+<!-- Footer Acierto o fallo -->
 <ion-footer style="margin-bottom: 0.5rem" *ngIf="states.question && !this.states.countdownQuestion">
   <ion-row>
     <ion-col size="6">
@@ -99,23 +100,47 @@
   </ion-row>
 </ion-footer>
 
+<!-- Footer Clasification y next -->
 <ion-footer style="margin-bottom: 0.5rem" *ngIf="!states.question && !states.classification">
   <ion-row>
-    <ion-col size="12">
-      <ion-button expand="block" (click)="nextQuestion()">Siguiente pregunta</ion-button>
+    <ion-col size="6">
+      <ion-card style="margin: 0" color="warning" (click)="goToClassification()">
+        <ion-card-content class="ion-text-center">
+          <ion-icon
+            style="zoom: 3; padding-top: 0.1rem; color: white"
+            name="list-outline"
+          ></ion-icon>
+          <br />
+        </ion-card-content>
+      </ion-card>
     </ion-col>
-    <ion-col size="12">
-      <ion-button color="warning" expand="block" (click)="goToClassification()">
-        Clasificacion
-      </ion-button>
+    <ion-col size="6">
+      <ion-card style="margin: 0" color="primary" (click)="nextQuestion()">
+        <ion-card-content class="ion-text-center">
+          <ion-icon
+            style="zoom: 3; padding-top: 0.1rem; color: white"
+            name="arrow-forward-outline"
+          ></ion-icon>
+          <br />
+        </ion-card-content>
+      </ion-card>
     </ion-col>
   </ion-row>
 </ion-footer>
 
+<!-- Footer clasificacion -->
 <ion-footer style="margin-bottom: 0.5rem" *ngIf="states.classification">
   <ion-row>
     <ion-col>
-      <ion-button expand="block" (click)="goToResume()">Volver</ion-button>
+      <ion-card style="margin: 0" color="primary" (click)="goToResume()">
+        <ion-card-content class="ion-text-center">
+          <ion-icon
+            style="zoom: 3; padding-top: 0.1rem; color: white"
+            name="arrow-back-outline"
+          ></ion-icon>
+          <br />
+        </ion-card-content>
+      </ion-card>
     </ion-col>
   </ion-row>
 </ion-footer>
