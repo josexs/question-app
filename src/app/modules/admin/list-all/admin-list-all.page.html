@@ -1,18 +1,21 @@
 <ion-header class="ion-no-border">
   <ion-toolbar mode="ios" color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title class="ion-text-center">Admin</ion-title>
+    <ion-title class="ion-text-center">Preguntas ({{this.items.length}})</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-item (click)="goToEdit(item)" *ngFor="let item of items" detail>
-    <p>{{ item.text }}<br><br>
-    <ion-text color="primary">{{ item.author }}</ion-text> -
-    <ion-text color="primary">{{ item.created | timeAgo | titlecase }}</ion-text><br>
-
-  </p>
+    <p>
+      {{ item.text }}<br /><br />
+      <ion-badge color="primary">{{ item.author }}</ion-badge>&nbsp;
+      <ion-badge color="dark">{{ item.created | timeAgo | titlecase }}</ion-badge>&nbsp;
+      <ion-badge *ngIf="item.type == 'normal'">Normal</ion-badge>
+      <ion-badge *ngIf="item.type == 'hard'">Fuerte</ion-badge>
+    </p>
   </ion-item>
 </ion-content>
+
+<ion-footer color>
+  <ion-button expand="full" [routerLink]="['/admin']">Volver</ion-button>
+</ion-footer>
