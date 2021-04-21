@@ -5,6 +5,7 @@ import { StorageProvider } from '@providers/ionic/storage.provider';
 import { OptionsI } from 'app/interfaces/init-options.interface';
 import { NavController } from '@ionic/angular';
 import { ParticipantI } from '@interfaces/participant.interface';
+import { Gtag } from 'angular-gtag';
 
 @Component({
   selector: 'app-init-options',
@@ -29,6 +30,7 @@ export class InitOptionsPage {
     private storageProvider: StorageProvider,
     private navCtrl: NavController,
     private questionsProvider: QuestionsProvider,
+    private gtag: Gtag
   ) {}
 
   async ionViewWillEnter() {
@@ -79,9 +81,6 @@ export class InitOptionsPage {
     }
   }
 
-  takePhoto() {
-  }
-
   onSaveInitOptionsSuccess() {
     this.options.state = 'resume';
     this.storageProvider.set('options', this.options);
@@ -130,6 +129,7 @@ export class InitOptionsPage {
     this.storageProvider.set('options', this.options);
     this.storageProvider.set('currentShift', this.shifts[0]);
     this.storageProvider.set('firstQuestion', true);
+    this.gtag.event('startGame');
     this.navCtrl.navigateForward(['question']);
   }
 
@@ -138,7 +138,8 @@ export class InitOptionsPage {
     this.storageProvider.set('shifts', this.shifts);
   }
 
-  goToAdmin() {
+  goToLogin() {
+    this.gtag.event('goToLogin');
     this.navCtrl.navigateForward('login');
   }
 }

@@ -8,6 +8,7 @@ import { OptionsI } from '@interfaces/init-options.interface';
 import { ParticipantI } from '@interfaces/participant.interface';
 import { QuestionI } from '@interfaces/question.interface';
 import { QuestionMenuComponent } from './components/menu-popover/question-menu.component';
+import { Gtag } from 'angular-gtag';
 
 @Component({
   selector: 'page-question',
@@ -33,6 +34,7 @@ export class QuestionPage {
     private navCtrl: NavController,
     private alertProvider: AlertProvider,
     public popoverController: PopoverController,
+    private gtag: Gtag
   ) {}
 
   async ionViewWillEnter(): Promise<void> {
@@ -70,6 +72,7 @@ export class QuestionPage {
     if (this.isFirstQuestion) {
       this.storageProvider.set('firstQuestion', false);
       this.isFirstQuestion = false;
+      this.gtag.event('startFirstQuestion');
       this.startQuestion();
     }
   }
@@ -82,15 +85,18 @@ export class QuestionPage {
     this.countdownQuestion.event.subscribe(() => {
       this.states.countdownQuestion = false;
     });
+    this.gtag.event('startQuestion');
   }
 
   resetGame(): void {
     this.storageProvider.remove('options');
+    this.gtag.event('resetGame');
     this.navCtrl.navigateForward(['/']);
   }
 
   async voteQuestion(type: string): Promise<void> {
     this.participant = await this.questionsProvider.voteQuestion(type, this.participant);
+    this.gtag.event('voteQuestion');
     this.states.question = false;
   }
 
@@ -99,13 +105,16 @@ export class QuestionPage {
     this.states.countdownQuestion = true;
     this.states.question = true;
     this.states.buttonStart = true;
+    this.gtag.event('nextQuestion');
   }
 
   goToClassification(): void {
+    this.gtag.event('goToClassification');
     this.states.classification = true;
   }
 
   goToResume() {
+    this.gtag.event('goToResume');
     this.states.classification = false;
   }
 
@@ -117,6 +126,7 @@ export class QuestionPage {
       translucent: true,
       componentProps: { state: this.states.pause },
     });
+    this.gtag.event('openPopover');
     await popover.present();
     const response = await popover.onDidDismiss();
     if (response.data && response.data.action) {

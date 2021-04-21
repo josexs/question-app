@@ -3,7 +3,7 @@ import { environment } from './../../../environments/environment';
 import { questionsMock } from './questions.mock';
 import { Injectable } from '@angular/core';
 import { ParticipantI } from '@interfaces/participant.interface';
-import { UtilsProvider } from '@providers/utils.provider';
+import { UtilsProvider } from '@providers/misc/utils.provider';
 import { QuestionI } from '@interfaces/question.interface';
 import { StorageProvider } from '@providers/ionic/storage.provider';
 import Speech from 'speak-tts';
