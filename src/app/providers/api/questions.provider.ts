@@ -21,7 +21,7 @@ export class QuestionsProvider {
     private utilsProvider: UtilsProvider,
     private storageProvider: StorageProvider,
     private platform: Platform,
-    private httpClient: HttpClient,
+    private httpClient: HttpClient
   ) {
     this.initSpeech();
   }
@@ -40,7 +40,7 @@ export class QuestionsProvider {
     const questions = this.questions.filter((item) => item.type.indexOf(options.type) !== -1);
     const randomNumber = this.utilsProvider.randomNumber(questions.length - 1, 0, false);
     const randomQuestion = questions[randomNumber];
-    this.questions = questions.filter((_item, i) => i !== Number(randomNumber));
+    this.questions = questions.filter((item, i) => i !== Number(randomNumber));
     return randomQuestion;
   }
 
@@ -163,12 +163,10 @@ export class QuestionsProvider {
 
   async generateHeaders(): Promise<HttpHeaders> {
     const token = await this.storageProvider.get<string>('token');
-    let headers = new HttpHeaders({
+    const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'x-token': token,
     });
     return headers;
   }
 }
-
-

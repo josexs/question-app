@@ -6,10 +6,10 @@ import { InitOptionsPage } from './init-options.page';
 
 import { InitOptionsPageRoutingModule } from './init-options-routing.module';
 import { PipesModule } from 'app/pipes/pipes.module';
-import { InitOptionsParticipants } from './components/init-options-participants.component';
+import { InitOptionsParticipantsComponent } from './components/init-options-participants.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule, InitOptionsPageRoutingModule, PipesModule],
-  declarations: [InitOptionsPage, InitOptionsParticipants],
+  declarations: [InitOptionsPage, InitOptionsParticipantsComponent],
 })
 export class InitOptionsPageModule {}

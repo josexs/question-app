@@ -20,7 +20,7 @@ export class AdminListAllPage {
   }
 
   goToEdit(item: QuestionI): void {
-    let navigationExtras: NavigationExtras = {
+    const navigationExtras: NavigationExtras = {
       queryParams: {
         item: JSON.stringify(item),
         route: JSON.stringify({ sent: false }),

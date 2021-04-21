@@ -40,8 +40,8 @@ export class LoginPage implements OnInit {
     const loading = await this.loadingCtrl.create();
     this.authProvider
       .login({
-        email: this.credentials.value['email'],
-        password: this.credentials.value['password'],
+        email: this.credentials.value.email,
+        password: this.credentials.value.password,
       })
       .then(
         async (response: { item: any; token: string }) => {

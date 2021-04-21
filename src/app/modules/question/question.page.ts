@@ -70,7 +70,7 @@ export class QuestionPage {
     if (this.isFirstQuestion) {
       this.storageProvider.set('firstQuestion', false);
       this.isFirstQuestion = false;
-      this.startQuestion()
+      this.startQuestion();
     }
   }
 

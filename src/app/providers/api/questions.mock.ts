@@ -1,4 +1,4 @@
-import { QuestionI } from "@interfaces/question.interface";
+import { QuestionI } from '@interfaces/question.interface';
 export const questionsMock: QuestionI[] = [
   {
     text: 'Di 3 razones para darle un like a un feo en Tinder',
