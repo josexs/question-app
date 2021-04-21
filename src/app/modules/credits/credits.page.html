@@ -1,0 +1,25 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="ios" color="primary">
+    <ion-title class="ion-text-center">Questions App </ion-title>
+    <ion-buttons slot="start">
+      <ion-button color="dark" fill="clear" (click)="goToHome()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card color="dark">
+    <ion-card-content>Desde aqui podeis ver todos los autores de las preguntas de QuestionsApp </ion-card-content>
+  </ion-card>
+
+  <ion-card color="dark">
+    <ion-card-content>
+      <ion-item color="dark" *ngFor="let item of authors">
+        {{ item.author }}
+        <ion-badge slot="end"> {{ item.questions }} </ion-badge>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

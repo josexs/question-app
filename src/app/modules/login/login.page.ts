@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
 import { StorageProvider } from '@providers/ionic/storage.provider';
+import { Gtag } from 'angular-gtag';
 
 @Component({
   selector: 'page-login',
@@ -19,7 +20,8 @@ export class LoginPage implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private loadingCtrl: LoadingController,
-    private storageProvider: StorageProvider
+    private storageProvider: StorageProvider,
+    private gtag: Gtag
   ) {}
 
   ngOnInit(): void {
@@ -58,6 +60,11 @@ export class LoginPage implements OnInit {
           }
         }
       );
+  }
+
+  goBack() {
+    this.gtag.event('goToHome');
+    this.router.navigate(['/init-options']);
   }
 
   get email() {

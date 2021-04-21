@@ -16,15 +16,16 @@
             <ion-card-content color="primary">
               <ion-item color="primary">
                 <ion-label>Tipo</ion-label>
-                <ion-select formControlName="type" placeholder="Selecciona">
+                <ion-select
+                  formControlName="type"
+                  placeholder="Selecciona"
+                  okText="Ok"
+                  cancelText="Cancelar"
+                >
                   <ion-select-option value="normal">Normal</ion-select-option>
                   <ion-select-option value="hard">Fuerte</ion-select-option>
                 </ion-select>
               </ion-item>
-              <div *ngIf="(type.dirty || type.touched) && type.errors" class="errors">
-                <span *ngIf="type.errors?.required">El tipo es obligatorio</span>
-                <span *ngIf="type.errors?.minlength">El tipo es incorrecto</span>
-              </div>
 
               <ion-item color="primary">
                 <ion-label>Activo</ion-label>
@@ -42,7 +43,7 @@
               </ion-item>
               <div *ngIf="(text.dirty || text.touched) && text.errors" class="errors">
                 <span *ngIf="text.errors?.required">Pregunta obligatoria</span>
-                <span *ngIf="text.errors?.email">Pregunta incorrecta</span>
+                <span *ngIf="text.errors?.minlength">La pregunta necesita minimo 10 caracteres</span>
               </div>
             </ion-card-content>
           </ion-card>

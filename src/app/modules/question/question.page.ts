@@ -91,8 +91,10 @@ export class QuestionPage {
   resetGame(): void {
     this.storageProvider.remove('options');
     this.gtag.event('resetGame');
-    this.navCtrl.navigateForward(['/']);
+    this.navCtrl.navigateForward(['/home-menu']);
   }
+
+  endGame() {}
 
   async voteQuestion(type: string): Promise<void> {
     this.participant = await this.questionsProvider.voteQuestion(type, this.participant);

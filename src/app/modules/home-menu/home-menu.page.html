@@ -1,0 +1,12 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="ios" color="primary">
+    <ion-title class="ion-text-center">Questions App </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button expand="block" color="primary" class="big-button" (click)="goTo('route1')">Iniciar partida</ion-button>
+  <ion-button expand="block" color="warning" class="big-button" *ngIf="continue" (click)="goTo('route2')">Continuar partida</ion-button>
+  <ion-button expand="block" [color]="continue ? 'primary' : 'warning'" class="big-button" (click)="goTo('route3')">Enviar preguntas</ion-button>
+  <ion-button expand="block" [color]="continue ? 'warning' : 'primary'" class="big-button" (click)="goTo('route4')">Autores de preguntas</ion-button>
+</ion-content>

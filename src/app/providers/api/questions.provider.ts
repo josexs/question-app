@@ -36,6 +36,11 @@ export class QuestionsProvider {
     return this.httpClient.post<QuestionI[]>(url, {}).toPromise();
   }
 
+  async getAuthors(): Promise<any[]> {
+    const url = `${environment.path.api}/questions/getAuthors`;
+    return this.httpClient.post<any[]>(url, {}).toPromise();
+  }
+
   getRandomQuestion(options: OptionsI): QuestionI {
     const questions = this.questions.filter((item) => item.type.indexOf(options.type) !== -1);
     const randomNumber = this.utilsProvider.randomNumber(questions.length - 1, 0, false);
@@ -142,6 +147,13 @@ export class QuestionsProvider {
     const headers = await this.generateHeaders();
     return this.httpClient
       .post<QuestionI>(url, item, { headers })
+      .toPromise();
+  }
+
+  async createUserCuestion(item: QuestionI) {
+    const url = `${environment.path.api}/questions/sendApp`;
+    return this.httpClient
+      .post<QuestionI>(url, item)
       .toPromise();
   }
 

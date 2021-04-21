@@ -1,6 +1,11 @@
 <ion-header class="ion-no-border">
   <ion-toolbar mode="ios" color="primary">
     <ion-title class="ion-text-center">Questions App </ion-title>
+    <ion-buttons slot="start">
+      <ion-button color="dark" fill="clear" (click)="goToHome()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-buttons slot="end">
       <ion-button color="dark" fill="clear" (click)="goToLogin()">
         <ion-icon name="people"></ion-icon>
@@ -27,6 +32,8 @@
                 placeholder="Seleciona tipo"
                 [(ngModel)]="options.type"
                 (ionChange)="getTotalOfQuestionOfType()"
+                okText="Ok"
+                cancelText="Cancelar"
               >
                 <ion-select-option *ngFor="let type of typesOfGame" [value]="type.value">
                   {{ type.name }}
@@ -42,6 +49,8 @@
                 multiple="false"
                 placeholder="Selecciona duracion pregunta"
                 [(ngModel)]="options.durationQuestion"
+                okText="Ok"
+                cancelText="Cancelar"
               >
                 <ion-select-option value="5">5 segundos</ion-select-option>
                 <ion-select-option value="10">10 segundos</ion-select-option>
@@ -61,6 +70,8 @@
                 placeholder="Selecciona participantes"
                 [(ngModel)]="options.numberParticipants"
                 (ionChange)="changeNumberOfParticipants()"
+                okText="Ok"
+                cancelText="Cancelar"
               >
                 <ion-select-option value="2">2</ion-select-option>
                 <ion-select-option value="3">3</ion-select-option>
@@ -140,5 +151,7 @@
 </ion-content>
 
 <ion-footer *ngIf="options.state === 'resume'">
-  <ion-button class="big-button" expand="block" color="warning" (click)="startGame()">Empezar juego</ion-button>
+  <ion-button class="big-button" expand="block" color="warning" (click)="startGame()"
+    >Empezar juego</ion-button
+  >
 </ion-footer>

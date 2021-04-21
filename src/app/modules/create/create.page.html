@@ -1,0 +1,91 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="ios" color="primary">
+    <ion-title class="ion-text-center">Questions App </ion-title>
+    <ion-buttons slot="start">
+      <ion-button color="dark" fill="clear" (click)="goToHome()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="animate slideInUp">
+    <ion-col size="12" sizeLg="8" offsetLg="2">
+      <form [formGroup]="question">
+        <div class="input-group">
+          <ion-card style="margin: 0.5rem 0 0 0" color="dark">
+            <ion-card-content color="dark">
+              <ion-item color="dark">
+                <ion-label>Tu nombre</ion-label>
+                <ion-input
+                  class="ion-text-right"
+                  formControlName="author"
+                  placeholder="Nombre"
+                ></ion-input>
+              </ion-item>
+              <div *ngIf="(author.dirty || author.touched) && author.errors" class="errors">
+                <span *ngIf="author.errors?.required">El nombre del autor es obligatorio</span>
+                <span *ngIf="author.errors?.minlength">Tienes que introducir minimo 4 caracteres</span>
+              </div>
+
+              <ion-item color="dark">
+                <ion-label>Tu ciudad</ion-label>
+                <ion-input
+                  class="ion-text-right"
+                  formControlName="city"
+                  placeholder="Ciudad"
+                ></ion-input>
+              </ion-item>
+              <div *ngIf="(city.dirty || city.touched) && city.errors" class="errors">
+                <span *ngIf="city.errors?.required">La ciudad o zona es obligatorio</span>
+                <span *ngIf="city.errors?.minlength">Tienes que introducir minimo 4 caracteres</span>
+              </div>
+
+              <ion-item color="dark">
+                <ion-label>Tipo</ion-label>
+                <ion-select
+                  formControlName="type"
+                  placeholder="Selecciona"
+                  okText="Ok"
+                  cancelText="Cancelar"
+                >
+                  <ion-select-option value="normal">Normal</ion-select-option>
+                  <ion-select-option value="hard">Fuerte</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <div *ngIf="(type.dirty || type.touched) && type.errors" class="errors">
+                <span *ngIf="type.errors?.required">El tipo es obligatorio</span>
+              </div>
+
+              <ion-item color="dark">
+                <ion-label>Pregunta</ion-label>
+                <ion-textarea
+                  type="text"
+                  placeholder="Escribe la pregunta"
+                  formControlName="text"
+                  rows="5"
+                ></ion-textarea>
+              </ion-item>
+              <div *ngIf="(text.dirty || text.touched) && text.errors" class="errors">
+                <span *ngIf="text.errors?.required">Pregunta obligatoria</span>
+                <span *ngIf="text.errors?.minlength">La pregunta necesita minimo 10 caracteres</span>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </form>
+    </ion-col>
+  </ion-row>
+</ion-content>
+
+<ion-footer>
+  <ion-button
+    [disabled]="!question.valid"
+    class="big-button"
+    (click)="create()"
+    type="submit"
+    expand="block"
+    >Enviar pregunta</ion-button
+  >
+</ion-footer>

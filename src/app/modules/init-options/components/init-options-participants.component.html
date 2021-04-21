@@ -21,7 +21,13 @@
               </ion-item>
               <ion-item color="light">
                 <ion-label>Genero</ion-label>
-                <ion-select slot="end" placeholder="Selecciona" [(ngModel)]="user.gender">
+                <ion-select
+                  slot="end"
+                  placeholder="Selecciona"
+                  [(ngModel)]="user.gender"
+                  okText="Ok"
+                  cancelText="Cancelar"
+                >
                   <ion-select-option value="male">Hombre</ion-select-option>
                   <ion-select-option value="female">Mujer</ion-select-option>
                 </ion-select>

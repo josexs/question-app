@@ -114,7 +114,7 @@ export class InitOptionsPage {
   }
 
   resetGame() {
-    this.storageProvider.remove('options');
+    this.storageProvider.clear();
     this.options = {
       numberParticipants: '2',
       type: 'hard',
@@ -138,9 +138,14 @@ export class InitOptionsPage {
     this.storageProvider.set('shifts', this.shifts);
   }
 
+  goToHome() {
+    this.gtag.event('goToHome');
+    this.navCtrl.navigateForward('/home-menu');
+  }
+
   goToLogin() {
     this.gtag.event('goToLogin');
-    this.navCtrl.navigateForward('login');
+    this.navCtrl.navigateForward('/login');
   }
 
   takePhoto() {}

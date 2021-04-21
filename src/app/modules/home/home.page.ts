@@ -12,6 +12,6 @@ export class HomePage {
 
   goTo() {
     this.gtag.event('start');
-    this.router.navigate(['/init-options']);
+    this.router.navigate(['/home-menu']);
   }
 }

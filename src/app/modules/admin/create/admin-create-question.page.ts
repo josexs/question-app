@@ -27,7 +27,7 @@ export class AdminCreateQuestionPage implements OnInit {
 
   ngOnInit() {
     this.question = this.formBuilder.group({
-      text: ['', [Validators.required, Validators.minLength(6)]],
+      text: ['', [Validators.required, Validators.minLength(10)]],
       type: ['normal', [Validators.required]],
       state: [false, [Validators.required]],
     });

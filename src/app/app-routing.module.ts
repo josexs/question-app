@@ -7,6 +7,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/home/home.module').then((m) => m.HomePageModule),
   },
   {
+    path: 'home-menu',
+    loadChildren: () => import('./modules/home-menu/home-menu.module').then((m) => m.HomeMenuPageModule),
+  },
+  {
     path: 'login',
     loadChildren: () => import('./modules/login/login.module').then((m) => m.LoginPageModule),
   },
@@ -19,6 +23,16 @@ const routes: Routes = [
     path: 'question',
     loadChildren: () =>
       import('./modules/question/question.module').then((m) => m.QuestionPageModule),
+  },
+  {
+    path: 'credits',
+    loadChildren: () =>
+      import('./modules/credits/credits.module').then((m) => m.CreditsPageModule),
+  },
+  {
+    path: 'create',
+    loadChildren: () =>
+      import('./modules/create/create.module').then((m) => m.CreatePageModule),
   },
   {
     path: 'admin',
