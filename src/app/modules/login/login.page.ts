@@ -1,42 +1,68 @@
 import { AuthProvider } from './../../providers/api/auth.provider';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AlertProvider } from '@providers/ionic/alert.provider';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'page-login',
   templateUrl: 'login.page.html',
+  styleUrls: ['./login.page.scss']
 })
-export class LoginPage {
-  email = '';
-  password = '';
+export class LoginPage implements OnInit {
+  credentials: FormGroup;
   constructor(
     private authProvider: AuthProvider,
     private alertProvider: AlertProvider,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private loadingCtrl: LoadingController
   ) {}
 
-  ionViewWillEnter() {
+  ngOnInit(): void {
+    this.credentials = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+  }
+
+  ionViewWillEnter(): void {
     const token = localStorage.getItem('token');
     if (token) {
       this.router.navigate(['admin']);
     }
   }
 
-  login() {
-    this.authProvider.login({ email: this.email, password: this.password }).then(
-      (response: { item: any; token: string }) => {
-        console.log(response);
-        localStorage.setItem('token', response.token);
-        this.router.navigate(['admin']);
-      },
-      (error) => {
-        if (error.error && error.error.message) {
-          this.alertProvider.presentAlert('Vaya!', error.error.message);
-        } else {
-          this.alertProvider.presentAlert('Vaya!', 'Ha ocurrido un error, intentalo mas tarde');
+  async login(): Promise<void> {
+    const loading = await this.loadingCtrl.create();
+    this.authProvider
+      .login({
+        email: this.credentials.value['email'],
+        password: this.credentials.value['password'],
+      })
+      .then(
+        async (response: { item: any; token: string }) => {
+          await loading.dismiss();
+          localStorage.setItem('token', response.token);
+          this.router.navigate(['admin']);
+        },
+        async (error) => {
+          await loading.dismiss();
+          if (error.error && error.error.message) {
+            this.alertProvider.presentAlert('Vaya!', error.error.message);
+          } else {
+            this.alertProvider.presentAlert('Vaya!', 'Ha ocurrido un error, intentalo mas tarde');
+          }
         }
-      }
-    );
+      );
+  }
+
+  get email() {
+    return this.credentials.get('email');
+  }
+
+  get password() {
+    return this.credentials.get('password');
   }
 }

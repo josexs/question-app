@@ -8,21 +8,33 @@
 </ion-header>
 
 <ion-content>
-  <form>
-    <ion-item lines="full">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input name="email" [(ngModel)]="email" type="text" required></ion-input>
-    </ion-item>
-
-    <ion-item lines="full">
-      <ion-label position="floating">Password</ion-label>
-      <ion-input name="password" [(ngModel)]="password" type="password" required></ion-input>
-    </ion-item>
-
-    <ion-row>
-      <ion-col>
-        <ion-button (click)="login()" type="submit" expand="block">Sign In</ion-button>
-      </ion-col>
-    </ion-row>
+  <form [formGroup]="credentials">
+    <div class="input-group">
+      <ion-item color="dark">
+        <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+      </ion-item>
+      <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
+        <span *ngIf="email.errors?.required">Email obligatorio</span>
+        <span *ngIf="email.errors?.email">Email incorrecto</span>
+      </div>
+      <ion-item color="dark">
+        <ion-input type="password" placeholder="Contraseña" formControlName="password"></ion-input>
+      </ion-item>
+      <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
+        <span *ngIf="password.errors?.required">Contraseña obligatoria</span>
+        <span *ngIf="password.errors?.minlength">La contraseña necesita minimo 6 caracteres</span>
+      </div>
+    </div>
   </form>
 </ion-content>
+
+<ion-footer>
+  <ion-button
+    [disabled]="!credentials.valid"
+    class="big-button"
+    (click)="login()"
+    type="submit"
+    expand="block"
+    >Entrar</ion-button
+  >
+</ion-footer>
