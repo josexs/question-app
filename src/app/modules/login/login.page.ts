@@ -4,6 +4,7 @@ import { AlertProvider } from '@providers/ionic/alert.provider';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
+import { StorageProvider } from '@providers/ionic/storage.provider';
 
 @Component({
   selector: 'page-login',
@@ -17,7 +18,8 @@ export class LoginPage implements OnInit {
     private alertProvider: AlertProvider,
     private router: Router,
     private formBuilder: FormBuilder,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private storageProvider: StorageProvider
   ) {}
 
   ngOnInit(): void {
@@ -27,8 +29,8 @@ export class LoginPage implements OnInit {
     });
   }
 
-  ionViewWillEnter(): void {
-    const token = localStorage.getItem('token');
+  async ionViewWillEnter(): Promise<void> {
+    const token = await this.storageProvider.get('token');
     if (token) {
       this.router.navigate(['admin']);
     }
@@ -44,7 +46,7 @@ export class LoginPage implements OnInit {
       .then(
         async (response: { item: any; token: string }) => {
           await loading.dismiss();
-          localStorage.setItem('token', response.token);
+          await this.storageProvider.set('token', response.token);
           this.router.navigate(['admin']);
         },
         async (error) => {

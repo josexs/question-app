@@ -21,7 +21,7 @@ export class QuestionsProvider {
     private utilsProvider: UtilsProvider,
     private storageProvider: StorageProvider,
     private platform: Platform,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
   ) {
     this.initSpeech();
   }
@@ -137,25 +137,38 @@ export class QuestionsProvider {
     return currentShift;
   }
 
-  updateQuestion(item: QuestionI) {
+  async createAdminCuestion(item: QuestionI) {
+    const url = `${environment.path.api}/questions/create`;
+    const headers = await this.generateHeaders();
+    return this.httpClient
+      .post<QuestionI>(url, item, { headers })
+      .toPromise();
+  }
+
+  async updateQuestion(item: QuestionI) {
     const url = `${environment.path.api}/questions/update`;
-    let headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-token': localStorage.getItem('token'),
-    });
+    const headers = await this.generateHeaders();
     return this.httpClient
       .put<QuestionI>(url, item, { headers })
       .toPromise();
   }
 
-  deleteQuestion(id: string) {
+  async deleteQuestion(id: string) {
     const url = `${environment.path.api}/questions/one/${id}`;
-    let headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-token': localStorage.getItem('token'),
-    });
+    const headers = await this.generateHeaders();
     return this.httpClient
       .delete<QuestionI>(url, { headers })
       .toPromise();
   }
+
+  async generateHeaders(): Promise<HttpHeaders> {
+    const token = await this.storageProvider.get<string>('token');
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'x-token': token,
+    });
+    return headers;
+  }
 }
+
+
