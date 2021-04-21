@@ -142,4 +142,6 @@ export class InitOptionsPage {
     this.gtag.event('goToLogin');
     this.navCtrl.navigateForward('login');
   }
+
+  takePhoto() {}
 }
