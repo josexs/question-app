@@ -1,18 +1,24 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar mode="ios" color="primary">
-    <ion-title class="ion-text-center">Preguntas enviadas</ion-title>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-button color="dark" fill="clear" [routerLink]="['/admin']">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Preguntas enviadas ({{items.length}})</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-card *ngIf="items.length === 0" class="card-button" color="primary">
+    <ion-card-content> No hay preguntas enviadas </ion-card-content>
+  </ion-card>
+
   <ion-item (click)="goToEdit(item)" *ngFor="let item of items" detail>
-    <p>{{ item.text }}<br><br>
-    <ion-text color="primary">{{ item.author }}</ion-text> -
-    <ion-text color="primary">{{ item.created | timeAgo | titlecase }}</ion-text><br>
-  </p>
+    <p>
+      {{ item.text }}<br /><br />
+      <ion-text color="primary">{{ item.author }}</ion-text> -
+      <ion-text color="primary">{{ item.created | timeAgo | titlecase }}</ion-text><br />
+    </p>
   </ion-item>
 </ion-content>
-
-<ion-footer>
-  <ion-button expand="full" [routerLink]="['/admin']">Volver</ion-button>
-</ion-footer>

@@ -1,27 +1,28 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar mode="ios" color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
+  <ion-toolbar mode="ios">
     <ion-title class="ion-text-center">Admin</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-      <ion-item (click)="goTo('all')" detail>
-        <ion-icon color="primary" name="help-circle-outline" slot="start"></ion-icon>
-        <ion-label>Todas las preguntas</ion-label>
-      </ion-item>
-      <ion-item (click)="goTo('sent')" detail>
-        <ion-icon color="primary" name="send-outline" slot="start"></ion-icon>
-        <ion-label>Preguntas enviadas</ion-label>
-      </ion-item>
-      <ion-item (click)="goTo('create')" detail>
-        <ion-icon color="primary" name="add-circle-outline" slot="start"></ion-icon>
-        <ion-label>Crear pregunta</ion-label>
-      </ion-item>
-      <ion-item (click)="logout()" detail>
-        <ion-icon color="primary" name="log-out-outline" slot="start"></ion-icon>
-        <ion-label>Cerrar sesion</ion-label>
-      </ion-item>
+
+  <ng-container *ngFor="let item of items">
+    <ion-card
+      *ngIf="item.state"
+      [color]="item.color"
+      class="card-button"
+      (click)="goTo(item.route)"
+    >
+      <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
+        <ion-item lines="none" [color]="item.color">
+          <ion-label class="card-button-label">
+            {{ item.title }}<br />
+            <span class="card-button-sublabel">{{ item.subtitle }}</span>
+          </ion-label>
+          <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-ripple-effect></ion-ripple-effect>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
 </ion-content>
