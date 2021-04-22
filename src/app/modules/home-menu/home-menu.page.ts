@@ -15,6 +15,7 @@ export class HomeMenuPage {
     route3: '/create',
     route4: '/credits',
   };
+  items = [];
   continue = false;
   constructor(
     private gtag: Gtag,
@@ -25,27 +26,56 @@ export class HomeMenuPage {
   async ionViewWillEnter(): Promise<void> {
     const shifts = await this.storageProvider.get('shifts');
     this.continue = shifts ? true : false;
+    console.log(this.continue);
+    this.createItems();
   }
 
-  async goTo(route: string) {
-    switch (route) {
-      case 'route1':
-        await this.storageProvider.clear();
-        this.gtag.event('start');
-        break;
-      case 'route2':
-        this.gtag.event('continue');
-        break;
-      case 'route3':
-        this.gtag.event('create');
-        break;
-      case 'route4':
-        this.gtag.event('credits');
-        break;
-      default:
-        break;
-    }
+  createItems() {
+    this.items = [
+      {
+        title: 'Iniciar partida',
+        subtitle: 'Aqui empieza todo...',
+        action: 'start',
+        color: 'dark',
+        state: true,
+        event: 'start',
+        route: '/init-options',
+      },
+      {
+        title: 'Continuar',
+        subtitle: '¿Continuamos donde lo dejamos?',
+        action: 'continue',
+        color: 'dark',
+        state: this.continue,
+        event: 'continue',
+        route: '/init-options',
+      },
+      {
+        title: 'Enviar preguntas',
+        subtitle: '¿Te atreves a enviarnos algo?',
+        action: 'continue',
+        color: 'dark',
+        state: true,
+        event: 'sendQuestion',
+        route: '/create',
+      },
+      {
+        title: 'Autores de preguntas',
+        subtitle: 'Aqui, los que han hecho esto posible',
+        action: 'continue',
+        color: 'dark',
+        state: true,
+        event: 'credits',
+        route: '/credits',
+      },
+    ];
+  }
 
-    this.router.navigate([this.routes[route]]);
+  async goTo(route: string, event: string) {
+    if (event === 'start') {
+      await this.storageProvider.clear();
+    }
+    this.gtag.event(event);
+    this.router.navigate([route]);
   }
 }

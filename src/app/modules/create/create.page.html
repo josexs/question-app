@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar mode="ios" color="primary">
-    <ion-title class="ion-text-center">Questions App </ion-title>
+  <ion-toolbar mode="ios">
+    <ion-title class="ion-text-center">Enviar pregunta </ion-title>
     <ion-buttons slot="start">
       <ion-button color="dark" fill="clear" (click)="goToHome()">
         <ion-icon name="arrow-back-outline"></ion-icon>
@@ -10,13 +10,12 @@
 </ion-header>
 
 <ion-content>
-  <ion-row class="animate slideInUp">
-    <ion-col size="12" sizeLg="8" offsetLg="2">
+
       <form [formGroup]="question">
         <div class="input-group">
-          <ion-card style="margin: 0.5rem 0 0 0" color="dark">
+          <ion-card class="card-button" color="dark">
             <ion-card-content color="dark">
-              <ion-item color="dark">
+              <ion-item color="dark" lines="none">
                 <ion-label>Tu nombre</ion-label>
                 <ion-input
                   class="ion-text-right"
@@ -29,7 +28,7 @@
                 <span *ngIf="author.errors?.minlength">Tienes que introducir minimo 4 caracteres</span>
               </div>
 
-              <ion-item color="dark">
+              <ion-item color="dark" lines="none">
                 <ion-label>Tu ciudad</ion-label>
                 <ion-input
                   class="ion-text-right"
@@ -42,7 +41,7 @@
                 <span *ngIf="city.errors?.minlength">Tienes que introducir minimo 4 caracteres</span>
               </div>
 
-              <ion-item color="dark">
+              <ion-item color="dark" lines="none">
                 <ion-label>Tipo</ion-label>
                 <ion-select
                   formControlName="type"
@@ -58,7 +57,7 @@
                 <span *ngIf="type.errors?.required">El tipo es obligatorio</span>
               </div>
 
-              <ion-item color="dark">
+              <ion-item color="dark" lines="none">
                 <ion-label>Pregunta</ion-label>
                 <ion-textarea
                   type="text"
@@ -75,8 +74,6 @@
           </ion-card>
         </div>
       </form>
-    </ion-col>
-  </ion-row>
 </ion-content>
 
 <ion-footer>

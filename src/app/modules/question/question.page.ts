@@ -26,7 +26,7 @@ export class QuestionPage {
     countdownQuestion: true,
     question: true,
     pause: false,
-    classification: false
+    classification: false,
   };
   constructor(
     private questionsProvider: QuestionsProvider,
@@ -120,6 +120,14 @@ export class QuestionPage {
     this.states.classification = false;
   }
 
+  goToEnd() {
+    this.alertProvider.presentAlertWithButtons('¿Estas seguro?', '¿Quieres terminar el juego?', [
+      { text: 'No', role: 'cancel' },
+      { text: 'Si', handler: () => this.goToEndConfirm() },
+    ]);
+  }
+
+  goToEndConfirm() {}
 
   async openPopover(ev: any) {
     const popover = await this.popoverController.create({

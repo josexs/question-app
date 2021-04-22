@@ -1,12 +1,56 @@
-<ion-header class="ion-no-border">
+<!-- <ion-header class="ion-no-border">
   <ion-toolbar mode="ios" color="primary">
     <ion-title class="ion-text-center">Questions App </ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content>
-  <ion-button expand="block" color="primary" class="big-button" (click)="goTo('route1')">Iniciar partida</ion-button>
-  <ion-button expand="block" color="warning" class="big-button" *ngIf="continue" (click)="goTo('route2')">Continuar partida</ion-button>
-  <ion-button expand="block" [color]="continue ? 'primary' : 'warning'" class="big-button" (click)="goTo('route3')">Enviar preguntas</ion-button>
-  <ion-button expand="block" [color]="continue ? 'warning' : 'primary'" class="big-button" (click)="goTo('route4')">Autores de preguntas</ion-button>
+  <h4 class="title-hello">¡Hola!</h4>
+  <div class="subtitle-hello">Elige una de las siguientes opciones</div>
+
+  <ng-container *ngFor="let item of items">
+    <ion-card
+      *ngIf="item.state"
+      [color]="item.color"
+      class="card-button"
+      (click)="goTo(item.route, item.event)"
+    >
+      <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
+        <ion-item lines="none" [color]="item.color">
+          <ion-label class="card-button-label">
+            {{ item.title }}<br />
+            <span class="card-button-sublabel">{{ item.subtitle }}</span>
+          </ion-label>
+          <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-ripple-effect></ion-ripple-effect>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <!-- <ion-button expand="block" color="primary" class="big-button" (click)="goTo('route1')"
+    >Iniciar partida</ion-button
+  >
+  <ion-button
+    expand="block"
+    color="warning"
+    class="big-button"
+    *ngIf="continue"
+    (click)="goTo('route2')"
+    >Continuar partida</ion-button
+  >
+  <ion-button
+    expand="block"
+    [color]="continue ? 'primary' : 'warning'"
+    class="big-button"
+    (click)="goTo('route3')"
+    >Enviar preguntas</ion-button
+  >
+  <ion-button
+    expand="block"
+    [color]="continue ? 'warning' : 'primary'"
+    class="big-button"
+    (click)="goTo('route4')"
+    >Autores de preguntas</ion-button
+  > -->
 </ion-content>

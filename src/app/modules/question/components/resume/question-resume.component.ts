@@ -9,5 +9,6 @@ export class QuestionResumeComponent {
   @Input() currentShift: ParticipantI;
   @Output() goToNextQuestion = new EventEmitter();
   @Output() goToClassification = new EventEmitter();
+  @Output() goToEnd = new EventEmitter();
   constructor() {}
 }

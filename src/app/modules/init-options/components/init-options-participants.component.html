@@ -1,5 +1,5 @@
 <ng-container *ngIf="participants > 0">
-  <ion-card style="margin: 0.75rem 0 0 0" color="light">
+  <ion-card class="card-button" color="dark">
     <ion-card-header style="padding: 0 0 0.25rem 0.5rem">
       <h4 style="padding-left: 0.5rem">Participantes</h4>
     </ion-card-header>
@@ -8,10 +8,7 @@
         <ng-container *ngFor="let user of users; let index = index">
           <ion-col *ngIf="index < participants" size="12" sizeMd="6">
             <ng-container color="primary" style="margin: 0">
-              <!-- <img src="assets/images/no-image.jpg" />
-          <input type="file" id="pwaphoto" #pwaphoto accept="image/x-png,image/jpeg" (change)="uploadPWA(index)"> -->
-
-              <ion-item color="light">
+              <ion-item color="dark" lines="none">
                 <ion-label>Nombre</ion-label>
                 <ion-input
                   class="ion-text-right"
@@ -19,7 +16,7 @@
                   [(ngModel)]="user.name"
                 ></ion-input>
               </ion-item>
-              <ion-item color="light">
+              <ion-item color="dark" [lines]="participants -1 === index ? 'none' : 'full'">
                 <ion-label>Genero</ion-label>
                 <ion-select
                   slot="end"
@@ -38,7 +35,14 @@
       </ion-row>
     </ion-card-content>
   </ion-card>
-  <ion-button class="big-button-2" expand="block" color="warning" (click)="goToConfirm()">
-    Confirmar
-  </ion-button>
+
+  <ion-card color="primary" class="card-button" (click)="goToConfirm()">
+    <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
+      <ion-item lines="none" color="primary">
+        <ion-label class="card-button-label"> Confirmar </ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+      <ion-ripple-effect></ion-ripple-effect>
+    </ion-card-content>
+  </ion-card>
 </ng-container>
