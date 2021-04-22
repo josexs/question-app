@@ -65,7 +65,8 @@ export class QuestionsProvider {
       this.speech
         .init(options)
         .then((data: any) => {
-          this.setVoicesSupported(data.voices);
+          const voices = data.voices.filter((item) => item.lang === 'es-ES');
+          this.setVoicesSupported(voices);
         })
         .catch((e: any) => console.error('Error al iniciar speech: ', e));
     } else {
@@ -74,6 +75,7 @@ export class QuestionsProvider {
   }
 
   setVoicesSupported(voices: any[]) {
+    console.log('voices', voices)
     for (const voice of voices) {
       this.voicesSupported.push(voice.name);
     }
@@ -82,16 +84,19 @@ export class QuestionsProvider {
   readQuestion(participant: ParticipantI, question: QuestionI): Promise<void> {
     return new Promise((resolve, reject) => {
       const msg = `Pregunta para ${participant.name}.......${question.text}`;
+      const isiOS = this.platform.is('ios');
       if (participant.gender === 'male') {
-        if (this.voicesSupported.indexOf('Monica') !== -1) {
-          this.speech.setVoice('Monica');
+        const nameFemale = isiOS ? 'Mónica' : 'Monica'
+        if (this.voicesSupported.indexOf(nameFemale) !== -1) {
+          this.speech.setVoice(nameFemale);
         } else {
           this.speech.setRate(1.3);
           this.speech.setVoice('español España');
         }
       } else if (participant.gender === 'female') {
-        if (this.voicesSupported.indexOf('Jorge') !== -1) {
-          this.speech.setVoice('Jorge');
+        const nameMale = isiOS ? 'Mónica' : 'Jorge'
+        if (this.voicesSupported.indexOf(nameMale) !== -1) {
+          this.speech.setVoice(nameMale);
         } else {
           this.speech.setRate(1.2);
           this.speech.setVoice('español España');
@@ -152,9 +157,7 @@ export class QuestionsProvider {
 
   async createUserCuestion(item: QuestionI) {
     const url = `${environment.path.api}/questions/sendApp`;
-    return this.httpClient
-      .post<QuestionI>(url, item)
-      .toPromise();
+    return this.httpClient.post<QuestionI>(url, item).toPromise();
   }
 
   async updateQuestion(item: QuestionI) {
