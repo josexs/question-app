@@ -15,7 +15,7 @@ import { Gtag } from 'angular-gtag';
   templateUrl: 'question.page.html',
 })
 export class QuestionPage {
-  @ViewChild('cdQuestion', { static: false }) private countdownQuestion: CountdownComponent;
+  @ViewChild('cdQuestion', { static: false }) public countdownQuestion: CountdownComponent;
   options: OptionsI;
   question: QuestionI;
   participant: ParticipantI;
@@ -28,6 +28,8 @@ export class QuestionPage {
     pause: false,
     classification: false,
   };
+  countdownCurrent = 0;
+  countdownCurrentPercentage = '1';
   constructor(
     private questionsProvider: QuestionsProvider,
     private storageProvider: StorageProvider,
@@ -43,6 +45,8 @@ export class QuestionPage {
     await this.getRandomQuestion();
     await this.checkFirstQuestion();
     this.startFirstQuestion();
+    this.countdownCurrent = Number(this.options.durationQuestion);
+    this.countdownCurrentPercentage = '1';
   }
 
   async getOptions(): Promise<void> {
@@ -81,11 +85,14 @@ export class QuestionPage {
     this.states.countdownQuestion = true;
     this.states.buttonStart = false;
     await this.questionsProvider.readQuestion(this.participant, this.question);
-    this.countdownQuestion.begin();
-    this.countdownQuestion.event.subscribe(() => {
-      this.states.countdownQuestion = false;
-    });
+    // this.countdownQuestion.begin();
+
+    // this.countdownQuestion.event.subscribe(() => {
+    //   this.states.countdownQuestion = false;
+    // });
     this.gtag.event('startQuestion');
+    await this.countDown();
+    this.states.countdownQuestion = false;
   }
 
   resetGame(): void {
@@ -107,6 +114,8 @@ export class QuestionPage {
     this.states.countdownQuestion = true;
     this.states.question = true;
     this.states.buttonStart = true;
+    this.countdownCurrent = Number(this.options.durationQuestion);
+    this.countdownCurrentPercentage = '1';
     this.gtag.event('nextQuestion');
   }
 
@@ -124,7 +133,7 @@ export class QuestionPage {
     this.alertProvider.presentAlertWithButtons('¿Estas seguro?', '¿Quieres terminar el juego?', [
       { text: 'No', role: 'cancel' },
       { text: 'Si', handler: () => this.goToEndConfirm() },
-    ]);
+    ], 'alert-warning');
   }
 
   goToEndConfirm() {}
@@ -147,5 +156,20 @@ export class QuestionPage {
         this.resetGame();
       }
     }
+  }
+
+  countDown() {
+    return new Promise((resolve) => {
+      const interval = setInterval(() => {
+        this.countdownCurrent -= 1;
+        this.countdownCurrentPercentage = (
+          (this.countdownCurrent / Number(this.options.durationQuestion))
+        ).toFixed(2);
+        if (this.countdownCurrent === 0) {
+          clearInterval(interval);
+          resolve(true);
+        }
+      }, 1000);
+    });
   }
 }

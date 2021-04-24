@@ -8,7 +8,7 @@ import { Gtag } from 'angular-gtag';
   templateUrl: 'credits.page.html',
 })
 export class CreditsPage implements OnInit {
-  authors: {author: string, questions: number}[] = []
+  authors: {author: string, questions: number}[] = [];
   constructor(
     private gtag: Gtag,
     private router: Router,

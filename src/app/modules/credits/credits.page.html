@@ -10,15 +10,15 @@
 </ion-header>
 
 <ion-content>
-  <ion-card class="card-button" color="dark">
+  <ion-card class="card-button card-button-black-border" color="dark">
     <ion-card-content>
       <ion-label class="card-button-label-normal">Desde aqui podeis ver todos los autores de las preguntas de QuestionsApp</ion-label>
     </ion-card-content>
   </ion-card>
 
-  <ion-card class="card-button" color="dark" >
+  <ion-card class="card-button card-button-black-border" color="dark" >
     <ion-card-content>
-      <ion-item *ngFor="let item of authors" color="dark" lines="none">
+      <ion-item *ngFor="let item of authors" color="dark" lines="none" style="text-transform: uppercase;">
         {{ item.author }}
         <ion-badge slot="end"> {{ item.questions }} </ion-badge>
       </ion-item>

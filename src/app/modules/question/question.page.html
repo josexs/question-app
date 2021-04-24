@@ -1,4 +1,4 @@
-<ion-header class="ion-no-border">
+<!-- <ion-header class="ion-no-border">
   <ion-toolbar mode="ios">
     <ion-title class="ion-text-center"></ion-title>
     <ion-buttons slot="end">
@@ -7,42 +7,71 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content [fullscreen]="true">
   <ng-container *ngIf="states.question">
     <ng-container *ngIf="participant && question">
-      <ion-card class="card-button" color="primary">
+      <ion-card class="card-button card-button-black-border" color="dark">
         <ion-card-content class="ion-text-center">
-          <ion-item color="primary" lines="none">
-            <ion-avatar slot="start">
-              <img [src]="participant.photo | imagePipe" />
-            </ion-avatar>
-            <ion-label>
-              <strong>{{ participant.name }}</strong><br />
-              <small>
-                <strong>Aciertos</strong>: {{ participant.positive }} - <strong>Fallos</strong>: {{
-                participant.negative }}
-              </small>
+          <ion-item color="dark" lines="none" class="ion-text-center">
+            <ion-label
+              style="font-weight: 900; text-transform: uppercase; font-size: 2.5rem; margin: 0"
+            >
+              {{ participant.name }}
+              <ion-badge style="font-size: 1.4rem"
+                >{{ participant.positive - participant.negative }}</ion-badge
+              >
             </ion-label>
           </ion-item>
         </ion-card-content>
       </ion-card>
 
-      <ion-card class="card-button" color="dark">
-        <ion-card-content class="ion-text-center card-button-label-normal">
-          <br />
-          {{ question.text }}
-          <br /><br />
-          <strong>Enviado por</strong>: {{ question.author }} <br /><br />
+      <ion-card
+        *ngIf="this.states.countdownQuestion"
+        class="card-button card-button-black-border"
+        color="dark"
+      >
+        <ion-card-content
+          class="ion-text-center"
+          style="padding: 0; padding-left: 1rem; padding-bottom: 0.1rem"
+        >
+          <ion-row style="margin: 0">
+            <ion-col style="margin-top: 0.25rem" size="11">
+              <!-- <ion-progress-bar *ngIf="countdownQuestion" [value]="countdownQuestion?.left"></ion-progress-bar> -->
+              <ion-progress-bar
+                style="padding: 0.5rem; border-radius: 25px"
+                [value]="countdownCurrentPercentage"
+              ></ion-progress-bar>
+            </ion-col>
+            <ion-col size="1">
+              <ion-label>{{ countdownCurrent }}</ion-label>
+              <!-- <div
+                style="font-size: 30px; font-weight: 800; padding: 1rem; margin: auto; width: 50%"
+              > -->
+              <!-- <countdown #cdQuestion [config]="countdownQuestionConfig"></countdown> -->
+              <!-- </div> -->
+            </ion-col>
+          </ion-row>
         </ion-card-content>
       </ion-card>
 
-      <ion-card *ngIf="this.states.countdownQuestion" class="card-button" color="primary">
-        <ion-card-content class="ion-text-center">
-          <div style="font-size: 30px; font-weight: 800; padding: 1rem; margin: auto; width: 50%">
-            <countdown #cdQuestion [config]="countdownQuestionConfig"></countdown>
-            <p>Segundos</p>
+      <ion-card class="card-button card-button-white-border">
+        <ion-card-content class="ion-text-center card-button-label-normal">
+          <p
+            style="
+              padding: 1.25rem;
+              color: var(--ion-color-dark);
+              font-size: 1.6rem;
+              font-weight: 700;
+              text-transform: uppercase;
+            "
+          >
+            {{ question.text }}
+          </p>
+          <br />
+          <div style="color: var(--ion-color-dark); font-size: 1rem">
+            <strong>Enviado por</strong>: {{ question.author }} <br /><br />
           </div>
         </ion-card-content>
       </ion-card>
@@ -64,8 +93,8 @@
 </ion-content>
 
 <!-- Footer Iniciar pregunta -->
-<ion-footer *ngIf="states.buttonStart && !isFirstQuestion">
-  <ion-card color="primary" class="card-button" (click)="startQuestion()">
+<ion-footer class="ion-no-border" *ngIf="states.buttonStart && !isFirstQuestion">
+  <ion-card color="primary" class="card-button card-button-red-border" (click)="startQuestion()">
     <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
       <ion-item lines="none" color="primary">
         <ion-label class="card-button-label"> Iniciar pregunta </ion-label>
@@ -76,18 +105,21 @@
   </ion-card>
 </ion-footer>
 
-<!-- Footer Acierto o fallo -->
-<ion-footer style="margin-bottom: 0.5rem" *ngIf="states.question && !this.states.countdownQuestion">
+<ion-footer
+  class="ion-no-border"
+  style="margin-bottom: 0.5rem"
+  *ngIf="!states.buttonStart && !isFirstQuestion && this.states.countdownQuestion"
+>
   <ion-row>
     <ion-col size="6">
-      <ion-card class="card-button-two-columns" color="primary" (click)="voteQuestion('negative')">
+      <ion-card disabled class="card-button-two-columns card-button-red-border" color="primary">
         <ion-card-content class="ion-text-center">
           <ion-icon style="zoom: 3; padding-top: 0.1rem" name="close-outline"></ion-icon>
         </ion-card-content>
       </ion-card>
     </ion-col>
     <ion-col size="6">
-      <ion-card class="card-button-two-columns" color="success" (click)="voteQuestion('positive')">
+      <ion-card disabled class="card-button-two-columns card-button-green-border" color="success">
         <ion-card-content class="ion-text-center">
           <ion-icon style="zoom: 3; padding-top: 0.1rem; color: white" name="checkmark"></ion-icon
           ><br />
@@ -98,9 +130,43 @@
   </ion-row>
 </ion-footer>
 
+<!-- Footer Acierto o fallo -->
+<ion-footer
+  class="ion-no-border"
+  style="margin-bottom: 0.5rem"
+  *ngIf="states.question && !this.states.countdownQuestion"
+>
+  <ion-row>
+    <ion-col size="6">
+      <ion-card
+        class="card-button-two-columns card-button-red-border"
+        color="primary"
+        (click)="voteQuestion('negative')"
+      >
+        <ion-card-content class="ion-text-center">
+          <ion-icon style="zoom: 3; padding-top: 0.1rem" name="close-outline"></ion-icon>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size="6">
+      <ion-card
+        class="card-button-two-columns card-button-green-border"
+        color="success"
+        (click)="voteQuestion('positive')"
+      >
+        <ion-card-content class="ion-text-center">
+          <ion-icon style="zoom: 3; padding-top: 0.1rem; color: #ffffff" name="checkmark"></ion-icon
+          ><br />
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <br />
+  </ion-row>
+</ion-footer>
+
 <!-- Footer clasificacion -->
-<ion-footer style="margin-bottom: 0.5rem" *ngIf="states.classification">
-  <ion-card class="card-button" color="primary" (click)="goToResume()">
+<ion-footer class="ion-no-border" style="margin-bottom: 0.5rem" *ngIf="states.classification">
+  <ion-card class="card-button card-button-red-border" color="primary" (click)="goToResume()">
     <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
       <ion-item lines="none" color="primary">
         <ion-icon slot="start" name="chevron-back-outline"></ion-icon>

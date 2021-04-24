@@ -16,7 +16,7 @@
 
 <ion-content>
   <ng-container *ngIf="options.state === 'todo'">
-    <ion-card color="dark" class="card-button">
+    <ion-card color="dark" class="card-button card-button-black-border">
       <ion-card-header style="padding: 0 0 0.25rem 0.5rem">
         <h4 style="padding-left: 0.5rem">Opciones</h4>
       </ion-card-header>
@@ -86,7 +86,7 @@
       </ion-card-content>
     </ion-card>
 
-    <ion-card class="card-button" color="primary">
+    <ion-card class="card-button card-button-red-border" color="primary">
       <ion-card-content color="warning" class="ion-no-padding">
         <ion-item color="primary" lines="none">
           <ion-icon name="warning"></ion-icon>&nbsp;&nbsp;
@@ -103,7 +103,7 @@
   </ng-container>
 
   <ng-container *ngIf="options.state === 'resume'">
-    <ion-card class="card-button" color="dark">
+    <ion-card class="card-button card-button-black-border" color="dark">
       <ion-card-content>
         <ion-item color="dark" lines="none">
           <ion-label><strong>Tipo de juego</strong></ion-label>
@@ -117,7 +117,7 @@
       </ion-card-content>
     </ion-card>
 
-    <ion-card class="card-button" color="primary">
+    <ion-card class="card-button card-button-red-border" color="primary">
       <ion-card-content>
         <h2>Participantes</h2>
         <ion-row>
@@ -138,12 +138,11 @@
       </ion-card-content>
     </ion-card>
     <br />
-
   </ng-container>
 </ion-content>
 
-<ion-footer *ngIf="options.state === 'resume'">
-  <ion-card color="dark" class="card-button" (click)="resetGame()">
+<ion-footer class="ion-no-border" *ngIf="options.state === 'resume'">
+  <ion-card color="dark" class="card-button card-button-black-border" (click)="resetGame()">
     <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
       <ion-item lines="none" color="dark">
         <ion-label class="card-button-label"> Volver </ion-label>
@@ -152,7 +151,7 @@
       <ion-ripple-effect></ion-ripple-effect>
     </ion-card-content>
   </ion-card>
-  <ion-card color="primary" class="card-button" (click)="startGame()">
+  <ion-card color="primary" class="card-button card-button-red-border" (click)="startGame()">
     <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
       <ion-item lines="none" color="primary">
         <ion-label class="card-button-label"> Empezar juego </ion-label>
@@ -162,4 +161,3 @@
     </ion-card-content>
   </ion-card>
 </ion-footer>
-

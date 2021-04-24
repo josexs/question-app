@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content *ngIf="item">
-  <ion-card class="card-button" color="dark">
+  <ion-card class="card-button card-button-black-border" color="dark">
     <ion-card-content color="dark">
       <ion-item color="dark" lines="none">
         <ion-label>Autor</ion-label>
@@ -35,7 +35,7 @@
   </ion-card>
 </ion-content>
 
-<ion-footer>
+<ion-footer class="ion-no-border">
   <ion-button color="danger" (click)="delete()" expand="full">Eliminar</ion-button>
   <ion-button color="warning" (click)="edit()" expand="full">Editar</ion-button>
   <ion-button *ngIf="isSent" (click)="approve()" expand="full">Aprobar</ion-button>

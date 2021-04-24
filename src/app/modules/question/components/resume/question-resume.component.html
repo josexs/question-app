@@ -1,4 +1,4 @@
-<ion-card class="card-button" color="dark">
+<ion-card class="card-button card-button-black-border" color="dark">
   <ion-card-content class="ion-text-center">
     <h2 style="font-size: 20px; font-weight: 700; padding-bottom: 0.5rem">Siguiente turno</h2>
     <p class="card-button-label-normal">
@@ -7,7 +7,7 @@
   </ion-card-content>
 </ion-card>
 
-<ion-card color="warning" class="card-button" (click)="goToClassification.emit()">
+<ion-card color="warning" class="card-button card-button-yellow-border" (click)="goToClassification.emit()">
   <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
     <ion-item lines="none" color="warning">
       <ion-label class="card-button-label"> Clasificacion </ion-label>
@@ -17,7 +17,7 @@
   </ion-card-content>
 </ion-card>
 
-<ion-card color="light" class="card-button" (click)="goToEnd.emit()">
+<ion-card color="light" class="card-button card-button-white-border" (click)="goToEnd.emit()">
   <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
     <ion-item lines="none" color="light">
       <ion-label class="card-button-label"> Terminar Juego </ion-label>
@@ -27,7 +27,7 @@
   </ion-card-content>
 </ion-card>
 
-<ion-card color="primary" class="card-button" (click)="goToNextQuestion.emit()">
+<ion-card color="primary" class="card-button card-button-red-border" (click)="goToNextQuestion.emit()">
   <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
     <ion-item lines="none" color="primary">
       <ion-label class="card-button-label"> Siguiente pregunta </ion-label>

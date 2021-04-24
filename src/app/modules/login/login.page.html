@@ -10,7 +10,7 @@
 
 <ion-content>
   <form [formGroup]="credentials">
-    <div class="input-group">
+    <div class="input-group card-button-black-border" >
       <ion-item color="dark">
         <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
       </ion-item>
@@ -29,8 +29,8 @@
   </form>
 </ion-content>
 
-<ion-footer>
-  <ion-card [disabled]="!credentials.valid" color="primary" class="card-button" (click)="login()">
+<ion-footer class="ion-no-border">
+  <ion-card [disabled]="!credentials.valid" color="primary" class="card-button card-button-red-border" (click)="login()">
     <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
       <ion-item lines="none" color="primary">
         <ion-label class="card-button-label">Entrar</ion-label>

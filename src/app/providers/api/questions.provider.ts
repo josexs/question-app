@@ -26,6 +26,11 @@ export class QuestionsProvider {
     this.initSpeech();
   }
 
+  async getAllQuestionsNumber(): Promise<{ total: number }> {
+    const url = `${environment.path.api}/questions/getAllNumber`;
+    return this.httpClient.post<{ total: number }>(url, {}).toPromise();
+  }
+
   async getQuestions(): Promise<QuestionI[]> {
     const url = `${environment.path.api}/questions/getAll`;
     return this.httpClient.post<QuestionI[]>(url, {}).toPromise();
@@ -75,7 +80,7 @@ export class QuestionsProvider {
   }
 
   setVoicesSupported(voices: any[]) {
-    console.log('voices', voices)
+    console.log('voices', voices);
     for (const voice of voices) {
       this.voicesSupported.push(voice.name);
     }
@@ -86,7 +91,7 @@ export class QuestionsProvider {
       const msg = `Pregunta para ${participant.name}.......${question.text}`;
       const isiOS = this.platform.is('ios');
       if (participant.gender === 'male') {
-        const nameFemale = isiOS ? 'Mónica' : 'Monica'
+        const nameFemale = isiOS ? 'Mónica' : 'Monica';
         if (this.voicesSupported.indexOf(nameFemale) !== -1) {
           this.speech.setVoice(nameFemale);
         } else {
@@ -94,7 +99,7 @@ export class QuestionsProvider {
           this.speech.setVoice('español España');
         }
       } else if (participant.gender === 'female') {
-        const nameMale = isiOS ? 'Mónica' : 'Jorge'
+        const nameMale = isiOS ? 'Mónica' : 'Jorge';
         if (this.voicesSupported.indexOf(nameMale) !== -1) {
           this.speech.setVoice(nameMale);
         } else {

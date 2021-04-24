@@ -1,21 +1,21 @@
 <ion-content>
-  <h4 [routerLink]="['/login']" class="title-hello">👋 ¡Hola!</h4>
-  <div class="subtitle-hello">Elige una de las siguientes opciones</div>
+  <h4 [routerLink]="['/login']" class="title-hello">👋 {{ literals.title }}</h4>
+  <div class="subtitle-hello">{{ literals.subtitle }}</div>
 
-  <ion-row class="ion-no-padding">
+  <ion-row *ngIf="totalBlock" class="ion-no-padding">
     <ion-col size="6" class="ion-no-padding">
-      <ion-card color="primary" class="card-button">
+      <ion-card color="primary" class="card-button card-button-red-border">
         <ion-card-content class="ion-activatable ripple-parent ion-no-padding ion-text-center">
-          <p style="font-weight: 800; font-size: 2rem">5</p>
-          <p>Preguntas</p>
+          <p style="font-weight: 800; font-size: 2rem">{{ totalQuestions }}</p>
+          <p style="padding-bottom: 0.5rem;">Preguntas</p>
         </ion-card-content>
       </ion-card>
     </ion-col>
     <ion-col size="6" class="ion-no-padding">
-      <ion-card color="primary" class="card-button">
+      <ion-card color="primary" class="card-button card-button-red-border">
         <ion-card-content class="ion-activatable ripple-parent ion-no-padding ion-text-center">
           <p style="font-weight: 800; font-size: 2rem">2</p>
-          <p>Modos</p>
+          <p style="padding-bottom: 0.5rem;">Modos</p>
         </ion-card-content>
       </ion-card>
     </ion-col>
@@ -25,7 +25,7 @@
     <ion-card
       *ngIf="item.state"
       [color]="item.color"
-      class="card-button"
+      class="card-button card-button-white-border"
       (click)="goTo(item.route, item.event)"
     >
       <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
