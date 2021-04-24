@@ -64,7 +64,7 @@ export class LoginPage implements OnInit {
 
   goBack() {
     this.gtag.event('goToHome');
-    this.router.navigate(['/init-options']);
+    this.router.navigate(['/home-menu']);
   }
 
   get email() {

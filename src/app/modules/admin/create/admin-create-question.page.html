@@ -15,6 +15,19 @@
       <ion-card class="card-button" color="dark">
         <ion-card-content color="dark">
           <ion-item color="dark" lines="none">
+            <ion-label>Autor</ion-label>
+            <ion-input
+              class="ion-text-right"
+              formControlName="author"
+              placeholder="Nombre"
+            ></ion-input>
+          </ion-item>
+          <div *ngIf="(author.dirty || author.touched) && author.errors" class="errors">
+            <span *ngIf="author.errors?.required">El nombre del autor es obligatorio</span>
+            <span *ngIf="author.errors?.minlength">Tienes que introducir minimo 4 caracteres</span>
+          </div>
+
+          <ion-item color="dark" lines="none">
             <ion-label>Tipo</ion-label>
             <ion-select
               formControlName="type"
@@ -35,6 +48,7 @@
           <ion-item color="dark" lines="none">
             <ion-label>Pregunta</ion-label>
             <ion-textarea
+              class="ion-text-right"
               type="text"
               placeholder="Escribe la pregunta"
               formControlName="text"

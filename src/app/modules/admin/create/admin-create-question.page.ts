@@ -27,6 +27,7 @@ export class AdminCreateQuestionPage implements OnInit {
 
   ngOnInit() {
     this.question = this.formBuilder.group({
+      author: ['', [Validators.required, Validators.minLength(4)]],
       text: ['', [Validators.required, Validators.minLength(10)]],
       type: ['normal', [Validators.required]],
       state: [false, [Validators.required]],
@@ -73,6 +74,10 @@ export class AdminCreateQuestionPage implements OnInit {
         this.alertProvider.presentAlert('¡Vaya!', 'Hemos tenido un problema...');
       }
     );
+  }
+
+  get author() {
+    return this.question.get('author');
   }
 
   get text() {

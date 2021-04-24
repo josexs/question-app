@@ -1,12 +1,25 @@
-<!-- <ion-header class="ion-no-border">
-  <ion-toolbar mode="ios" color="primary">
-    <ion-title class="ion-text-center">Questions App </ion-title>
-  </ion-toolbar>
-</ion-header> -->
-
 <ion-content>
-  <h4 class="title-hello">¡Hola!</h4>
+  <h4 [routerLink]="['/login']" class="title-hello">👋 ¡Hola!</h4>
   <div class="subtitle-hello">Elige una de las siguientes opciones</div>
+
+  <ion-row class="ion-no-padding">
+    <ion-col size="6" class="ion-no-padding">
+      <ion-card color="primary" class="card-button">
+        <ion-card-content class="ion-activatable ripple-parent ion-no-padding ion-text-center">
+          <p style="font-weight: 800; font-size: 2rem">5</p>
+          <p>Preguntas</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size="6" class="ion-no-padding">
+      <ion-card color="primary" class="card-button">
+        <ion-card-content class="ion-activatable ripple-parent ion-no-padding ion-text-center">
+          <p style="font-weight: 800; font-size: 2rem">2</p>
+          <p>Modos</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
 
   <ng-container *ngFor="let item of items">
     <ion-card
@@ -27,30 +40,4 @@
       </ion-card-content>
     </ion-card>
   </ng-container>
-
-  <!-- <ion-button expand="block" color="primary" class="big-button" (click)="goTo('route1')"
-    >Iniciar partida</ion-button
-  >
-  <ion-button
-    expand="block"
-    color="warning"
-    class="big-button"
-    *ngIf="continue"
-    (click)="goTo('route2')"
-    >Continuar partida</ion-button
-  >
-  <ion-button
-    expand="block"
-    [color]="continue ? 'primary' : 'warning'"
-    class="big-button"
-    (click)="goTo('route3')"
-    >Enviar preguntas</ion-button
-  >
-  <ion-button
-    expand="block"
-    [color]="continue ? 'warning' : 'primary'"
-    class="big-button"
-    (click)="goTo('route4')"
-    >Autores de preguntas</ion-button
-  > -->
 </ion-content>
