@@ -34,22 +34,25 @@ export class InitOptionsPage {
   ) {}
 
   async ionViewWillEnter() {
-    const options = await this.storageProvider.get<OptionsI>('options');
-    if (options) {
-      if (options.state === 'resume') {
-        this.shifts = await this.storageProvider.get<ParticipantI[]>('shifts');
-        this.options = options;
-      } else if (options.state === 'inProgress') {
-        this.navCtrl.navigateForward(['/question']);
-      }
-    } else {
-      await this.questionsProvider.getQuestions();
+    this.questionsProvider.getQuestions().then(async () => {
       this.getTotalOfQuestionOfType();
-    }
+      const options = await this.storageProvider.get<OptionsI>('options');
+      if (options) {
+        if (options.state === 'resume') {
+          this.shifts = await this.storageProvider.get<ParticipantI[]>('shifts');
+          this.options = options;
+        } else if (options.state === 'inProgress') {
+          this.navCtrl.navigateForward(['/question']);
+        }
+      }
+    });
   }
 
   getTotalOfQuestionOfType() {
-    this.totalQuestions = this.questionsProvider.getTotalOfQuestionOfType(this.options.type);
+    this.totalQuestions = this.questionsProvider.getTotalOfQuestionOfType(
+      this.questionsProvider.questions,
+      this.options.type
+    );
   }
 
   changeNumberOfParticipants() {

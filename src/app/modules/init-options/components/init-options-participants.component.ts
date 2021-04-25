@@ -36,7 +36,6 @@ export class InitOptionsParticipantsComponent {
   }
 
   uploadPWA(index: number) {
-    console.log(this.pwaphoto);
     if (this.pwaphoto == null) {
       return;
     }

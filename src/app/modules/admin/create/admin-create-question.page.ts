@@ -26,6 +26,10 @@ export class AdminCreateQuestionPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.createInputs();
+  }
+
+  createInputs() {
     this.question = this.formBuilder.group({
       author: ['', [Validators.required, Validators.minLength(4)]],
       text: ['', [Validators.required, Validators.minLength(10)]],
@@ -48,7 +52,8 @@ export class AdminCreateQuestionPage implements OnInit {
             text: 'Si',
             handler: () => this.confirmCreate(),
           },
-        ]
+        ],
+        'alert-warning'
       );
     } else {
       this.confirmCreate();
@@ -65,9 +70,16 @@ export class AdminCreateQuestionPage implements OnInit {
     };
     this.questionsProvider.createAdminCuestion(question).then(
       () => {
-        this.alertProvider.presentAlert('¡Vale!', 'La pregunta ha sido publicada');
-        const route = this.state.value ? '/admin/all' : '/admin/sent';
-        this.router.navigate([route]);
+        this.alertProvider.presentAlertWithButtons('¡Vale!', 'La pregunta ha sido publicada', [
+          { text: 'Publicar otra', handler: () => this.createInputs() },
+          {
+            text: 'OK',
+            handler: () => {
+              const route = this.state.value ? '/admin/all' : '/admin/sent';
+              this.router.navigate([route]);
+            },
+          },
+        ]);
       },
       (error) => {
         console.error(error);

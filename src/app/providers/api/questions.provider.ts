@@ -12,11 +12,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class QuestionsProvider {
-  questions = questionsMock;
+  questions = [];
   shifts: ParticipantI[] = [];
   speech = new Speech();
   voicesSupported = [];
-
   constructor(
     private utilsProvider: UtilsProvider,
     private storageProvider: StorageProvider,
@@ -32,8 +31,22 @@ export class QuestionsProvider {
   }
 
   async getQuestions(): Promise<QuestionI[]> {
-    const url = `${environment.path.api}/questions/getAll`;
-    return this.httpClient.post<QuestionI[]>(url, {}).toPromise();
+    return new Promise((resolve) => {
+      const url = `${environment.path.api}/questions/getAll`;
+      this.httpClient
+        .post<QuestionI[]>(url, {})
+        .toPromise()
+        .then(
+          (questions: QuestionI[]) => {
+            this.questions = questions;
+            resolve(this.questions);
+          },
+          () => {
+            this.questions = questionsMock;
+            resolve(this.questions);
+          }
+        );
+    });
   }
 
   async getQuestionsSent(): Promise<QuestionI[]> {
@@ -46,7 +59,19 @@ export class QuestionsProvider {
     return this.httpClient.post<any[]>(url, {}).toPromise();
   }
 
-  getRandomQuestion(options: OptionsI): QuestionI {
+  async getRandomQuestion(options: OptionsI): Promise<QuestionI> {
+    return new Promise((resolve) => {
+      if (this.questions.length === 0) {
+        this.getQuestions().then(() => {
+          resolve(this.getRandomQuestionWithQuestionsValues(options));
+        });
+      } else {
+        resolve(this.getRandomQuestionWithQuestionsValues(options));
+      }
+    });
+  }
+
+  getRandomQuestionWithQuestionsValues(options) {
     const questions = this.questions.filter((item) => item.type.indexOf(options.type) !== -1);
     const randomNumber = this.utilsProvider.randomNumber(questions.length - 1, 0, false);
     const randomQuestion = questions[randomNumber];
@@ -54,8 +79,8 @@ export class QuestionsProvider {
     return randomQuestion;
   }
 
-  getTotalOfQuestionOfType(type: string): number {
-    return this.questions.filter((item: QuestionI) => item.type.indexOf(type) !== -1).length;
+  getTotalOfQuestionOfType(questions: QuestionI[], type: string): number {
+    return questions.filter((item: QuestionI) => item.type.indexOf(type) !== -1).length;
   }
 
   initSpeech(): void {
@@ -80,7 +105,6 @@ export class QuestionsProvider {
   }
 
   setVoicesSupported(voices: any[]) {
-    console.log('voices', voices);
     for (const voice of voices) {
       this.voicesSupported.push(voice.name);
     }

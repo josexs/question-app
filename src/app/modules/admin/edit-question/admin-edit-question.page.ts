@@ -23,8 +23,6 @@ export class AdminEditQuestionPage {
         this.item = JSON.parse(params.item);
         this.isSent = JSON.parse(params.route).sent;
         this.routeBack = this.isSent ? 'admin/sent' : 'admin/all';
-        console.log(this.isSent);
-        console.log(this.routeBack);
       }
     });
   }

@@ -42,11 +42,11 @@ export class QuestionPage {
   async ionViewWillEnter(): Promise<void> {
     this.states.buttonStart = true;
     await this.getOptions();
+    this.countdownCurrent = Number(this.options.durationQuestion);
+    this.countdownCurrentPercentage = '1';
     await this.getRandomQuestion();
     await this.checkFirstQuestion();
     this.startFirstQuestion();
-    this.countdownCurrent = Number(this.options.durationQuestion);
-    this.countdownCurrentPercentage = '1';
   }
 
   async getOptions(): Promise<void> {
@@ -60,7 +60,7 @@ export class QuestionPage {
 
   async getRandomQuestion(): Promise<void> {
     this.participant = await this.storageProvider.get<ParticipantI>('currentShift');
-    this.question = this.questionsProvider.getRandomQuestion(this.options);
+    this.question = await this.questionsProvider.getRandomQuestion(this.options);
   }
 
   async checkFirstQuestion() {

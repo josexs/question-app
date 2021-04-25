@@ -105,27 +105,27 @@ ion-row {
   margin: 1rem;
 }
 
-.card-button-black-border {
+.card-button-dark-border {
   border: 8px solid #000;
   padding: 0;
 }
 
-.card-button-red-border {
+.card-button-primary-border {
   border: 8px solid #b30101;
   padding: 0;
 }
 
-.card-button-green-border {
+.card-button-success-border {
   border: 8px solid #29c467;
   padding: 0;
 }
 
-.card-button-white-border {
+.card-button-light-border {
   border: 8px solid #f0f0f0;
   padding: 0;
 }
 
-.card-button-yellow-border {
+.card-button-warning-border {
   border: 8px solid #e0bb2e;
   padding: 0;
 }
@@ -235,4 +235,9 @@ ion-toolbar {
 .alert-danger .alert-message {
   text-transform: uppercase;
   font-weight: 600;
+}
+
+.resumen-user-rows {
+  font-size: 1.15rem;
+  font-weight: 900;
 }

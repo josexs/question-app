@@ -12,10 +12,10 @@ export class AdminListSentPage {
   constructor(private questionsProvider: QuestionsProvider, private router: Router) {}
 
   ionViewWillEnter(): void {
-    this.getAllQuestions();
+    this.getQuestionsSent();
   }
 
-  async getAllQuestions(): Promise<void> {
+  async getQuestionsSent(): Promise<void> {
     this.items = await this.questionsProvider.getQuestionsSent();
   }
 

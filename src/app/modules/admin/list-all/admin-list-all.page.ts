@@ -16,7 +16,8 @@ export class AdminListAllPage {
   }
 
   async getAllQuestions(): Promise<void> {
-    this.items = await this.questionsProvider.getQuestions();
+    await this.questionsProvider.getQuestions();
+    this.items = this.questionsProvider.questions;
   }
 
   goToEdit(item: QuestionI): void {

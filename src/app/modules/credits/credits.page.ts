@@ -25,7 +25,7 @@ export class CreditsPage implements OnInit {
         this.authors = response;
       },
       (error) => {
-        console.log(error);
+        console.error(error);
       }
     );
   }

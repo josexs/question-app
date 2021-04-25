@@ -12,7 +12,7 @@
 <ion-content>
   <form [formGroup]="question">
     <div class="input-group">
-      <ion-card class="card-button card-button-black-border" color="dark">
+      <ion-card class="card-button card-button-dark-border" color="dark">
         <ion-card-content color="dark">
           <ion-item color="dark" lines="none">
             <ion-label>Tu nombre</ion-label>
@@ -77,7 +77,7 @@
 </ion-content>
 
 <ion-footer class="ion-no-border">
-  <ion-card [disabled]="!question.valid" color="primary" class="card-button card-button-red-border" (click)="create()">
+  <ion-card [disabled]="!question.valid" color="primary" class="card-button card-button-primary-border" (click)="create()">
     <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
       <ion-item lines="none" color="primary">
         <ion-label class="card-button-label"> Enviar pregunta </ion-label>

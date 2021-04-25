@@ -1,27 +1,16 @@
-<!-- <ion-header class="ion-no-border">
-  <ion-toolbar mode="ios">
-    <ion-title class="ion-text-center"></ion-title>
-    <ion-buttons slot="end">
-      <ion-button color="dark" fill="clear" (click)="openPopover($event)">
-        <ion-icon name="ellipsis-vertical"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header> -->
-
 <ion-content [fullscreen]="true">
   <ng-container *ngIf="states.question">
     <ng-container *ngIf="participant && question">
-      <ion-card class="card-button card-button-black-border" color="dark">
+      <ion-card class="card-button card-button-dark-border" color="dark">
         <ion-card-content class="ion-text-center">
           <ion-item color="dark" lines="none" class="ion-text-center">
             <ion-label
               style="font-weight: 900; text-transform: uppercase; font-size: 2.5rem; margin: 0"
             >
               {{ participant.name }}
-              <ion-badge style="font-size: 1.4rem"
-                >{{ participant.positive - participant.negative }}</ion-badge
-              >
+              <ion-badge style="font-size: 1.4rem">
+                {{ participant.positive - participant.negative }}
+              </ion-badge>
             </ion-label>
           </ion-item>
         </ion-card-content>
@@ -29,7 +18,7 @@
 
       <ion-card
         *ngIf="this.states.countdownQuestion"
-        class="card-button card-button-black-border"
+        class="card-button card-button-dark-border"
         color="dark"
       >
         <ion-card-content
@@ -56,7 +45,7 @@
         </ion-card-content>
       </ion-card>
 
-      <ion-card class="card-button card-button-white-border">
+      <ion-card class="card-button card-button-light-border">
         <ion-card-content class="ion-text-center card-button-label-normal">
           <p
             style="
@@ -94,7 +83,7 @@
 
 <!-- Footer Iniciar pregunta -->
 <ion-footer class="ion-no-border" *ngIf="states.buttonStart && !isFirstQuestion">
-  <ion-card color="primary" class="card-button card-button-red-border" (click)="startQuestion()">
+  <ion-card color="primary" class="card-button card-button-primary-border" (click)="startQuestion()">
     <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
       <ion-item lines="none" color="primary">
         <ion-label class="card-button-label"> Iniciar pregunta </ion-label>
@@ -112,14 +101,14 @@
 >
   <ion-row>
     <ion-col size="6">
-      <ion-card disabled class="card-button-two-columns card-button-red-border" color="primary">
+      <ion-card disabled class="card-button-two-columns card-button-primary-border" color="primary">
         <ion-card-content class="ion-text-center">
           <ion-icon style="zoom: 3; padding-top: 0.1rem" name="close-outline"></ion-icon>
         </ion-card-content>
       </ion-card>
     </ion-col>
     <ion-col size="6">
-      <ion-card disabled class="card-button-two-columns card-button-green-border" color="success">
+      <ion-card disabled class="card-button-two-columns card-button-success-border" color="success">
         <ion-card-content class="ion-text-center">
           <ion-icon style="zoom: 3; padding-top: 0.1rem; color: white" name="checkmark"></ion-icon
           ><br />
@@ -139,7 +128,7 @@
   <ion-row>
     <ion-col size="6">
       <ion-card
-        class="card-button-two-columns card-button-red-border"
+        class="card-button-two-columns card-button-primary-border"
         color="primary"
         (click)="voteQuestion('negative')"
       >
@@ -150,7 +139,7 @@
     </ion-col>
     <ion-col size="6">
       <ion-card
-        class="card-button-two-columns card-button-green-border"
+        class="card-button-two-columns card-button-success-border"
         color="success"
         (click)="voteQuestion('positive')"
       >
@@ -166,11 +155,48 @@
 
 <!-- Footer clasificacion -->
 <ion-footer class="ion-no-border" style="margin-bottom: 0.5rem" *ngIf="states.classification">
-  <ion-card class="card-button card-button-red-border" color="primary" (click)="goToResume()">
+  <ion-card class="card-button card-button-primary-border" color="primary" (click)="goToResume()">
     <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
       <ion-item lines="none" color="primary">
         <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
         <ion-label class="card-button-label"> Volver </ion-label>
+      </ion-item>
+      <ion-ripple-effect></ion-ripple-effect>
+    </ion-card-content>
+  </ion-card>
+</ion-footer>
+
+<!-- Footer Resume -->
+<ion-footer class="ion-no-border" *ngIf="!states.question && !states.classification">
+  <ion-card
+    color="warning"
+    class="card-button card-button-warning-border"
+    (click)="goToClassification()"
+  >
+    <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
+      <ion-item lines="none" color="warning">
+        <ion-label class="card-button-label"> Clasificacion </ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+      <ion-ripple-effect></ion-ripple-effect>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card color="light" class="card-button card-button-light-border" (click)="goToEnd()">
+    <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
+      <ion-item lines="none" color="light">
+        <ion-label class="card-button-label"> Terminar Juego </ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+      <ion-ripple-effect></ion-ripple-effect>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card color="primary" class="card-button card-button-primary-border" (click)="nextQuestion()">
+    <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
+      <ion-item lines="none" color="primary">
+        <ion-label class="card-button-label"> Siguiente pregunta </ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
       </ion-item>
       <ion-ripple-effect></ion-ripple-effect>
     </ion-card-content>

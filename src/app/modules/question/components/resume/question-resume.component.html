@@ -1,4 +1,4 @@
-<ion-card class="card-button card-button-black-border" color="dark">
+<ion-card class="card-button card-button-dark-border" color="dark">
   <ion-card-content class="ion-text-center">
     <h2 style="font-size: 20px; font-weight: 700; padding-bottom: 0.5rem">Siguiente turno</h2>
     <p class="card-button-label-normal">
@@ -7,32 +7,27 @@
   </ion-card-content>
 </ion-card>
 
-<ion-card color="warning" class="card-button card-button-yellow-border" (click)="goToClassification.emit()">
-  <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
-    <ion-item lines="none" color="warning">
-      <ion-label class="card-button-label"> Clasificacion </ion-label>
-      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
-    </ion-item>
-    <ion-ripple-effect></ion-ripple-effect>
+<ion-card class="card-button card-button-light-border" color="light">
+  <ion-card-content class="ion-text-center">
+    <ion-row>
+      <ion-col>
+        <p class="resumen-user-rows">55</p>
+        <p>Aciertos</p>
+      </ion-col>
+      <ion-col>
+        <p class="resumen-user-rows">5</p>
+        <p>Fallos</p>
+      </ion-col>
+      <ion-col>
+        <p class="resumen-user-rows">1º</p>
+        <p>Posicion</p>
+      </ion-col>
+    </ion-row>
   </ion-card-content>
 </ion-card>
 
-<ion-card color="light" class="card-button card-button-white-border" (click)="goToEnd.emit()">
-  <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
-    <ion-item lines="none" color="light">
-      <ion-label class="card-button-label"> Terminar Juego </ion-label>
-      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
-    </ion-item>
-    <ion-ripple-effect></ion-ripple-effect>
-  </ion-card-content>
-</ion-card>
-
-<ion-card color="primary" class="card-button card-button-red-border" (click)="goToNextQuestion.emit()">
-  <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
-    <ion-item lines="none" color="primary">
-      <ion-label class="card-button-label"> Siguiente pregunta </ion-label>
-      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
-    </ion-item>
-    <ion-ripple-effect></ion-ripple-effect>
+<ion-card class="card-button card-button-primary-border" color="primary">
+  <ion-card-content class="ion-text-center">
+    <p>¿Quieres aparecer aqui?</p>
   </ion-card-content>
 </ion-card>
