@@ -35,6 +35,11 @@ const routes: Routes = [
       import('./modules/create/create.module').then((m) => m.CreatePageModule),
   },
   {
+    path: 'end-game',
+    loadChildren: () =>
+      import('./modules/end-game/end-game.module').then((m) => m.EndGamePageModule),
+  },
+  {
     path: 'admin',
     loadChildren: () =>
       import('./modules/admin/admin.module').then((m) => m.AdminModule),

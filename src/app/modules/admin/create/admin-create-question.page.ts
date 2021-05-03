@@ -66,6 +66,8 @@ export class AdminCreateQuestionPage implements OnInit {
       type: this.type.value,
       state: this.state.value,
       author: 'Admin',
+      counter: 0,
+      reports: 0,
       gender: null,
     };
     this.questionsProvider.createAdminCuestion(question).then(

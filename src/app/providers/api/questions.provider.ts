@@ -60,23 +60,33 @@ export class QuestionsProvider {
   }
 
   async getRandomQuestion(options: OptionsI): Promise<QuestionI> {
-    return new Promise((resolve) => {
-      if (this.questions.length === 0) {
-        this.getQuestions().then(() => {
-          resolve(this.getRandomQuestionWithQuestionsValues(options));
-        });
-      } else {
-        resolve(this.getRandomQuestionWithQuestionsValues(options));
+    return new Promise(async (resolve, reject) => {
+      try {
+        if (this.questions.length === 0) {
+          this.getQuestions().then(async () => {
+            resolve(await this.getRandomQuestionWithQuestionsValues(options));
+          });
+        } else {
+          resolve(await this.getRandomQuestionWithQuestionsValues(options));
+        }
+      } catch (error) {
+        reject(error);
       }
     });
   }
 
-  getRandomQuestionWithQuestionsValues(options) {
+  async getRandomQuestionWithQuestionsValues(options) {
     const questions = this.questions.filter((item) => item.type.indexOf(options.type) !== -1);
     const randomNumber = this.utilsProvider.randomNumber(questions.length - 1, 0, false);
     const randomQuestion = questions[randomNumber];
-    this.questions = questions.filter((item, i) => i !== Number(randomNumber));
+    this.questions = questions.filter((_item, i) => i !== Number(randomNumber));
+    await this.incrementCounterOfQuestion(randomQuestion._id);
     return randomQuestion;
+  }
+
+  incrementCounterOfQuestion(id: string): Promise<QuestionI> {
+    const url = `${environment.path.api}/questions/incrementCounterOfQuestion/${id}`;
+    return this.httpClient.put<QuestionI>(url, {}).toPromise();
   }
 
   getTotalOfQuestionOfType(questions: QuestionI[], type: string): number {

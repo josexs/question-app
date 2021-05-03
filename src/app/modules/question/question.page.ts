@@ -9,6 +9,7 @@ import { ParticipantI } from '@interfaces/participant.interface';
 import { QuestionI } from '@interfaces/question.interface';
 import { QuestionMenuComponent } from './components/menu-popover/question-menu.component';
 import { Gtag } from 'angular-gtag';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'page-question',
@@ -33,10 +34,10 @@ export class QuestionPage {
   constructor(
     private questionsProvider: QuestionsProvider,
     private storageProvider: StorageProvider,
-    private navCtrl: NavController,
     private alertProvider: AlertProvider,
     public popoverController: PopoverController,
-    private gtag: Gtag
+    private gtag: Gtag,
+    private router: Router
   ) {}
 
   async ionViewWillEnter(): Promise<void> {
@@ -98,7 +99,7 @@ export class QuestionPage {
   resetGame(): void {
     this.storageProvider.remove('options');
     this.gtag.event('resetGame');
-    this.navCtrl.navigateForward(['/home-menu']);
+    this.router.navigate(['/home-menu']);
   }
 
   endGame() {}
@@ -130,13 +131,20 @@ export class QuestionPage {
   }
 
   goToEnd() {
-    this.alertProvider.presentAlertWithButtons('¿Estas seguro?', '¿Quieres terminar el juego?', [
-      { text: 'No', role: 'cancel' },
-      { text: 'Si', handler: () => this.goToEndConfirm() },
-    ], 'alert-warning');
+    this.alertProvider.presentAlertWithButtons(
+      '¿Estas seguro?',
+      '¿Quieres terminar el juego?',
+      [
+        { text: 'No', role: 'cancel' },
+        { text: 'Si', handler: () => this.goToEndConfirm() },
+      ],
+      'alert-warning'
+    );
   }
 
-  goToEndConfirm() {}
+  goToEndConfirm() {
+    this.router.navigate(['/end-game']);
+  }
 
   async openPopover(ev: any) {
     const popover = await this.popoverController.create({
@@ -163,7 +171,7 @@ export class QuestionPage {
       const interval = setInterval(() => {
         this.countdownCurrent -= 1;
         this.countdownCurrentPercentage = (
-          (this.countdownCurrent / Number(this.options.durationQuestion))
+          this.countdownCurrent / Number(this.options.durationQuestion)
         ).toFixed(2);
         if (this.countdownCurrent === 0) {
           clearInterval(interval);

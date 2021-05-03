@@ -5,6 +5,8 @@ export interface QuestionI {
   type: string;
   author: string;
   state: boolean;
+  counter: number;
+  reports: number;
   created?: string;
   updated?: string;
   id?: string;
