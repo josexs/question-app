@@ -11,15 +11,15 @@
   <ion-card-content class="ion-text-center">
     <ion-row>
       <ion-col>
-        <p class="resumen-user-rows">55</p>
+        <p class="resumen-user-rows">{{ currentShift.positive }}</p>
         <p>Aciertos</p>
       </ion-col>
       <ion-col>
-        <p class="resumen-user-rows">5</p>
+        <p class="resumen-user-rows">{{ currentShift.negative }}</p>
         <p>Fallos</p>
       </ion-col>
       <ion-col>
-        <p class="resumen-user-rows">1º</p>
+        <p class="resumen-user-rows">{{ position + 1 }}º</p>
         <p>Posicion</p>
       </ion-col>
     </ion-row>
@@ -28,6 +28,16 @@
 
 <ion-card class="card-button card-button-primary-border" color="primary">
   <ion-card-content class="ion-text-center">
-    <p>¿Quieres aparecer aqui?</p>
+    <p
+      style="
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        font-weight: 900;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      "
+    >
+      ¿Tienes una empresa y quieres aparecer aqui?
+    </p>
   </ion-card-content>
 </ion-card>
