@@ -5,6 +5,7 @@ import { AlertProvider } from '@providers/ionic/alert.provider';
 import { StorageProvider } from '@providers/ionic/storage.provider';
 import { OptionsI } from 'app/interfaces/init-options.interface';
 import { ParticipantI } from '@interfaces/participant.interface';
+import { Gtag } from 'angular-gtag';
 
 @Component({
   selector: 'app-options',
@@ -28,7 +29,8 @@ export class InitOptionsPage {
     private alertProvider: AlertProvider,
     private storageProvider: StorageProvider,
     private questionsProvider: QuestionsProvider,
-    private router: Router
+    private router: Router,
+    private gtag: Gtag
   ) {}
 
   async ionViewWillEnter() {
@@ -43,11 +45,23 @@ export class InitOptionsPage {
     } else {
       await this.questionsProvider.getQuestions();
       this.getTotalOfQuestionOfType();
+      const options = await this.storageProvider.get<OptionsI>('options');
+      if (options) {
+        if (options.state === 'resume') {
+          this.shifts = await this.storageProvider.get<ParticipantI[]>('shifts');
+          this.options = options;
+        } else if (options.state === 'inProgress') {
+          this.router.navigate(['/question']);
+        }
+      }
     }
   }
 
   getTotalOfQuestionOfType() {
-    this.totalQuestions = this.questionsProvider.getTotalOfQuestionOfType(this.options.type);
+    this.totalQuestions = this.questionsProvider.getTotalOfQuestionOfType(
+      // this.questionsProvider.questions,
+      this.options.type
+    );
   }
 
   changeNumberOfParticipants() {
@@ -112,7 +126,7 @@ export class InitOptionsPage {
   }
 
   resetGame() {
-    this.storageProvider.remove('options');
+    this.storageProvider.clear();
     this.options = {
       numberParticipants: '2',
       type: 'hard',
@@ -131,4 +145,6 @@ export class InitOptionsPage {
   goToAdmin() {
     
   }
+
+  takePhoto() {}
 }

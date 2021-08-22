@@ -1,7 +1,6 @@
 import { QuestionsProvider } from '@providers/api/questions.provider';
 import { Component } from '@angular/core';
 import { QuestionI } from '@interfaces/question.interface';
-import { NavController } from '@ionic/angular';
 import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
@@ -10,16 +9,18 @@ import { NavigationExtras, Router } from '@angular/router';
 })
 export class AdminListSentPage {
   items: QuestionI[] = [];
-  constructor(private questionsProvider: QuestionsProvider, private router: Router) {
-    this.getAllQuestions();
+  constructor(private questionsProvider: QuestionsProvider, private router: Router) {}
+
+  ionViewWillEnter(): void {
+    this.getQuestionsSent();
   }
 
-  async getAllQuestions() {
+  async getQuestionsSent(): Promise<void> {
     this.items = await this.questionsProvider.getQuestionsSent();
   }
 
-  goToEdit(item: QuestionI) {
-    let navigationExtras: NavigationExtras = {
+  goToEdit(item: QuestionI): void {
+    const navigationExtras: NavigationExtras = {
       queryParams: {
         item: JSON.stringify(item),
         route: JSON.stringify({ sent: true }),

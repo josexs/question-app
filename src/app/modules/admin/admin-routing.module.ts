@@ -5,6 +5,7 @@ import { AdminListAllPage } from './list-all/admin-list-all.page';
 import { AdminListSentPage } from './list-sent/admin-list-sent.page';
 import { AdminEditQuestionPage } from './edit-question/admin-edit-question.page';
 import { AdminGuard } from 'app/guards/admin.guard';
+import { AdminCreateQuestionPage } from './create/admin-create-question.page';
 
 const routes: Routes = [
   {
@@ -25,6 +26,11 @@ const routes: Routes = [
   {
     path: 'all',
     component: AdminListAllPage,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'create',
+    component: AdminCreateQuestionPage,
     canActivate: [AdminGuard],
   },
 ];

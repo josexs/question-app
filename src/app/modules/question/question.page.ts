@@ -8,13 +8,15 @@ import { OptionsI } from '@interfaces/init-options.interface';
 import { ParticipantI } from '@interfaces/participant.interface';
 import { QuestionI } from '@interfaces/question.interface';
 import { QuestionMenuComponent } from './components/menu-popover/question-menu.component';
+import { Gtag } from 'angular-gtag';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'page-question',
   templateUrl: 'question.page.html',
 })
 export class QuestionPage {
-  @ViewChild('cdQuestion', { static: false }) private countdownQuestion: CountdownComponent;
+  @ViewChild('cdQuestion', { static: false }) public countdownQuestion: CountdownComponent;
   options: OptionsI;
   question: QuestionI;
   participant: ParticipantI;
@@ -25,19 +27,24 @@ export class QuestionPage {
     countdownQuestion: true,
     question: true,
     pause: false,
-    classification: false
+    classification: false,
   };
+  countdownCurrent = 0;
+  countdownCurrentPercentage = '1';
   constructor(
     private questionsProvider: QuestionsProvider,
     private storageProvider: StorageProvider,
-    private navCtrl: NavController,
     private alertProvider: AlertProvider,
     public popoverController: PopoverController,
+    private gtag: Gtag,
+    private router: Router
   ) {}
 
   async ionViewWillEnter(): Promise<void> {
     this.states.buttonStart = true;
     await this.getOptions();
+    this.countdownCurrent = Number(this.options.durationQuestion);
+    this.countdownCurrentPercentage = '1';
     await this.getRandomQuestion();
     await this.checkFirstQuestion();
     this.startFirstQuestion();
@@ -54,7 +61,7 @@ export class QuestionPage {
 
   async getRandomQuestion(): Promise<void> {
     this.participant = await this.storageProvider.get<ParticipantI>('currentShift');
-    this.question = this.questionsProvider.getRandomQuestion(this.options);
+    this.question = await this.questionsProvider.getRandomQuestion(this.options);
   }
 
   async checkFirstQuestion() {
@@ -70,7 +77,8 @@ export class QuestionPage {
     if (this.isFirstQuestion) {
       this.storageProvider.set('firstQuestion', false);
       this.isFirstQuestion = false;
-      this.startQuestion()
+      this.gtag.event('startFirstQuestion');
+      this.startQuestion();
     }
   }
 
@@ -78,19 +86,27 @@ export class QuestionPage {
     this.states.countdownQuestion = true;
     this.states.buttonStart = false;
     await this.questionsProvider.readQuestion(this.participant, this.question);
-    this.countdownQuestion.begin();
-    this.countdownQuestion.event.subscribe(() => {
-      this.states.countdownQuestion = false;
-    });
+    // this.countdownQuestion.begin();
+
+    // this.countdownQuestion.event.subscribe(() => {
+    //   this.states.countdownQuestion = false;
+    // });
+    this.gtag.event('startQuestion');
+    await this.countDown();
+    this.states.countdownQuestion = false;
   }
 
   resetGame(): void {
     this.storageProvider.remove('options');
-    this.navCtrl.navigateForward(['/']);
+    this.gtag.event('resetGame');
+    this.router.navigate(['/home-menu']);
   }
+
+  endGame() {}
 
   async voteQuestion(type: string): Promise<void> {
     this.participant = await this.questionsProvider.voteQuestion(type, this.participant);
+    this.gtag.event('voteQuestion');
     this.states.question = false;
   }
 
@@ -99,16 +115,36 @@ export class QuestionPage {
     this.states.countdownQuestion = true;
     this.states.question = true;
     this.states.buttonStart = true;
+    this.countdownCurrent = Number(this.options.durationQuestion);
+    this.countdownCurrentPercentage = '1';
+    this.gtag.event('nextQuestion');
   }
 
   goToClassification(): void {
+    this.gtag.event('goToClassification');
     this.states.classification = true;
   }
 
   goToResume() {
+    this.gtag.event('goToResume');
     this.states.classification = false;
   }
 
+  goToEnd() {
+    this.alertProvider.presentAlertWithButtons(
+      '¿Estas seguro?',
+      '¿Quieres terminar el juego?',
+      [
+        { text: 'No', role: 'cancel' },
+        { text: 'Si', handler: () => this.goToEndConfirm() },
+      ],
+      'alert-warning'
+    );
+  }
+
+  goToEndConfirm() {
+    this.router.navigate(['/end-game']);
+  }
 
   async openPopover(ev: any) {
     const popover = await this.popoverController.create({
@@ -117,6 +153,7 @@ export class QuestionPage {
       translucent: true,
       componentProps: { state: this.states.pause },
     });
+    this.gtag.event('openPopover');
     await popover.present();
     const response = await popover.onDidDismiss();
     if (response.data && response.data.action) {
@@ -127,5 +164,20 @@ export class QuestionPage {
         this.resetGame();
       }
     }
+  }
+
+  countDown() {
+    return new Promise((resolve) => {
+      const interval = setInterval(() => {
+        this.countdownCurrent -= 1;
+        this.countdownCurrentPercentage = (
+          this.countdownCurrent / Number(this.options.durationQuestion)
+        ).toFixed(2);
+        if (this.countdownCurrent === 0) {
+          clearInterval(interval);
+          resolve(true);
+        }
+      }, 1000);
+    });
   }
 }

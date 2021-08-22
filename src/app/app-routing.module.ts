@@ -16,6 +16,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/send/send.module').then((m) => m.SendModule),
   },
   {
+    path: 'home-menu',
+    loadChildren: () => import('./modules/home-menu/home-menu.module').then((m) => m.HomeMenuPageModule),
+  },
+  {
     path: 'login',
     loadChildren: () => import('./modules/login/login.module').then((m) => m.LoginPageModule),
   },
@@ -33,6 +37,21 @@ const routes: Routes = [
     path: 'question',
     loadChildren: () =>
       import('./modules/question/question.module').then((m) => m.QuestionPageModule),
+  },
+  {
+    path: 'credits',
+    loadChildren: () =>
+      import('./modules/credits/credits.module').then((m) => m.CreditsPageModule),
+  },
+  {
+    path: 'create',
+    loadChildren: () =>
+      import('./modules/create/create.module').then((m) => m.CreatePageModule),
+  },
+  {
+    path: 'end-game',
+    loadChildren: () =>
+      import('./modules/end-game/end-game.module').then((m) => m.EndGamePageModule),
   },
   {
     path: 'admin',

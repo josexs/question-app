@@ -1,36 +1,43 @@
-<ion-card style="margin: 0.5rem 0 0 0" color="dark">
-  <ion-card-content>
+<ion-card class="card-button card-button-dark-border" color="dark">
+  <ion-card-content class="ion-text-center">
+    <h2 style="font-size: 20px; font-weight: 700; padding-bottom: 0.5rem">Siguiente turno</h2>
+    <p class="card-button-label-normal">
+      Le toca a <strong>{{ currentShift.name }}</strong>
+    </p>
+  </ion-card-content>
+</ion-card>
+
+<ion-card class="card-button card-button-light-border" color="light">
+  <ion-card-content class="ion-text-center">
     <ion-row>
-      <ion-col size="12" class="ion-text-center">
-        <h2 style="font-size: 20px; font-weight: 700; padding-bottom: 0.5rem">Siguiente turno</h2>
-        <p>
-          Le toca a <strong>{{ currentShift.name }}</strong>
-        </p>
+      <ion-col>
+        <p class="resumen-user-rows">{{ currentShift.positive }}</p>
+        <p>Aciertos</p>
+      </ion-col>
+      <ion-col>
+        <p class="resumen-user-rows">{{ currentShift.negative }}</p>
+        <p>Fallos</p>
+      </ion-col>
+      <ion-col>
+        <p class="resumen-user-rows">{{ position + 1 }}º</p>
+        <p>Posicion</p>
       </ion-col>
     </ion-row>
   </ion-card-content>
 </ion-card>
 
-<ion-row style="margin: 0.5rem 0 0 0">
-  <ion-col style="padding: 0 0.25rem 0 0" size="6" class="ion-text-center">
-    <ion-card style="margin: 0" color="success">
-      <ion-card-content class="ion-text-center">
-        <ion-icon style="zoom: 3; padding-top: 0.1rem; color: white" name="checkmark"></ion-icon>
-        <br />
-        <p style="font-size: 20px; font-weight: 700; color: white">{{ currentShift.positive }}</p>
-      </ion-card-content>
-    </ion-card>
-  </ion-col>
-  <ion-col style="padding: 0 0 0 0.25rem" size="6" class="ion-text-center">
-    <ion-card style="margin: 0" color="primary">
-      <ion-card-content class="ion-text-center">
-        <ion-icon
-          style="zoom: 3; padding-top: 0.1rem; color: white"
-          name="close-outline"
-        ></ion-icon>
-        <br />
-        <p style="font-size: 20px; font-weight: 700; color: white">{{ currentShift.negative }}</p>
-      </ion-card-content>
-    </ion-card>
-  </ion-col>
-</ion-row>
+<ion-card class="card-button card-button-primary-border" color="primary">
+  <ion-card-content class="ion-text-center">
+    <p
+      style="
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        font-weight: 900;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      "
+    >
+      ¿Tienes una empresa y quieres aparecer aqui?
+    </p>
+  </ion-card-content>
+</ion-card>

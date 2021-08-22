@@ -6,7 +6,7 @@ import { AlertProvider } from '@providers/ionic/alert.provider';
   selector: 'init-options-participants',
   templateUrl: 'init-options-participants.component.html',
 })
-export class InitOptionsParticipants {
+export class OptionsParticipantsComponent {
   @ViewChild('pwaphoto') pwaphoto: ElementRef;
   @Input() participants: number;
   @Output() confirm = new EventEmitter<ParticipantI[]>();
@@ -36,7 +36,6 @@ export class InitOptionsParticipants {
   }
 
   uploadPWA(index: number) {
-    console.log(this.pwaphoto);
     if (this.pwaphoto == null) {
       return;
     }
@@ -57,7 +56,7 @@ export class InitOptionsParticipants {
 
   private firstFileToBase64(fileImage: File): Promise<{}> {
     return new Promise((resolve, reject) => {
-      let fileReader: FileReader = new FileReader();
+      const fileReader: FileReader = new FileReader();
       if (fileReader && fileImage != null) {
         fileReader.readAsDataURL(fileImage);
         fileReader.onload = () => {

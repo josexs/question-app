@@ -3,7 +3,7 @@ import { environment } from './../../../environments/environment';
 import { questionsMock } from './questions.mock';
 import { Injectable } from '@angular/core';
 import { ParticipantI } from '@interfaces/participant.interface';
-import { UtilsProvider } from '@providers/utils.provider';
+import { UtilsProvider } from '@providers/misc/utils.provider';
 import { QuestionI } from '@interfaces/question.interface';
 import { StorageProvider } from '@providers/ionic/storage.provider';
 import Speech from 'speak-tts';
@@ -12,11 +12,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class QuestionsProvider {
-  questions = questionsMock;
+  questions = [];
   shifts: ParticipantI[] = [];
   speech = new Speech();
   voicesSupported = [];
-
   constructor(
     private utilsProvider: UtilsProvider,
     private storageProvider: StorageProvider,
@@ -26,9 +25,28 @@ export class QuestionsProvider {
     this.initSpeech();
   }
 
+  async getAllQuestionsNumber(): Promise<{ total: number }> {
+    const url = `${environment.path.api}/questions/getAllNumber`;
+    return this.httpClient.post<{ total: number }>(url, {}).toPromise();
+  }
+
   async getQuestions(): Promise<QuestionI[]> {
-    const url = `${environment.path.api}/questions/getAll`;
-    return this.httpClient.post<QuestionI[]>(url, {}).toPromise();
+    return new Promise((resolve) => {
+      const url = `${environment.path.api}/questions/getAll`;
+      this.httpClient
+        .post<QuestionI[]>(url, {})
+        .toPromise()
+        .then(
+          (questions: QuestionI[]) => {
+            this.questions = questions;
+            resolve(this.questions);
+          },
+          () => {
+            this.questions = questionsMock;
+            resolve(this.questions);
+          }
+        );
+    });
   }
 
   async getQuestionsSent(): Promise<QuestionI[]> {
@@ -36,11 +54,33 @@ export class QuestionsProvider {
     return this.httpClient.post<QuestionI[]>(url, {}).toPromise();
   }
 
-  getRandomQuestion(options: OptionsI): QuestionI {
+  async getAuthors(): Promise<any[]> {
+    const url = `${environment.path.api}/questions/getAuthors`;
+    return this.httpClient.post<any[]>(url, {}).toPromise();
+  }
+
+  async getRandomQuestion(options: OptionsI): Promise<QuestionI> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        if (this.questions.length === 0) {
+          this.getQuestions().then(async () => {
+            resolve(await this.getRandomQuestionWithQuestionsValues(options));
+          });
+        } else {
+          resolve(await this.getRandomQuestionWithQuestionsValues(options));
+        }
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  async getRandomQuestionWithQuestionsValues(options) {
     const questions = this.questions.filter((item) => item.type.indexOf(options.type) !== -1);
     const randomNumber = this.utilsProvider.randomNumber(questions.length - 1, 0, false);
     const randomQuestion = questions[randomNumber];
     this.questions = questions.filter((_item, i) => i !== Number(randomNumber));
+    await this.incrementCounterOfQuestion(randomQuestion._id);
     return randomQuestion;
   }
 
@@ -50,6 +90,11 @@ export class QuestionsProvider {
     } else {
       return this.questions.filter((item: QuestionI) => item.type.indexOf(type) !== -1).length;
     }
+  }
+
+  incrementCounterOfQuestion(id: string): Promise<QuestionI> {
+    const url = `${environment.path.api}/questions/incrementCounterOfQuestion/${id}`;
+    return this.httpClient.put<QuestionI>(url, {}).toPromise();
   }
 
   initSpeech(): void {
@@ -64,7 +109,8 @@ export class QuestionsProvider {
       this.speech
         .init(options)
         .then((data: any) => {
-          this.setVoicesSupported(data.voices);
+          const voices = data.voices.filter((item) => item.lang === 'es-ES');
+          this.setVoicesSupported(voices);
         })
         .catch((e: any) => console.error('Error al iniciar speech: ', e));
     } else {
@@ -81,16 +127,19 @@ export class QuestionsProvider {
   readQuestion(participant: ParticipantI, question: QuestionI): Promise<void> {
     return new Promise((resolve, reject) => {
       const msg = `Pregunta para ${participant.name}.......${question.text}`;
+      const isiOS = this.platform.is('ios');
       if (participant.gender === 'male') {
-        if (this.voicesSupported.indexOf('Monica') !== -1) {
-          this.speech.setVoice('Monica');
+        const nameFemale = isiOS ? 'Mónica' : 'Monica';
+        if (this.voicesSupported.indexOf(nameFemale) !== -1) {
+          this.speech.setVoice(nameFemale);
         } else {
           this.speech.setRate(1.3);
           this.speech.setVoice('español España');
         }
       } else if (participant.gender === 'female') {
-        if (this.voicesSupported.indexOf('Jorge') !== -1) {
-          this.speech.setVoice('Jorge');
+        const nameMale = isiOS ? 'Mónica' : 'Jorge';
+        if (this.voicesSupported.indexOf(nameMale) !== -1) {
+          this.speech.setVoice(nameMale);
         } else {
           this.speech.setRate(1.2);
           this.speech.setVoice('español España');
@@ -141,25 +190,41 @@ export class QuestionsProvider {
     return currentShift;
   }
 
-  updateQuestion(item: QuestionI) {
+  async createAdminCuestion(item: QuestionI) {
+    const url = `${environment.path.api}/questions/create`;
+    const headers = await this.generateHeaders();
+    return this.httpClient
+      .post<QuestionI>(url, item, { headers })
+      .toPromise();
+  }
+
+  async createUserCuestion(item: QuestionI) {
+    const url = `${environment.path.api}/questions/sendApp`;
+    return this.httpClient.post<QuestionI>(url, item).toPromise();
+  }
+
+  async updateQuestion(item: QuestionI) {
     const url = `${environment.path.api}/questions/update`;
-    let headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-token': localStorage.getItem('token'),
-    });
+    const headers = await this.generateHeaders();
     return this.httpClient
       .put<QuestionI>(url, item, { headers })
       .toPromise();
   }
 
-  deleteQuestion(id: string) {
+  async deleteQuestion(id: string) {
     const url = `${environment.path.api}/questions/one/${id}`;
-    let headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-token': localStorage.getItem('token'),
-    });
+    const headers = await this.generateHeaders();
     return this.httpClient
       .delete<QuestionI>(url, { headers })
       .toPromise();
+  }
+
+  async generateHeaders(): Promise<HttpHeaders> {
+    const token = await this.storageProvider.get<string>('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'x-token': token,
+    });
+    return headers;
   }
 }

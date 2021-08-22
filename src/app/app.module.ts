@@ -14,10 +14,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage';
 import { FormsModule } from '@angular/forms';
 import { QuestionsProvider } from '@providers/api/questions.provider';
-import { UtilsProvider } from '@providers/utils.provider';
+import { UtilsProvider } from '@providers/misc/utils.provider';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { GtagModule } from 'angular-gtag';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +30,7 @@ import { environment } from '../environments/environment';
     IonicStorageModule.forRoot(),
     IonicModule.forRoot(),
     AppRoutingModule,
+    GtagModule.forRoot({ trackingId: 'G-KW4L8CBSK4', trackPageviews: true }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [

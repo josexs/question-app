@@ -22,9 +22,9 @@ export class AdminEditQuestionPage {
       if (params && params.item && params.route) {
         this.item = JSON.parse(params.item);
         this.isSent = JSON.parse(params.route).sent;
+        this.routeBack = this.isSent ? 'admin/sent' : 'admin/all';
       }
     });
-    this.routeBack = this.isSent ? 'admin/sent' : 'admin/all';
   }
 
   approve() {

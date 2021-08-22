@@ -9,16 +9,19 @@ import { QuestionsProvider } from '@providers/api/questions.provider';
 })
 export class AdminListAllPage {
   items: QuestionI[] = [];
-  constructor(private questionsProvider: QuestionsProvider, private router: Router) {
+  constructor(private questionsProvider: QuestionsProvider, private router: Router) {}
+
+  ionViewWillEnter(): void {
     this.getAllQuestions();
   }
 
-  async getAllQuestions() {
-    this.items = await this.questionsProvider.getQuestions();
+  async getAllQuestions(): Promise<void> {
+    await this.questionsProvider.getQuestions();
+    this.items = this.questionsProvider.questions;
   }
 
-  goToEdit(item: QuestionI) {
-    let navigationExtras: NavigationExtras = {
+  goToEdit(item: QuestionI): void {
+    const navigationExtras: NavigationExtras = {
       queryParams: {
         item: JSON.stringify(item),
         route: JSON.stringify({ sent: false }),
@@ -26,5 +29,4 @@ export class AdminListAllPage {
     };
     this.router.navigate([`admin/question`], navigationExtras);
   }
-
 }

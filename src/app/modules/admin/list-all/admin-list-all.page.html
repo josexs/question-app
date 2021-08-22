@@ -1,18 +1,30 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar mode="ios" color="primary">
+  <ion-toolbar mode="ios">
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-button color="dark" fill="clear" [routerLink]="['/admin']">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
-    <ion-title class="ion-text-center">Admin</ion-title>
+    <ion-title class="ion-text-center">Todas las preguntas ({{this.items.length}})</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-item (click)="goToEdit(item)" *ngFor="let item of items" detail>
-    <p>{{ item.text }}<br><br>
-    <ion-text color="primary">{{ item.author }}</ion-text> -
-    <ion-text color="primary">{{ item.created | timeAgo | titlecase }}</ion-text><br>
+  <ion-card *ngIf="items.length === 0" class="card-button" color="primary">
+    <ion-card-content> No hay preguntas enviadas </ion-card-content>
+  </ion-card>
 
-  </p>
-  </ion-item>
+  <ion-card class="card-button card-button-dark-border" color="dark" *ngFor="let item of items">
+    <ion-card-content color="dark">
+      <ion-item class="ion-no-padding" lines="none" color="dark" (click)="goToEdit(item)" detail>
+        <p>
+          {{ item.text }}<br /><br />
+          <ion-badge color="primary">{{ item.author }}</ion-badge>&nbsp;
+          <ion-badge color="light">{{ item.created | timeAgo | titlecase }}</ion-badge>&nbsp;
+          <ion-badge *ngIf="item.type == 'normal'">Normal</ion-badge>
+          <ion-badge *ngIf="item.type == 'hard'">Fuerte</ion-badge>
+        </p>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

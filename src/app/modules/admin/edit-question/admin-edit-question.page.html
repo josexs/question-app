@@ -1,41 +1,41 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar mode="ios" color="primary">
+  <ion-toolbar mode="ios">
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-button color="dark" fill="clear" (click)="goBack()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title class="ion-text-center">Editar pregunta</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content *ngIf="item">
-  <ion-list>
-    <ion-item>
-      <ion-label color="primary" position="floating">Autor</ion-label>
-      <ion-input [(ngModel)]="item.author"></ion-input>
-    </ion-item>
+  <ion-card class="card-button card-button-dark-border" color="dark">
+    <ion-card-content color="dark">
+      <ion-item color="dark" lines="none">
+        <ion-label>Autor</ion-label>
+        <ion-input [(ngModel)]="item.author"></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label color="primary" position="floating">Tipo</ion-label>
-      <ion-input [(ngModel)]="item.type"></ion-input>
-    </ion-item>
+      <ion-item color="dark" lines="none">
+        <ion-label>Tipo</ion-label>
+        <ion-input [(ngModel)]="item.type"></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label color="primary" position="floating">Pregunta</ion-label>
-      <ion-textarea rows="5" [(ngModel)]="item.text"></ion-textarea>
-    </ion-item>
+      <ion-item color="dark" lines="none">
+        <ion-label>Pregunta</ion-label>
+        <ion-textarea class="ion-text-right" rows="5" [(ngModel)]="item.text"></ion-textarea>
+      </ion-item>
 
-    <ion-item>
-      <ion-label color="primary">Activo</ion-label>
-      <ion-checkbox [(ngModel)]="item.state"></ion-checkbox>
-    </ion-item>
-  </ion-list>
-
-  <ion-item lines="full" (click)="goBack()">
-    <ion-icon name="arrow-back-circle-outline" slot="start"></ion-icon>
-    <ion-label>Volver</ion-label>
-  </ion-item>
+      <ion-item color="dark" lines="none">
+        <ion-label>Activo</ion-label>
+        <ion-checkbox [(ngModel)]="item.state"></ion-checkbox>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
-<ion-footer>
+
+<ion-footer class="ion-no-border">
   <ion-button color="danger" (click)="delete()" expand="full">Eliminar</ion-button>
   <ion-button color="warning" (click)="edit()" expand="full">Editar</ion-button>
   <ion-button *ngIf="isSent" (click)="approve()" expand="full">Aprobar</ion-button>

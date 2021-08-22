@@ -14,11 +14,11 @@ export class QuestionClassificationComponent implements OnInit {
   async ngOnInit() {
     const shifts = await this.storageProvider.get<ParticipantI[]>('shifts');
     this.shifts = shifts.sort((a, b) => {
-      if (a.positive -a.negative > b.positive - b.negative) {
-        return -1
+      if (a.positive - a.negative > b.positive - b.negative) {
+        return -1;
       }
       if (a.positive - a.positive < b.positive - b.negative) {
-        return 1
+        return 1;
       }
     });
   }
