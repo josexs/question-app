@@ -45,7 +45,11 @@ export class QuestionsProvider {
   }
 
   getTotalOfQuestionOfType(type: string): number {
-    return this.questions.filter((item: QuestionI) => item.type.indexOf(type) !== -1).length;
+    if (type === 'all') {
+      return this.questions.length;
+    } else {
+      return this.questions.filter((item: QuestionI) => item.type.indexOf(type) !== -1).length;
+    }
   }
 
   initSpeech(): void {

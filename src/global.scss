@@ -36,5 +36,13 @@
 
 ion-row {
   margin: 0 0.5rem;
+}
 
+ion-button {
+  --border-radius: 55px;
+}
+
+.ion-item-input {
+  border-bottom: 2px solid var(--ion-color-primary);
+  margin-bottom: 0.5rem;
 }

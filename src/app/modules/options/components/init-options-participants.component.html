@@ -1,0 +1,28 @@
+<ng-container *ngIf="participants > 0">
+  <h4 style="text-align: center">PARTICIPANTES</h4>
+
+  <ng-container *ngFor="let user of users; let index = index">
+    <ion-col *ngIf="index < participants" size="12" sizeMd="6">
+      <ng-container color="primary" style="margin: 0">
+        <h6 style="color: var(--ion-color-primary)">Jugador {{ index + 1 }}</h6>
+        <ion-item class="ion-item-input" color="secondary">
+          <ion-label color="primary" position="floating">Nombre</ion-label>
+          <ion-input
+            placeholder="Introduce nombre"
+            [(ngModel)]="user.name"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item class="ion-item-input" color="secondary">
+          <ion-label color="primary" position="floating">Genero</ion-label>
+          <ion-select  placeholder="Selecciona" [(ngModel)]="user.gender">
+            <ion-select-option value="male">Hombre</ion-select-option>
+            <ion-select-option value="female">Mujer</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ng-container>
+    </ion-col>
+  </ng-container>
+
+  <ion-button expand="block" color="primary" (click)="goToConfirm()">Confirmar</ion-button>
+</ng-container>

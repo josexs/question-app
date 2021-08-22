@@ -4,16 +4,30 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./modules/home/home.module').then((m) => m.HomePageModule),
+    loadChildren: () => import('./modules/home/home.module').then((m) => m.HomeModule),
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./modules/dashboard/dashboard.module').then((m) => m.DashboardModule),
+  },
+  {
+    path: 'send',
+    loadChildren: () => import('./modules/send/send.module').then((m) => m.SendModule),
   },
   {
     path: 'login',
     loadChildren: () => import('./modules/login/login.module').then((m) => m.LoginPageModule),
   },
   {
-    path: 'init-options',
+    path: 'options',
     loadChildren: () =>
-      import('./modules/init-options/init-options.module').then((m) => m.InitOptionsPageModule),
+      import('./modules/options/options.module').then((m) => m.InitOptionsPageModule),
+  },
+  {
+    path: 'options-resume',
+    loadChildren: () =>
+      import('./modules/options-resume/options-resume.module').then((m) => m.OptionsResumeModule),
   },
   {
     path: 'question',
@@ -22,11 +36,15 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: () =>
-      import('./modules/admin/admin.module').then((m) => m.AdminModule),
+    loadChildren: () => import('./modules/admin/admin.module').then((m) => m.AdminModule),
   },
   {
     path: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
+  },
+  {
+    path: '*',
     redirectTo: 'home',
     pathMatch: 'full',
   },

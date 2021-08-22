@@ -1,0 +1,66 @@
+<ion-content>
+  <ion-row class="animate slideInUp">
+    <ion-col size="12" sizeLg="8" offsetLg="2">
+      <h2 style="text-align: center">Opciones</h2>
+      <ion-item class="ion-item-input" color="secondary">
+        <ion-label color="primary" position="floating">Tipo de juego</ion-label>
+        <ion-select
+          value="2"
+          multiple="false"
+          placeholder="Seleciona tipo"
+          [(ngModel)]="options.type"
+          (ionChange)="getTotalOfQuestionOfType()"
+        >
+          <ion-select-option *ngFor="let type of typesOfGame" [value]="type.value">
+            {{ type.name }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="ion-item-input" color="secondary">
+        <ion-label color="primary" position="floating">Duracion Pregunta (seg)</ion-label>
+        <ion-select
+          value="2"
+          multiple="false"
+          placeholder="Selecciona duracion pregunta"
+          [(ngModel)]="options.durationQuestion"
+        >
+          <ion-select-option value="5">5 segundos</ion-select-option>
+          <ion-select-option value="10">10 segundos</ion-select-option>
+          <ion-select-option value="15">15 segundos</ion-select-option>
+          <ion-select-option value="20">20 segundos</ion-select-option>
+          <ion-select-option value="25">25 segundos</ion-select-option>
+          <ion-select-option value="30">30 segundos</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="ion-item-input" color="secondary">
+        <ion-label color="primary" position="floating">Nº participantes</ion-label>
+        <ion-select
+          value="2"
+          multiple="false"
+          placeholder="Selecciona participantes"
+          [(ngModel)]="options.numberParticipants"
+          (ionChange)="changeNumberOfParticipants()"
+        >
+          <ion-select-option value="2">2</ion-select-option>
+          <ion-select-option value="3">3</ion-select-option>
+          <ion-select-option value="4">4</ion-select-option>
+          <ion-select-option value="5">5</ion-select-option>
+          <ion-select-option value="6">6</ion-select-option>
+          <ion-select-option value="7">7</ion-select-option>
+          <ion-select-option value="8">8</ion-select-option>
+          <ion-select-option value="9">9</ion-select-option>
+          <ion-select-option value="10">10</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <br />
+
+      <init-options-participants
+        [participants]="options.numberParticipants"
+        (confirm)="saveInitOptions($event)"
+        (takePhoto)="takePhoto()"
+      ></init-options-participants>
+    </ion-col>
+  </ion-row>
+</ion-content>

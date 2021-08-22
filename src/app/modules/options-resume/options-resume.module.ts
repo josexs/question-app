@@ -2,21 +2,23 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { HomePage } from './home.page';
 import { RouterModule } from '@angular/router';
+import { OptionsResumePage } from './options-resume.page';
+import { PipesModule } from 'app/pipes/pipes.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    PipesModule,
     RouterModule.forChild([
       {
         path: '',
-        component: HomePage,
+        component: OptionsResumePage,
       },
     ]),
   ],
-  declarations: [HomePage],
+  declarations: [OptionsResumePage],
 })
-export class HomeModule {}
+export class OptionsResumeModule {}

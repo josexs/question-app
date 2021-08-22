@@ -1,0 +1,37 @@
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-label><strong>Tipo de juego</strong></ion-label>
+        <ion-label class="ion-text-right">{{ options.type | typePipe }}</ion-label>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label><strong>Duracion Pregunta</strong></ion-label>
+        <ion-label class="ion-text-right">{{ options.durationQuestion }} segundos</ion-label>
+      </ion-item>
+
+      <br />
+      <h2>Participantes</h2>
+      <ion-row>
+        <ion-col size="6" *ngFor="let participant of shifts">
+          <ion-item lines="none">
+            <ion-avatar slot="start">
+              <img src="assets/images/no-image.jpg" alt="" />
+            </ion-avatar>
+            <ion-label class="ion-text-wrap">
+              <ion-text>
+                <h3>{{ participant.name }}</h3>
+              </ion-text>
+              <p>{{ participant.gender | genderPipe }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+  <br />
+  <ion-button expand="block" (click)="startGame()">Empezar juego</ion-button>
+  <br />
+  <ion-button color="warning" expand="block" (click)="resetGame()">Resetear</ion-button>
+</ion-content>

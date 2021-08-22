@@ -1,14 +1,14 @@
+import { Router } from '@angular/router';
 import { QuestionsProvider } from '@providers/api/questions.provider';
 import { Component } from '@angular/core';
 import { AlertProvider } from '@providers/ionic/alert.provider';
 import { StorageProvider } from '@providers/ionic/storage.provider';
 import { OptionsI } from 'app/interfaces/init-options.interface';
-import { NavController } from '@ionic/angular';
 import { ParticipantI } from '@interfaces/participant.interface';
 
 @Component({
-  selector: 'app-init-options',
-  templateUrl: 'init-options.page.html',
+  selector: 'app-options',
+  templateUrl: 'options.page.html',
 })
 export class InitOptionsPage {
   options: OptionsI = {
@@ -27,8 +27,8 @@ export class InitOptionsPage {
   constructor(
     private alertProvider: AlertProvider,
     private storageProvider: StorageProvider,
-    private navCtrl: NavController,
     private questionsProvider: QuestionsProvider,
+    private router: Router
   ) {}
 
   async ionViewWillEnter() {
@@ -38,7 +38,7 @@ export class InitOptionsPage {
         this.shifts = await this.storageProvider.get<ParticipantI[]>('shifts');
         this.options = options;
       } else if (options.state === 'inProgress') {
-        this.navCtrl.navigateForward(['/question']);
+        this.router.navigate(['/question']);
       }
     } else {
       await this.questionsProvider.getQuestions();
@@ -79,12 +79,9 @@ export class InitOptionsPage {
     }
   }
 
-  takePhoto() {
-  }
-
   onSaveInitOptionsSuccess() {
-    this.options.state = 'resume';
     this.storageProvider.set('options', this.options);
+    this.router.navigate(['/options-resume']);
   }
 
   onSaveInitOptionsError(validations: { message: string; state: boolean }) {
@@ -125,13 +122,6 @@ export class InitOptionsPage {
     };
   }
 
-  startGame() {
-    this.options.state = 'inProgress';
-    this.storageProvider.set('options', this.options);
-    this.storageProvider.set('currentShift', this.shifts[0]);
-    this.storageProvider.set('firstQuestion', true);
-    this.navCtrl.navigateForward(['question']);
-  }
 
   generateShifts() {
     this.shifts = this.options.participants.sort(() => Math.random() - 0.5);
@@ -139,6 +129,6 @@ export class InitOptionsPage {
   }
 
   goToAdmin() {
-    this.navCtrl.navigateForward('login');
+    
   }
 }
