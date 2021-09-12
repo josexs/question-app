@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 })
 export class EndGamePage {
   shifts = [];
-  winner;
-  loser;
+  winner: any;
+  loser: any;
   state = false;
   constructor(private storageProvider: StorageProvider, private router: Router) {}
 
@@ -18,7 +18,7 @@ export class EndGamePage {
     this.getClassification();
   }
 
-  async getClassification() {
+  async getClassification(): Promise<void> {
     let shifts: ParticipantI[] = await this.storageProvider.get('shifts');
     this.shifts = shifts.sort((a, b) => {
       if (a.positive - a.negative > b.positive - b.negative) {
@@ -33,7 +33,8 @@ export class EndGamePage {
     this.state = true;
   }
 
-  goToHome() {
-    this.router.navigate(['/home-menu']);
+  goToDashboard(): void {
+    this.storageProvider.clear();
+    this.router.navigate(['/dashboard']);
   }
 }

@@ -1,24 +1,34 @@
 <ion-content>
-  <ion-row style="margin-top: 4rem; margin-bottom: 4.5rem; margin-right: 2rem; margin-left: 2rem">
-    <ion-col size="7">
-      <img style="padding-left: 1rem" src="./assets/images/dashboard.svg" alt="" />
-    </ion-col>
-    <ion-col size="5">
-      <div class="box-counter" style="margin-bottom: 0.8rem">
-        <span class="box-counter-number"> {{ totalQuestions }} </span>
-        <span class="box-counter-text"> Preguntas </span>
-      </div>
-      <div class="box-counter">
-        <span class="box-counter-number">2</span>
-        <span class="box-counter-text">Modos</span>
-      </div>
-    </ion-col>
-  </ion-row>
+  <ion-slides style="height: 100%; width: 100%" mode="ios" pager="false" scrollbar="ios">
+    <ion-slide>
+      <ion-row class="animate fadeIn" style="width: 100%">
+        <ion-col size="12" sizeLg="8" offsetLg="2">
+          <ion-row
+            style=" margin-bottom: 4.5rem; margin-right: 2rem; margin-left: 2rem"
+          >
+            <ion-col size="7">
+              <img style="padding-left: 1rem" src="./assets/images/dashboard.svg" alt="" />
+            </ion-col>
+            <ion-col size="5">
+              <div class="box-counter" style="margin-bottom: 0.8rem">
+                <span class="box-counter-number"> {{ totalQuestions }} </span>
+                <span class="box-counter-text"> Preguntas </span>
+              </div>
+              <div class="box-counter">
+                <span class="box-counter-number">2</span>
+                <span class="box-counter-text">Modos</span>
+              </div>
+            </ion-col>
+          </ion-row>
 
-  <div>
-    <div (click)="actionButton(item.action)" class="ion-item-custom" *ngFor="let item of menuOptions">
-      {{ item.name }}
-      <ion-icon class="ion-icon-dashboard" name="chevron-forward-outline"></ion-icon>
-    </div>
-  </div>
+          <div *ngFor="let item of menuOptions">
+            <div (click)="actionButton(item.action)" class="ion-item-custom" *ngIf="!item.disabled">
+              {{ item.name }}
+              <ion-icon class="ion-icon-dashboard" name="chevron-forward-outline"></ion-icon>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-slide>
+  </ion-slides>
 </ion-content>

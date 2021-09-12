@@ -1,26 +1,33 @@
 <ion-content class="ion-text-center">
-  <ng-container *ngIf="state">
-    <img style="margin-top: 1rem; width: 50%" src="assets/images/trophy.png" />
+  <ion-slides style="height: 100%; width: 100%" mode="ios" pager="false" scrollbar="ios">
+    <ion-slide>
+      <ion-row class="animate fadeIn" style="width: 100%">
+        <ion-col size="12" sizeLg="8" offsetLg="2">
+          <ng-container *ngIf="state">
+            <img style="margin-top: 1rem; width: 50%" src="assets/images/trophy.png" alt="" />
 
-    <ion-card color="success" class="card-button card-button-success-border">
-      <ion-card-content class="ion-text-center card-button-label-normal">
-        <p>{{ winner.name }}</p>
-        <ion-row>
-          <ion-col>
-            Aciertos<br />
-            {{ winner.positive }}
-          </ion-col>
-          <ion-col>
-            Fallos<br />
-            {{ winner.negative }}
-          </ion-col>
-        </ion-row>
-        <br />
-      </ion-card-content>
-    </ion-card>
-  </ng-container>
+            <div class="ion-item-custom">
+              <p>{{ winner.name }}</p>
+              <ion-row>
+                <ion-col>
+                  Aciertos<br />
+                  {{ winner.positive }}
+                </ion-col>
+                <ion-col>
+                  Fallos<br />
+                  {{ winner.negative }}
+                </ion-col>
+              </ion-row>
+              <br />
+            </div>
+            <div style="text-align: center; margin: 1rem 0rem 1rem 0rem">
+              <ion-button (click)="goToDashboard()">Ir al inicio</ion-button>
+            </div>
+          </ng-container>
+        </ion-col>
+      </ion-row>
+    </ion-slide>
+  </ion-slides>
 </ion-content>
 
-<ion-footer>
-  <ion-button (click)="goToHome()">Ir al inicio</ion-button>
-</ion-footer>
+<ion-footer> </ion-footer>

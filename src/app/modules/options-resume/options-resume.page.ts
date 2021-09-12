@@ -36,7 +36,8 @@ export class OptionsResumePage implements OnInit {
     this.router.navigate(['question']);
   }
 
-  goToDashboad(): void {
+  resetGame(): void {
+    this.storageProvider.clear();
     this.router.navigate(['/dashboard']);
   }
 }

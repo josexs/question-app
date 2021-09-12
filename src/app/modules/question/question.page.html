@@ -1,204 +1,143 @@
 <ion-content [fullscreen]="true">
-  <ng-container *ngIf="states.question">
-    <ng-container *ngIf="participant && question">
-      <ion-card class="card-button card-button-dark-border" color="dark">
-        <ion-card-content class="ion-text-center">
-          <ion-item color="dark" lines="none" class="ion-text-center">
-            <ion-label
-              style="font-weight: 900; text-transform: uppercase; font-size: 2.5rem; margin: 0"
-            >
-              {{ participant.name }}
-              <ion-badge style="font-size: 1.4rem">
-                {{ participant.positive - participant.negative }}
-              </ion-badge>
-            </ion-label>
-          </ion-item>
-        </ion-card-content>
-      </ion-card>
+  <ion-slides style="height: 100%; width: 100%" mode="ios" pager="false" scrollbar="ios">
+    <ion-slide>
+      <ion-row class="animate fadeIn">
+        <ion-col size="12" sizeLg="8" offsetLg="2">
+          <ng-container *ngIf="states.question">
+            <ng-container *ngIf="participant && question">
+              <div class="ion-text-center" style="margin-bottom: 1.5rem">
+                <ion-label
+                  style="font-weight: 900; text-transform: uppercase; font-size: 2.5rem; margin: 0"
+                >
+                  {{ participant.name }}
+                </ion-label>
+                <br />
+                <span style="color: var(--ion-color-primary)">
+                  {{ participant.positive - participant.negative }} {{ participant.positive -
+                  participant.negative === 1 ? 'punto' : 'puntos' }}
+                </span>
+              </div>
 
-      <ion-card
-        *ngIf="this.states.countdownQuestion"
-        class="card-button card-button-dark-border"
-        color="dark"
-      >
-        <ion-card-content
-          class="ion-text-center"
-          style="padding: 0; padding-left: 1rem; padding-bottom: 0.1rem"
+              <div
+                *ngIf="this.states.countdownQuestion"
+                class="card-button card-button-dark-border"
+                style="margin-bottom: 1.5rem; width: 92.5vw"
+              >
+                <div
+                  class="ion-text-center"
+                  style="padding: 0; padding-left: 1rem; padding-bottom: 0.1rem"
+                >
+                  <ion-row style="margin: 0">
+                    <ion-col style="margin-top: 0.25rem" size="10">
+                      <ion-progress-bar
+                        style="padding: 0.5rem; border-radius: 25px"
+                        [value]="countdownCurrentPercentage"
+                      ></ion-progress-bar>
+                    </ion-col>
+                    <ion-col size="2">
+                      <ion-label>{{ countdownCurrent }}</ion-label>
+                    </ion-col>
+                  </ion-row>
+                </div>
+              </div>
+
+              <div class="ion-item-custom">
+                <p
+                  style="
+                    padding: 1.25rem;
+                    color: var(--ion-color-dark);
+                    font-size: 1.4rem;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                  "
+                >
+                  {{ question.text }}
+                </p>
+                <br />
+              </div>
+
+              <div style="margin-top: 1rem" class="ion-text-left">
+                <div class="ion-item-custom">
+                  <ion-label class="ion-text-wrap">
+                    <ion-text color="primary">
+                      <h3>Enviado por</h3>
+                    </ion-text>
+                    <p>{{ question.author }}</p>
+                  </ion-label>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngIf="states.classification">
+            <question-classification (goToResume)="goToResume()"></question-classification>
+          </ng-container>
+        </ion-col>
+
+        <!-- BUTTONS  -->
+        <div *ngIf="states.buttonStart && !isFirstQuestion" style="text-align: center; width: 100%">
+          <ion-button (click)="startQuestion()" style="margin-top: 1rem" class="ion-button-custom">
+            Iniciar Pregunta
+          </ion-button>
+        </div>
+
+        <ion-row
+          class="animate fadeIn"
+          *ngIf="states.question && !states.buttonStart && !isFirstQuestion"
+          style="width: 100%"
         >
-          <ion-row style="margin: 0">
-            <ion-col style="margin-top: 0.25rem" size="11">
-              <!-- <ion-progress-bar *ngIf="countdownQuestion" [value]="countdownQuestion?.left"></ion-progress-bar> -->
-              <ion-progress-bar
-                style="padding: 0.5rem; border-radius: 25px"
-                [value]="countdownCurrentPercentage"
-              ></ion-progress-bar>
-            </ion-col>
-            <ion-col size="1">
-              <ion-label>{{ countdownCurrent }}</ion-label>
-              <!-- <div
-                style="font-size: 30px; font-weight: 800; padding: 1rem; margin: auto; width: 50%"
-              > -->
-              <!-- <countdown #cdQuestion [config]="countdownQuestionConfig"></countdown> -->
-              <!-- </div> -->
-            </ion-col>
-          </ion-row>
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card class="card-button card-button-light-border">
-        <ion-card-content class="ion-text-center card-button-label-normal">
-          <p
-            style="
-              padding: 1.25rem;
-              color: var(--ion-color-dark);
-              font-size: 1.4rem;
-              font-weight: 700;
-              text-transform: uppercase;
-            "
-          >
-            {{ question.text }}
-          </p>
+          <ion-col size="6">
+            <ion-button
+              class="card-button-two-columns card-button-primary-border"
+              color="primary"
+              (click)="voteQuestion('negative')"
+              style="height: 4.25rem; width: 100%; margin: 0.5rem 0 0.5rem 0"
+              [disabled]="!states.buttonStart && !isFirstQuestion && states.countdownQuestion"
+            >
+              <ion-icon style="zoom: 1; padding-top: 0.1rem" name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button
+              class="card-button-two-columns card-button-success-border"
+              color="success"
+              (click)="voteQuestion('positive')"
+              style="height: 4.25rem; width: 100%; margin: 0.5rem 0 0.5rem 0"
+              [disabled]="!states.buttonStart && !isFirstQuestion && states.countdownQuestion"
+            >
+              <ion-icon
+                style="zoom: 1; padding-top: 0.1rem; color: #ffffff"
+                name="checkmark"
+              ></ion-icon
+              ><br />
+            </ion-button>
+          </ion-col>
           <br />
-          <div style="color: var(--ion-color-dark); font-size: 1rem">
-            <strong>Enviado por</strong>: {{ question.author }} <br /><br />
-          </div>
-        </ion-card-content>
-      </ion-card>
-    </ng-container>
-  </ng-container>
-
-  <ng-container *ngIf="!states.question && !states.classification">
-    <question-resume
-      [currentShift]="participant"
-      (goToNextQuestion)="nextQuestion()"
-      (goToClassification)="goToClassification()"
-      (goToEnd)="goToEnd()"
-    ></question-resume>
-  </ng-container>
-
-  <ng-container *ngIf="states.classification">
-    <question-classification (goToResume)="goToResume()"></question-classification>
-  </ng-container>
+        </ion-row>
+      </ion-row>
+    </ion-slide>
+  </ion-slides>
 </ion-content>
-
-<!-- Footer Iniciar pregunta -->
-<ion-footer class="ion-no-border" *ngIf="states.buttonStart && !isFirstQuestion">
-  <ion-card color="primary" class="card-button card-button-primary-border" (click)="startQuestion()">
-    <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
-      <ion-item lines="none" color="primary">
-        <ion-label class="card-button-label"> Iniciar pregunta </ion-label>
-        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
-      </ion-item>
-      <ion-ripple-effect></ion-ripple-effect>
-    </ion-card-content>
-  </ion-card>
-</ion-footer>
-
-<ion-footer
-  class="ion-no-border"
-  style="margin-bottom: 0.5rem"
-  *ngIf="!states.buttonStart && !isFirstQuestion && this.states.countdownQuestion"
->
-  <ion-row>
-    <ion-col size="6">
-      <ion-card disabled class="card-button-two-columns card-button-primary-border" color="primary">
-        <ion-card-content class="ion-text-center">
-          <ion-icon style="zoom: 3; padding-top: 0.1rem" name="close-outline"></ion-icon>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-    <ion-col size="6">
-      <ion-card disabled class="card-button-two-columns card-button-success-border" color="success">
-        <ion-card-content class="ion-text-center">
-          <ion-icon style="zoom: 3; padding-top: 0.1rem; color: white" name="checkmark"></ion-icon
-          ><br />
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-    <br />
-  </ion-row>
-</ion-footer>
-
-<!-- Footer Acierto o fallo -->
-<ion-footer
-  class="ion-no-border"
-  style="margin-bottom: 0.5rem"
-  *ngIf="states.question && !this.states.countdownQuestion"
->
-  <ion-row>
-    <ion-col size="6">
-      <ion-card
-        class="card-button-two-columns card-button-primary-border"
-        color="primary"
-        (click)="voteQuestion('negative')"
-      >
-        <ion-card-content class="ion-text-center">
-          <ion-icon style="zoom: 3; padding-top: 0.1rem" name="close-outline"></ion-icon>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-    <ion-col size="6">
-      <ion-card
-        class="card-button-two-columns card-button-success-border"
-        color="success"
-        (click)="voteQuestion('positive')"
-      >
-        <ion-card-content class="ion-text-center">
-          <ion-icon style="zoom: 3; padding-top: 0.1rem; color: #ffffff" name="checkmark"></ion-icon
-          ><br />
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-    <br />
-  </ion-row>
-</ion-footer>
 
 <!-- Footer clasificacion -->
 <ion-footer class="ion-no-border" style="margin-bottom: 0.5rem" *ngIf="states.classification">
-  <ion-card class="card-button card-button-primary-border" color="primary" (click)="goToResume()">
-    <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
-      <ion-item lines="none" color="primary">
-        <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
-        <ion-label class="card-button-label"> Volver </ion-label>
-      </ion-item>
-      <ion-ripple-effect></ion-ripple-effect>
-    </ion-card-content>
-  </ion-card>
+  <ion-row class="animate fadeIn">
+    <ion-col size="12" sizeLg="8" offsetLg="2">
+      <ion-card
+        class="card-button card-button-primary-border"
+        color="primary"
+        (click)="goToResume()"
+      >
+        <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
+          <ion-item lines="none" color="primary">
+            <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+            <ion-label class="card-button-label"> Volver </ion-label>
+          </ion-item>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
 </ion-footer>
 
 <!-- Footer Resume -->
-<ion-footer class="ion-no-border" *ngIf="!states.question && !states.classification">
-  <ion-card
-    color="warning"
-    class="card-button card-button-warning-border"
-    (click)="goToClassification()"
-  >
-    <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
-      <ion-item lines="none" color="warning">
-        <ion-label class="card-button-label"> Clasificacion </ion-label>
-        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
-      </ion-item>
-      <ion-ripple-effect></ion-ripple-effect>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card color="light" class="card-button card-button-light-border" (click)="goToEnd()">
-    <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
-      <ion-item lines="none" color="light">
-        <ion-label class="card-button-label"> Terminar Juego </ion-label>
-        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
-      </ion-item>
-      <ion-ripple-effect></ion-ripple-effect>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card color="primary" class="card-button card-button-primary-border" (click)="nextQuestion()">
-    <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
-      <ion-item lines="none" color="primary">
-        <ion-label class="card-button-label"> Siguiente pregunta </ion-label>
-        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
-      </ion-item>
-      <ion-ripple-effect></ion-ripple-effect>
-    </ion-card-content>
-  </ion-card>
-</ion-footer>

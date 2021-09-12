@@ -2,22 +2,22 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SendPage } from './send.page';
 import { RouterModule } from '@angular/router';
+import { QuestionResumePage } from './question-resume.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       {
         path: '',
-        component: SendPage,
+        component: QuestionResumePage,
       },
     ]),
-    ReactiveFormsModule,
   ],
-  declarations: [SendPage],
+  declarations: [QuestionResumePage],
 })
-export class SendModule {}
+export class QuestionResumeModule {}

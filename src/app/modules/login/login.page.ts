@@ -63,7 +63,7 @@ export class LoginPage implements OnInit {
   }
 
   goBack() {
-    this.gtag.event('goToHome');
+    this.gtag.event('goToDashboard');
     this.router.navigate(['/home-menu']);
   }
 

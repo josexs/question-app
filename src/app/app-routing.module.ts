@@ -17,7 +17,8 @@ const routes: Routes = [
   },
   {
     path: 'home-menu',
-    loadChildren: () => import('./modules/home-menu/home-menu.module').then((m) => m.HomeMenuPageModule),
+    loadChildren: () =>
+      import('./modules/home-menu/home-menu.module').then((m) => m.HomeMenuPageModule),
   },
   {
     path: 'login',
@@ -39,14 +40,19 @@ const routes: Routes = [
       import('./modules/question/question.module').then((m) => m.QuestionPageModule),
   },
   {
-    path: 'credits',
+    path: 'question-resume',
     loadChildren: () =>
-      import('./modules/credits/credits.module').then((m) => m.CreditsPageModule),
+      import('./modules/question-resume/question-resume.module').then(
+        (m) => m.QuestionResumeModule
+      ),
+  },
+  {
+    path: 'credits',
+    loadChildren: () => import('./modules/credits/credits.module').then((m) => m.CreditsPageModule),
   },
   {
     path: 'create',
-    loadChildren: () =>
-      import('./modules/create/create.module').then((m) => m.CreatePageModule),
+    loadChildren: () => import('./modules/send/send.module').then((m) => m.SendModule),
   },
   {
     path: 'end-game',

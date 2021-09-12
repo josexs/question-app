@@ -1,0 +1,23 @@
+.next-turno {
+  width: 100%;
+  width: 100%;
+  background: #eeeeee;
+  border: 1px solid #eeeeee;
+}
+
+.resumen-user-div {
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+.resumen-user-rows {
+  font-size: 1.15rem;
+  font-weight: 900;
+}
+
+.ion-item-custom:hover {
+  border: 1px solid var(--ion-color-primary);
+  color: var(--ion-color-primary);
+  transition: 100ms;
+  cursor: pointer;
+}

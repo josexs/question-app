@@ -41,22 +41,37 @@ export class QuestionPage {
   ) {}
 
   async ionViewWillEnter(): Promise<void> {
-    this.states.buttonStart = true;
     await this.getOptions();
-    this.countdownCurrent = Number(this.options.durationQuestion);
-    this.countdownCurrentPercentage = '1';
+    this.resetSstates();
+
     await this.getRandomQuestion();
     await this.checkFirstQuestion();
     this.startFirstQuestion();
   }
 
+  resetSstates() {
+    this.states = {
+      buttonStart: true,
+      countdownQuestion: true,
+      question: true,
+      pause: false,
+      classification: false,
+    };
+    this.countdownCurrent = Number(this.options.durationQuestion);
+    this.countdownCurrentPercentage = '1';
+  }
+
   async getOptions(): Promise<void> {
     this.options = await this.storageProvider.get<OptionsI>('options');
-    this.countdownQuestionConfig = {
-      leftTime: Number(this.options.durationQuestion),
-      format: 's',
-      demand: true,
-    };
+    if (this.options) {
+      this.countdownQuestionConfig = {
+        leftTime: Number(this.options.durationQuestion),
+        format: 's',
+        demand: true,
+      };
+    } else {
+      this.router.navigate(['/dashboard']);
+    }
   }
 
   async getRandomQuestion(): Promise<void> {
@@ -108,16 +123,9 @@ export class QuestionPage {
     this.participant = await this.questionsProvider.voteQuestion(type, this.participant);
     this.gtag.event('voteQuestion');
     this.states.question = false;
-  }
-
-  nextQuestion(): void {
-    this.getRandomQuestion();
-    this.states.countdownQuestion = true;
-    this.states.question = true;
-    this.states.buttonStart = true;
-    this.countdownCurrent = Number(this.options.durationQuestion);
-    this.countdownCurrentPercentage = '1';
-    this.gtag.event('nextQuestion');
+    // GOTO RESUME
+    this.router.navigate(['/question-resume']);
+    this.gtag.event('goToResume');
   }
 
   goToClassification(): void {
@@ -128,22 +136,6 @@ export class QuestionPage {
   goToResume() {
     this.gtag.event('goToResume');
     this.states.classification = false;
-  }
-
-  goToEnd() {
-    this.alertProvider.presentAlertWithButtons(
-      '¿Estas seguro?',
-      '¿Quieres terminar el juego?',
-      [
-        { text: 'No', role: 'cancel' },
-        { text: 'Si', handler: () => this.goToEndConfirm() },
-      ],
-      'alert-warning'
-    );
-  }
-
-  goToEndConfirm() {
-    this.router.navigate(['/end-game']);
   }
 
   async openPopover(ev: any) {

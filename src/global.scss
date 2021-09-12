@@ -237,11 +237,6 @@ ion-toolbar {
   font-weight: 600;
 }
 
-.resumen-user-rows {
-  font-size: 1.15rem;
-  font-weight: 900;
-}
-
 ion-button {
   --border-radius: 55px;
 }
@@ -249,4 +244,20 @@ ion-button {
 .ion-item-input {
   border-bottom: 2px solid var(--ion-color-primary);
   margin-bottom: 0.5rem;
+}
+
+.ion-item-custom {
+  color: #000;
+  background: #eeeeee;
+  margin-left: 0.8rem;
+  margin-right: 0.8rem;
+  margin-bottom: 0.25rem;
+  padding: 1rem;
+  font-weight: 700;
+  border: 1px solid #eeeeee;
+}
+
+.ion-icon-dashboard {
+  float: right;
+  zoom: 1.25;
 }

@@ -7,15 +7,12 @@
         <h6 style="color: var(--ion-color-primary)">Jugador {{ index + 1 }}</h6>
         <ion-item class="ion-item-input" color="secondary">
           <ion-label color="primary" position="floating">Nombre</ion-label>
-          <ion-input
-            placeholder="Introduce nombre"
-            [(ngModel)]="user.name"
-          ></ion-input>
+          <ion-input placeholder="Introduce nombre" [(ngModel)]="user.name"></ion-input>
         </ion-item>
 
         <ion-item class="ion-item-input" color="secondary">
           <ion-label color="primary" position="floating">Genero</ion-label>
-          <ion-select  placeholder="Selecciona" [(ngModel)]="user.gender">
+          <ion-select placeholder="Selecciona" [(ngModel)]="user.gender">
             <ion-select-option value="male">Hombre</ion-select-option>
             <ion-select-option value="female">Mujer</ion-select-option>
           </ion-select>
@@ -24,5 +21,7 @@
     </ion-col>
   </ng-container>
 
-  <ion-button expand="block" color="primary" (click)="goToConfirm()">Confirmar</ion-button>
+  <div style="text-align: center; margin: 1rem 0rem 1rem 0rem">
+    <ion-button color="primary" (click)="goToConfirm()">Confirmar</ion-button>
+  </div>
 </ng-container>
