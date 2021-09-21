@@ -10,4 +10,4 @@ import { EndGamePageRoutingModule } from './end-game-routing.module';
   imports: [CommonModule, FormsModule, IonicModule, EndGamePageRoutingModule],
   declarations: [EndGamePage],
 })
-export class EndGamePageModule {}
+export class EndGameModule {}

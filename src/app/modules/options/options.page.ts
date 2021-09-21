@@ -6,6 +6,7 @@ import { StorageProvider } from '@providers/ionic/storage.provider';
 import { OptionsI } from 'app/interfaces/init-options.interface';
 import { ParticipantI } from '@interfaces/participant.interface';
 import { Gtag } from 'angular-gtag';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 @Component({
   selector: 'app-options',
@@ -25,12 +26,15 @@ export class InitOptionsPage {
     { name: 'Fuerte', value: 'hard' },
   ];
   totalQuestions = 0;
+  clickedImage: string;
+
   constructor(
     private alertProvider: AlertProvider,
     private storageProvider: StorageProvider,
     private questionsProvider: QuestionsProvider,
     private router: Router,
-    private gtag: Gtag
+    private gtag: Gtag,
+    private camera: Camera
   ) {}
 
   async ionViewWillEnter() {
@@ -136,15 +140,15 @@ export class InitOptionsPage {
     };
   }
 
-
   generateShifts() {
     this.shifts = this.options.participants.sort(() => Math.random() - 0.5);
     this.storageProvider.set('shifts', this.shifts);
   }
 
-  goToAdmin() {
-    
-  }
+  goToAdmin() {}
 
-  takePhoto() {}
+  goToDashboard() {
+    this.gtag.event('goToDashboard');
+    this.router.navigate(['/dashboard']);
+  }
 }

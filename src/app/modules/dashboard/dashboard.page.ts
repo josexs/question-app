@@ -99,4 +99,9 @@ export class DashboardPage {
   getTotalOfQuestionOfType(): void {
     this.totalQuestions = this.questionsProvider.getTotalOfQuestionOfType('all');
   }
+
+  goToAdmin() {
+    this.gtag.event('goToAdmin');
+    this.router.navigate(['/login']);
+  }
 }

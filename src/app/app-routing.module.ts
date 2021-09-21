@@ -16,18 +16,13 @@ const routes: Routes = [
     loadChildren: () => import('./modules/send/send.module').then((m) => m.SendModule),
   },
   {
-    path: 'home-menu',
-    loadChildren: () =>
-      import('./modules/home-menu/home-menu.module').then((m) => m.HomeMenuPageModule),
-  },
-  {
     path: 'login',
-    loadChildren: () => import('./modules/login/login.module').then((m) => m.LoginPageModule),
+    loadChildren: () => import('./modules/login/login.module').then((m) => m.LoginModule),
   },
   {
     path: 'options',
     loadChildren: () =>
-      import('./modules/options/options.module').then((m) => m.InitOptionsPageModule),
+      import('./modules/options/options.module').then((m) => m.InitOptionsModule),
   },
   {
     path: 'options-resume',
@@ -37,13 +32,20 @@ const routes: Routes = [
   {
     path: 'question',
     loadChildren: () =>
-      import('./modules/question/question.module').then((m) => m.QuestionPageModule),
+      import('./modules/question/question.module').then((m) => m.QuestionModule),
   },
   {
     path: 'question-resume',
     loadChildren: () =>
       import('./modules/question-resume/question-resume.module').then(
         (m) => m.QuestionResumeModule
+      ),
+  },
+  {
+    path: 'classification',
+    loadChildren: () =>
+      import('./modules/classification/classification.module').then(
+        (m) => m.ClassificationModule
       ),
   },
   {
@@ -57,7 +59,7 @@ const routes: Routes = [
   {
     path: 'end-game',
     loadChildren: () =>
-      import('./modules/end-game/end-game.module').then((m) => m.EndGamePageModule),
+      import('./modules/end-game/end-game.module').then((m) => m.EndGameModule),
   },
   {
     path: 'admin',

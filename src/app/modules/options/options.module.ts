@@ -22,4 +22,4 @@ import { RouterModule } from '@angular/router';
   ],
   declarations: [InitOptionsPage, OptionsParticipantsComponent],
 })
-export class InitOptionsPageModule {}
+export class InitOptionsModule {}

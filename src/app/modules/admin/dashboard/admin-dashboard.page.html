@@ -5,24 +5,21 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
-  <ng-container *ngFor="let item of items">
-    <ion-card
-      *ngIf="item.state"
-      [color]="item.color"
-      class="card-button"
-      (click)="goTo(item.route)"
-    >
-      <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
-        <ion-item lines="none" [color]="item.color">
-          <ion-label class="card-button-label">
-            {{ item.title }}<br />
-            <span class="card-button-sublabel">{{ item.subtitle }}</span>
-          </ion-label>
-          <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
-        </ion-item>
-        <ion-ripple-effect></ion-ripple-effect>
-      </ion-card-content>
-    </ion-card>
-  </ng-container>
+  <ion-row class="animate fadeIn" style="width: 100%">
+    <ion-col size="12" sizeLg="8" offsetLg="2">
+      <ng-container *ngFor="let item of items">
+        <div
+          *ngIf="item.state"
+          class="admin-ion-item-custom"
+          (click)="goTo(item.route)"
+        >
+            <ion-label class="card-button-label">
+              {{ item.title }}<br />
+              <span class="card-button-sublabel">{{ item.subtitle }}</span>
+            </ion-label>
+            <ion-icon class="ion-icon-dashboard" name="chevron-forward-outline"></ion-icon>
+        </div>
+      </ng-container>
+    </ion-col>
+  </ion-row>
 </ion-content>

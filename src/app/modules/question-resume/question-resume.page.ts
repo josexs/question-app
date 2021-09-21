@@ -91,6 +91,7 @@ export class QuestionResumePage {
 
   goToClassification() {
     this.gtag.event('goToClassification');
+    this.router.navigate(['/classification']);
   }
 
   nextQuestion(): void {

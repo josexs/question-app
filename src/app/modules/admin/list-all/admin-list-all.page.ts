@@ -9,6 +9,8 @@ import { QuestionsProvider } from '@providers/api/questions.provider';
 })
 export class AdminListAllPage {
   items: QuestionI[] = [];
+  loading = true;
+  error = false;
   constructor(private questionsProvider: QuestionsProvider, private router: Router) {}
 
   ionViewWillEnter(): void {
@@ -16,8 +18,14 @@ export class AdminListAllPage {
   }
 
   async getAllQuestions(): Promise<void> {
-    await this.questionsProvider.getQuestions();
-    this.items = this.questionsProvider.questions;
+    try {
+      await this.questionsProvider.getQuestions();
+      this.items = this.questionsProvider.questions;
+      this.loading = false;
+    } catch (error) {
+      this.loading = false;
+      this.error = true;
+    }
   }
 
   goToEdit(item: QuestionI): void {

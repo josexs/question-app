@@ -10,15 +10,17 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card *ngIf="items.length === 0" class="card-button" color="primary">
-    <ion-card-content> No hay preguntas enviadas </ion-card-content>
-  </ion-card>
+  <div *ngIf="!loading && items.length === 0" class="admin-ion-item-custom" color="secondary">
+    No hay preguntas enviadas
+  </div>
 
-  <ion-item (click)="goToEdit(item)" *ngFor="let item of items" detail>
-    <p>
-      {{ item.text }}<br /><br />
-      <ion-text color="primary">{{ item.author }}</ion-text> -
-      <ion-text color="primary">{{ item.created | timeAgo | titlecase }}</ion-text><br />
-    </p>
-  </ion-item>
+  <ng-container *ngIf="!loading && items.length > 0">
+    <div (click)="goToEdit(item)" *ngFor="let item of items" class="admin-ion-item-custom">
+      <p>
+        {{ item.text }}<br /><br />
+        <ion-text color="primary">{{ item.author }}</ion-text> -
+        <ion-text color="primary">{{ item.created | timeAgo | titlecase }}</ion-text><br />
+      </p>
+    </div>
+  </ng-container>
 </ion-content>

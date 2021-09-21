@@ -10,21 +10,25 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card *ngIf="items.length === 0" class="card-button" color="primary">
-    <ion-card-content> No hay preguntas enviadas </ion-card-content>
-  </ion-card>
+  <ion-row class="animate fadeIn" style="margin-left: 0.8rem; margin-right: 0.8rem">
+    <ion-col size="12" sizeLg="8" offsetLg="2">
+      <div *ngIf="!loading && items.length === 0" class="admin-ion-item-custom" color="secondary">
+        No hay preguntas
+      </div>
 
-  <ion-card class="card-button card-button-dark-border" color="dark" *ngFor="let item of items">
-    <ion-card-content color="dark">
-      <ion-item class="ion-no-padding" lines="none" color="dark" (click)="goToEdit(item)" detail>
-        <p>
-          {{ item.text }}<br /><br />
-          <ion-badge color="primary">{{ item.author }}</ion-badge>&nbsp;
-          <ion-badge color="light">{{ item.created | timeAgo | titlecase }}</ion-badge>&nbsp;
-          <ion-badge *ngIf="item.type == 'normal'">Normal</ion-badge>
-          <ion-badge *ngIf="item.type == 'hard'">Fuerte</ion-badge>
-        </p>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
+      <ng-container *ngIf="!loading && items.length > 0">
+        <div class="admin-ion-item-custom" *ngFor="let item of items" (click)="goToEdit(item)">
+          <div class="ion-no-margin">
+            <span>{{ item.text }}</span>
+            <div style="margin-top: 0.5rem">
+              <ion-badge color="primary">{{ item.author }}</ion-badge>&nbsp;
+              <ion-badge color="dark">{{ item.created | timeAgo | titlecase }}</ion-badge>&nbsp;
+              <ion-badge *ngIf="item.type == 'normal'">Normal</ion-badge>
+              <ion-badge *ngIf="item.type == 'hard'">Fuerte</ion-badge>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ion-col>
+  </ion-row>
 </ion-content>

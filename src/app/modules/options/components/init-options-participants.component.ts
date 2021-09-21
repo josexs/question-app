@@ -1,5 +1,6 @@
 import { Component, Input, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
 import { ParticipantI } from '@interfaces/participant.interface';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { AlertProvider } from '@providers/ionic/alert.provider';
 
 @Component({
@@ -23,7 +24,15 @@ export class OptionsParticipantsComponent {
     { name: '', gender: '', photo: '', positive: 0, negative: 0 },
     { name: '', gender: '', photo: '', positive: 0, negative: 0 },
   ];
-  constructor(private alertProvider: AlertProvider) {}
+  optionsCamera: CameraOptions = {
+    quality: 30,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE,
+  };
+  clickedImage: string;
+
+  constructor(private alertProvider: AlertProvider, private camera: Camera) {}
 
   goToConfirm() {
     const users = this.users.filter((item) => item.name !== '' && item.gender !== '');
@@ -70,5 +79,20 @@ export class OptionsParticipantsComponent {
         reject(new Error('No file found'));
       }
     });
+  }
+
+  captureImage() {
+    this.camera.getPicture(this.optionsCamera).then(
+      (imageData) => {
+        // imageData is either a base64 encoded string or a file URI
+        // If it's base64 (DATA_URL):
+        let base64Image = 'data:image/jpeg;base64,' + imageData;
+        this.clickedImage = base64Image;
+      },
+      (err) => {
+        console.log(err);
+        // Handle error
+      }
+    );
   }
 }

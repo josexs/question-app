@@ -57,7 +57,7 @@ export class SendPage implements OnInit {
     this.questionsProvider.createUserCuestion(question).then(
       () => {
         this.alertProvider.presentAlert('¡Vale!', 'La pregunta ha sido enviada');
-        this.router.navigate(['/home-menu']);
+        this.router.navigate(['/dashboard']);
       },
       (error) => {
         console.error(error);

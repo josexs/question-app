@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'admin-dashboard',
   templateUrl: 'admin-dashboard.page.html',
+  styleUrls: ['./admin-dashboard.page.scss']
 })
 export class AdminDashboardPage {
   items = [];

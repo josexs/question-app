@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
   <ion-slides style="height: 100%; width: 100%" mode="ios" pager="false" scrollbar="ios">
     <ion-slide>
-      <ion-row class="animate fadeIn">
+      <ion-row class="animate fadeIn" style="width: 100%">
         <ion-col size="12" sizeLg="8" offsetLg="2">
           <ng-container *ngIf="states.question">
             <ng-container *ngIf="participant && question">
@@ -21,12 +21,9 @@
               <div
                 *ngIf="this.states.countdownQuestion"
                 class="card-button card-button-dark-border"
-                style="margin-bottom: 1.5rem; width: 92.5vw"
+                style="margin-bottom: 1.5rem; width: 100%"
               >
-                <div
-                  class="ion-text-center"
-                  style="padding: 0; padding-left: 1rem; padding-bottom: 0.1rem"
-                >
+                <div class="ion-text-center" style="padding: 0; padding-bottom: 0.1rem">
                   <ion-row style="margin: 0">
                     <ion-col style="margin-top: 0.25rem" size="10">
                       <ion-progress-bar
@@ -69,9 +66,6 @@
             </ng-container>
           </ng-container>
 
-          <ng-container *ngIf="states.classification">
-            <question-classification (goToResume)="goToResume()"></question-classification>
-          </ng-container>
         </ion-col>
 
         <!-- BUTTONS  -->
@@ -118,26 +112,3 @@
     </ion-slide>
   </ion-slides>
 </ion-content>
-
-<!-- Footer clasificacion -->
-<ion-footer class="ion-no-border" style="margin-bottom: 0.5rem" *ngIf="states.classification">
-  <ion-row class="animate fadeIn">
-    <ion-col size="12" sizeLg="8" offsetLg="2">
-      <ion-card
-        class="card-button card-button-primary-border"
-        color="primary"
-        (click)="goToResume()"
-      >
-        <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
-          <ion-item lines="none" color="primary">
-            <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
-            <ion-label class="card-button-label"> Volver </ion-label>
-          </ion-item>
-          <ion-ripple-effect></ion-ripple-effect>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
-</ion-footer>
-
-<!-- Footer Resume -->

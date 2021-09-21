@@ -114,7 +114,7 @@ export class QuestionPage {
   resetGame(): void {
     this.storageProvider.remove('options');
     this.gtag.event('resetGame');
-    this.router.navigate(['/home-menu']);
+    this.router.navigate(['/dashboard']);
   }
 
   endGame() {}
