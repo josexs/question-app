@@ -1,8 +1,7 @@
-import { AlertProvider } from '@providers/ionic/alert.provider';
 import { Component, ViewChild } from '@angular/core';
 import { QuestionsProvider } from '@providers/api/questions.provider';
 import { StorageProvider } from '@providers/ionic/storage.provider';
-import { NavController, PopoverController } from '@ionic/angular';
+import { PopoverController } from '@ionic/angular';
 import { CountdownComponent, CountdownConfig } from 'ngx-countdown';
 import { OptionsI } from '@interfaces/init-options.interface';
 import { ParticipantI } from '@interfaces/participant.interface';
@@ -16,6 +15,7 @@ import { Router } from '@angular/router';
   templateUrl: 'question.page.html',
 })
 export class QuestionPage {
+  @ViewChild('slider') slides: any;
   @ViewChild('cdQuestion', { static: false }) public countdownQuestion: CountdownComponent;
   options: OptionsI;
   question: QuestionI;
@@ -34,16 +34,19 @@ export class QuestionPage {
   constructor(
     private questionsProvider: QuestionsProvider,
     private storageProvider: StorageProvider,
-    private alertProvider: AlertProvider,
     public popoverController: PopoverController,
     private gtag: Gtag,
     private router: Router
   ) {}
 
   async ionViewWillEnter(): Promise<void> {
+    setTimeout(() => {
+      if (this.slides) {
+        this.slides.lockSwipes(true);
+      }
+    }, 500);
     await this.getOptions();
     this.resetSstates();
-
     await this.getRandomQuestion();
     await this.checkFirstQuestion();
     this.startFirstQuestion();

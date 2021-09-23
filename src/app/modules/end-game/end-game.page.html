@@ -4,10 +4,12 @@
       <ion-row class="animate fadeIn" style="width: 100%">
         <ion-col size="12" sizeLg="8" offsetLg="2">
           <ng-container *ngIf="state">
+            <h2>¡Juego terminado!</h2>
+            <h6>Rondas: {{ rounds }}</h6>
             <img style="margin-top: 1rem; width: 50%" src="assets/images/trophy.png" alt="" />
 
             <div class="ion-item-custom">
-              <p>{{ winner.name }}</p>
+              <h2 style="text-transform: uppercase;">{{ winner.name }}</h2>
               <ion-row>
                 <ion-col>
                   Aciertos<br />
@@ -21,7 +23,7 @@
               <br />
             </div>
             <div style="text-align: center; margin: 1rem 0rem 1rem 0rem">
-              <ion-button (click)="goToDashboard()">Ir al inicio</ion-button>
+              <ion-button expand="block" (click)="goToDashboard()">Ir al inicio</ion-button>
             </div>
           </ng-container>
         </ion-col>

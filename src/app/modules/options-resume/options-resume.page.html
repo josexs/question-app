@@ -1,48 +1,61 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="ios">
+    <ion-title class="ion-text-center">Opciones </ion-title>
+    <ion-buttons slot="start">
+      <ion-button color="dark" fill="clear" (click)="goToBack()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
-  <ion-slides style="height: 100vh; width: 100vw" mode="ios" pager="false" scrollbar="ios">
-    <ion-slide style="width: 100%">
-      <ion-row class="animate fadeIn" style="width:100%">
-        <ion-col size="12" sizeLg="8" offsetLg="2">
-          <h2 style="text-align: center; width: 100%">Opciones</h2>
-          <div class="ion-item-custom">
-            <ion-label class="ion-text-wrap">
-              <ion-text color="primary">
-                <h3>Tipo de juego</h3>
-              </ion-text>
-              <p>{{ options.type | typePipe }}</p>
-            </ion-label>
-          </div>
+  <ion-row class="animate fadeIn" style="">
+    <ion-col size="12" sizeLg="8" offsetLg="2">
+      <div class="ion-item-custom">
+        <ion-label class="ion-text-wrap">
+          <ion-text color="primary">
+            <h3>Tipo de juego</h3>
+          </ion-text>
+          <p>{{ options.type | typePipe }}</p>
+        </ion-label>
+      </div>
 
-          <div class="ion-item-custom">
-            <ion-label class="ion-text-wrap">
-              <ion-text color="primary">
-                <h3>Duracion Pregunta</h3>
-              </ion-text>
-              <p>{{ options.durationQuestion }} segundos</p>
-            </ion-label>
-          </div>
+      <div class="ion-item-custom">
+        <ion-label class="ion-text-wrap">
+          <ion-text color="primary">
+            <h3>Duracion Pregunta</h3>
+          </ion-text>
+          <p>{{ options.durationQuestion }} segundos</p>
+        </ion-label>
+      </div>
 
-          <br />
-          <h2 style="text-align: center">Participantes</h2>
+      <br />
+      <p style="text-align: center; font-size: 17px; text-transform: uppercase; font-weight: 600">
+        Participantes
+      </p>
 
-          <div>
-            <div class="ion-item-custom" *ngFor="let participant of shifts">
-              <ion-label class="ion-text-wrap">
-                <ion-text color="primary">
-                  <h3>{{ participant.name }}</h3>
-                </ion-text>
-                <p>{{ participant.gender | genderPipe }}</p>
-              </ion-label>
-            </div>
-          </div>
+      <div>
+        <div class="ion-item-custom" *ngFor="let participant of shifts">
+          <ion-label class="ion-text-wrap">
+            <ion-text color="primary">
+              <h3>{{ participant.name }}</h3>
+            </ion-text>
+            <p>{{ participant.gender | genderPipe }}</p>
+          </ion-label>
+        </div>
+      </div>
 
-          <div style="text-align: center; margin: 1rem 0rem 1rem 0rem">
-            <ion-button (click)="startGame()">Empezar juego</ion-button>
-            <br />
-            <ion-button color="warning" (click)="resetGame()">Resetear</ion-button>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-slide>
-  </ion-slides>
+      <div
+        style="
+          padding-left: 1rem;
+          text-align: center;
+          margin: 1rem 0rem 1rem 0rem;
+          padding-right: 1rem;
+        "
+      >
+        <ion-button expand="block" (click)="startGame()">Empezar juego</ion-button>
+      </div>
+    </ion-col>
+  </ion-row>
 </ion-content>

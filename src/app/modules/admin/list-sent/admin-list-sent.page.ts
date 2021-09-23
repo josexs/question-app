@@ -9,6 +9,7 @@ import { NavigationExtras, Router } from '@angular/router';
 })
 export class AdminListSentPage {
   items: QuestionI[] = [];
+  loading = true;
   constructor(private questionsProvider: QuestionsProvider, private router: Router) {}
 
   ionViewWillEnter(): void {

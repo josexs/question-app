@@ -1,6 +1,7 @@
+import { OptionsI } from '@interfaces/init-options.interface';
 import { ParticipantI } from '@interfaces/participant.interface';
 import { StorageProvider } from '@providers/ionic/storage.provider';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,14 +9,35 @@ import { Router } from '@angular/router';
   templateUrl: 'end-game.page.html',
 })
 export class EndGamePage {
+  @ViewChild('slider') slides: any;
   shifts = [];
   winner: any;
   loser: any;
   state = false;
+  rounds = 0;
+  options: OptionsI;
   constructor(private storageProvider: StorageProvider, private router: Router) {}
 
   async ionViewWillEnter(): Promise<void> {
-    this.getClassification();
+    setTimeout(() => {
+      if (this.slides) {
+        this.slides.lockSwipes(true);
+      }
+    }, 500);
+    await this.checkEndGame();
+    await this.getClassification();
+    // this.storageProvider.clear();
+  }
+
+  async checkEndGame() {
+    this.options = await this.storageProvider.get('options');
+    if (this.options) {
+      if (this.options.state !== 'end') {
+        this.router.navigate(['/dashboard']);
+      }
+    } else {
+      this.router.navigate(['/dashboard']);
+    }
   }
 
   async getClassification(): Promise<void> {
@@ -30,11 +52,11 @@ export class EndGamePage {
     });
     this.winner = this.shifts[0];
     this.loser = this.shifts[this.shifts.length - 1];
+    this.rounds = this.winner.positive + this.winner.negative;
     this.state = true;
   }
 
   goToDashboard(): void {
-    this.storageProvider.clear();
     this.router.navigate(['/dashboard']);
   }
 }

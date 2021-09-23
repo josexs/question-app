@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { QuestionsProvider } from '@providers/api/questions.provider';
 import { AlertProvider } from '@providers/ionic/alert.provider';
@@ -11,6 +11,7 @@ import { Gtag } from 'angular-gtag';
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage {
+  @ViewChild('slider') slides: any;
   totalQuestions: number;
   menuOptions: { name: string; action: string; disabled: boolean }[] = [];
   constructor(
@@ -22,6 +23,11 @@ export class DashboardPage {
   ) {}
 
   async ionViewWillEnter(): Promise<void> {
+    setTimeout(() => {
+      if (this.slides) {
+        this.slides.lockSwipes(true);
+      }
+    }, 500);
     this.getMenuOptions();
     await this.questionsProvider.getQuestions();
     this.getTotalOfQuestionOfType();

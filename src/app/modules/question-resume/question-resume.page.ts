@@ -1,5 +1,6 @@
+import { OptionsI } from '@interfaces/init-options.interface';
 import { StorageProvider } from '@providers/ionic/storage.provider';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { ParticipantI } from '@interfaces/participant.interface';
 import { Gtag } from 'angular-gtag';
 import { Router } from '@angular/router';
@@ -11,6 +12,7 @@ import { AlertProvider } from '@providers/ionic/alert.provider';
   styleUrls: ['./question-resume.page.scss'],
 })
 export class QuestionResumePage {
+  @ViewChild('slider') slides: any;
   currentShift: ParticipantI;
   shifts: ParticipantI[] = [];
   state = false;
@@ -24,6 +26,11 @@ export class QuestionResumePage {
   ) {}
 
   async ionViewWillEnter(): Promise<void> {
+    setTimeout(() => {
+      if (this.slides) {
+        this.slides.lockSwipes(true);
+      }
+    }, 500);
     await this.getCurrentShift();
     this.getStats();
     this.getOptions();
@@ -99,7 +106,6 @@ export class QuestionResumePage {
     this.router.navigate(['/question']);
   }
 
-
   endGame() {
     this.alertProvider.presentAlertWithButtons(
       '¿Estas seguro?',
@@ -112,8 +118,10 @@ export class QuestionResumePage {
     );
   }
 
-  goToEndConfirm() {
+  async goToEndConfirm() {
+    const gameOptions: OptionsI = await this.storageProvider.get('options');
+    gameOptions.state = 'end';
+    await this.storageProvider.set('options', gameOptions);
     this.router.navigate(['/end-game']);
   }
-
 }

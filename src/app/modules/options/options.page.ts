@@ -6,7 +6,7 @@ import { StorageProvider } from '@providers/ionic/storage.provider';
 import { OptionsI } from 'app/interfaces/init-options.interface';
 import { ParticipantI } from '@interfaces/participant.interface';
 import { Gtag } from 'angular-gtag';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
 
 @Component({
   selector: 'app-options',

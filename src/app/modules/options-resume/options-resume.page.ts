@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { OptionsI } from '@interfaces/init-options.interface';
 import { ParticipantI } from '@interfaces/participant.interface';
@@ -9,6 +9,7 @@ import { StorageProvider } from '@providers/ionic/storage.provider';
   templateUrl: 'options-resume.page.html',
 })
 export class OptionsResumePage implements OnInit {
+  @ViewChild('slider') slides: any;
   options: OptionsI = {
     numberParticipants: '2',
     type: 'normal',
@@ -24,8 +25,13 @@ export class OptionsResumePage implements OnInit {
   constructor(private router: Router, private storageProvider: StorageProvider) {}
 
   async ngOnInit() {
-      this.options = await this.storageProvider.get('options');
-      this.shifts = await this.storageProvider.get('shifts');
+    setTimeout(() => {
+      if (this.slides) {
+        this.slides.lockSwipes(true);
+      }
+    }, 500);
+    this.options = await this.storageProvider.get('options');
+    this.shifts = await this.storageProvider.get('shifts');
   }
 
   startGame() {
@@ -36,8 +42,8 @@ export class OptionsResumePage implements OnInit {
     this.router.navigate(['question']);
   }
 
-  resetGame(): void {
+  goToBack(): void {
     this.storageProvider.clear();
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/options']);
   }
 }

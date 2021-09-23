@@ -16,6 +16,8 @@
           value="2"
           multiple="false"
           placeholder="Seleciona tipo"
+          okText="Ok"
+          cancelText="Cancelar"
           [(ngModel)]="options.type"
           (ionChange)="getTotalOfQuestionOfType()"
         >
@@ -30,6 +32,8 @@
         <ion-select
           value="2"
           multiple="false"
+          okText="Ok"
+          cancelText="Cancelar"
           placeholder="Selecciona duracion pregunta"
           [(ngModel)]="options.durationQuestion"
         >
@@ -47,6 +51,8 @@
         <ion-select
           value="2"
           multiple="false"
+          okText="Ok"
+          cancelText="Cancelar"
           placeholder="Selecciona participantes"
           [(ngModel)]="options.numberParticipants"
           (ionChange)="changeNumberOfParticipants()"
@@ -67,7 +73,6 @@
       <init-options-participants
         [participants]="options.numberParticipants"
         (confirm)="saveInitOptions($event)"
-        (takePhoto)="takePhoto()"
       ></init-options-participants>
     </ion-col>
   </ion-row>

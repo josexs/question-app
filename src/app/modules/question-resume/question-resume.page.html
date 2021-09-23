@@ -1,11 +1,12 @@
 <ion-content>
-  <ion-slides style="height: 100%; width: 100%" mode="ios" pager="false" scrollbar="ios">
+  <ion-slides #slider style="height: 100%; width: 100%" mode="ios" pager="false" scrollbar="ios">
     <ion-slide>
-      <ion-row class="animate fadeIn" style="width: 100%">
+      <ion-row class="animate fadeIn" style="width: 100%" *ngIf="currentShift">
         <ion-col size="12" sizeLg="8" offsetLg="2">
           <ion-row>
             <div color="dark" class="next-turno">
               <div class="ion-text-center">
+                <h1>Ronda {{currentShift?.positive + currentShift?.negative + 1}}</h1>
                 <h2 style="font-size: 20px; font-weight: 700; padding-bottom: 0.5rem">
                   Siguiente turno
                 </h2>

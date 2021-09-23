@@ -15,7 +15,7 @@
       <form [formGroup]="question">
         <ion-item class="ion-item-input" color="secondary">
           <ion-label color="primary" position="floating">Tu nombre</ion-label>
-          <ion-input formControlName="author" placeholder="Nombre"></ion-input>
+          <ion-input formControlName="author" placeholder="Introduce tu nombre"></ion-input>
         </ion-item>
         <div *ngIf="(author.dirty || author.touched) && author.errors" class="errors">
           <span *ngIf="author.errors?.required">El nombre del autor es obligatorio</span>
@@ -24,7 +24,7 @@
 
         <ion-item class="ion-item-input" color="secondary">
           <ion-label color="primary" position="floating">Tu ciudad</ion-label>
-          <ion-input formControlName="city" placeholder="Ciudad"></ion-input>
+          <ion-input formControlName="city" placeholder="Introduce tu ciudad"></ion-input>
         </ion-item>
         <div *ngIf="(city.dirty || city.touched) && city.errors" class="errors">
           <span *ngIf="city.errors?.required">La ciudad o zona es obligatorio</span>
@@ -63,7 +63,7 @@
       </form>
       
       <div style="text-align: center; margin: 1rem 0rem 1rem 0rem">
-        <ion-button [disabled]="!question.valid" (click)="create()">Enviar pregunta</ion-button>
+        <ion-button [disabled]="!question.valid" (click)="create()" expand="block">Enviar pregunta</ion-button>
       </div>
     </ion-col>
   </ion-row>

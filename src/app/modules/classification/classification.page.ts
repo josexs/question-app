@@ -1,8 +1,9 @@
 import { StorageProvider } from '@providers/ionic/storage.provider';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ParticipantI } from '@interfaces/participant.interface';
 import { Router } from '@angular/router';
 import { AlertProvider } from '@providers/ionic/alert.provider';
+import { OptionsI } from '@interfaces/init-options.interface';
 
 @Component({
   selector: 'classification',
@@ -10,6 +11,7 @@ import { AlertProvider } from '@providers/ionic/alert.provider';
   styleUrls: ['./classification.page.scss'],
 })
 export class ClassificationPage {
+  @ViewChild('slider') slides: any;
   shifts: ParticipantI[] = [];
   options: any[] = [];
   constructor(
@@ -19,6 +21,11 @@ export class ClassificationPage {
   ) {}
 
   async ionViewWillEnter(): Promise<void> {
+    setTimeout(() => {
+      if (this.slides) {
+        this.slides.lockSwipes(true);
+      }
+    }, 500);
     const shifts = await this.storageProvider.get<ParticipantI[]>('shifts');
     this.getOptions();
     this.shifts = shifts.sort((a, b) => {
@@ -73,7 +80,10 @@ export class ClassificationPage {
     );
   }
 
-  goToEndConfirm() {
+  async goToEndConfirm() {
+    const gameOptions: OptionsI = await this.storageProvider.get('options');
+    gameOptions.state = 'end';
+    await this.storageProvider.set('options', gameOptions);
     this.router.navigate(['/end-game']);
   }
 }
