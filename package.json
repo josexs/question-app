@@ -29,6 +29,7 @@
     "@angular/router": "^14.1.0",
     "@angular/service-worker": "^14.1.0",
     "@capacitor-community/admob": "4.0.0-1",
+    "@capacitor-community/text-to-speech": "^2.0.1",
     "@capacitor/android": "4.0.1",
     "@capacitor/app": "4.0.1",
     "@capacitor/browser": "4.0.1",
