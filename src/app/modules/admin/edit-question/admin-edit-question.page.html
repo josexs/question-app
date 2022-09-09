@@ -33,11 +33,9 @@
       </ion-item>
 
       <div style="text-align: center; margin: 1rem 0rem 1rem 0rem">
-        <ion-button color="danger" (click)="delete()">Eliminar</ion-button>
-        <br />
-        <ion-button color="warning" (click)="edit()">Editar</ion-button>
-        <br />
-        <ion-button *ngIf="isSent" (click)="approve()">Aprobar</ion-button>
+        <ion-button expand="block" color="danger" (click)="delete()">Eliminar</ion-button>
+        <ion-button expand="block" color="warning" (click)="edit()">Editar</ion-button>
+        <ion-button expand="block" *ngIf="isSent" (click)="approve()">Aprobar</ion-button>
       </div>
     </ion-col>
   </ion-row>

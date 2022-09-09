@@ -9,34 +9,35 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="credentials">
-    <div class="input-group card-button-dark-border" >
-      <ion-item color="dark">
-        <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
-      </ion-item>
-      <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
-        <span *ngIf="email.errors?.required">Email obligatorio</span>
-        <span *ngIf="email.errors?.email">Email incorrecto</span>
-      </div>
-      <ion-item color="dark">
-        <ion-input type="password" placeholder="Contraseña" formControlName="password"></ion-input>
-      </ion-item>
-      <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
-        <span *ngIf="password.errors?.required">Contraseña obligatoria</span>
-        <span *ngIf="password.errors?.minlength">La contraseña necesita minimo 6 caracteres</span>
-      </div>
-    </div>
-  </form>
+  <ion-row>
+    <ion-col size="12" sizeLg="8" offsetLg="2">
+      <form [formGroup]="credentials">
+        <div class="input-group card-button-dark-border">
+          <ion-item color="dark">
+            <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+          </ion-item>
+          <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
+            <span *ngIf="email.errors?.required">Email obligatorio</span>
+            <span *ngIf="email.errors?.email">Email incorrecto</span>
+          </div>
+          <ion-item color="dark">
+            <ion-input
+              type="password"
+              placeholder="Contraseña"
+              formControlName="password"
+            ></ion-input>
+          </ion-item>
+          <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
+            <span *ngIf="password.errors?.required">Contraseña obligatoria</span>
+            <span *ngIf="password.errors?.minlength">
+              La contraseña necesita minimo 6 caracteres
+            </span>
+          </div>
+        </div>
+        <ion-button expand="block" (click)="login()" [disabled]="!credentials.valid">
+          Entrar
+        </ion-button>
+      </form>
+    </ion-col>
+  </ion-row>
 </ion-content>
-
-<ion-footer class="ion-no-border">
-  <ion-card [disabled]="!credentials.valid" color="primary" class="card-button card-button-primary-border" (click)="login()">
-    <ion-card-content class="ion-activatable ripple-parent ion-no-padding">
-      <ion-item lines="none" color="primary">
-        <ion-label class="card-button-label">Entrar</ion-label>
-        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
-      </ion-item>
-      <ion-ripple-effect></ion-ripple-effect>
-    </ion-card-content>
-  </ion-card>
-</ion-footer>

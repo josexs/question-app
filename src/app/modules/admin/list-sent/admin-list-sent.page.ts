@@ -10,6 +10,7 @@ import { NavigationExtras, Router } from '@angular/router';
 export class AdminListSentPage {
   items: QuestionI[] = [];
   loading = true;
+  error = false;
   constructor(private questionsProvider: QuestionsProvider, private router: Router) {}
 
   ionViewWillEnter(): void {
@@ -17,7 +18,14 @@ export class AdminListSentPage {
   }
 
   async getQuestionsSent(): Promise<void> {
-    this.items = await this.questionsProvider.getQuestionsSent();
+    try {
+      this.items = await this.questionsProvider.getQuestionsSent();
+      this.loading = false;
+      this.error = false;
+    } catch (error) {
+      this.loading = false;
+      this.error = true;
+    }
   }
 
   goToEdit(item: QuestionI): void {

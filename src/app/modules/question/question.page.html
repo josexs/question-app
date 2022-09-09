@@ -65,12 +65,19 @@
               </div>
             </ng-container>
           </ng-container>
-
         </ion-col>
 
         <!-- BUTTONS  -->
-        <div *ngIf="states.buttonStart && !isFirstQuestion" style="text-align: center; width: 100%">
-          <ion-button (click)="startQuestion()" style="margin-top: 1rem" class="ion-button-custom">
+        <div
+          *ngIf="states.buttonStart && !isFirstQuestion"
+          style="text-align: center; width: 100%; padding-left: 1rem; padding-right: 1rem"
+        >
+          <ion-button
+            expand="block"
+            (click)="startQuestion()"
+            style="margin-top: 1rem"
+            class="ion-button-custom"
+          >
             Iniciar Pregunta
           </ion-button>
         </div>
