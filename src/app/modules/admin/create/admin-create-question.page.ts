@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { QuestionI } from '@interfaces/question.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertProvider } from '@providers/ionic/alert.provider';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
 
 @Component({
@@ -12,7 +12,7 @@ import { LoadingController } from '@ionic/angular';
   styleUrls: ['./admin-create-question.page.scss'],
 })
 export class AdminCreateQuestionPage implements OnInit {
-  question: FormGroup;
+  question: UntypedFormGroup;
   item: QuestionI;
   isSent: boolean;
   routeBack: string;
@@ -21,7 +21,7 @@ export class AdminCreateQuestionPage implements OnInit {
     private route: ActivatedRoute,
     private alertProvider: AlertProvider,
     private router: Router,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private loadingCtrl: LoadingController
   ) {}
 

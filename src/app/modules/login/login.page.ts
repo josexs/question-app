@@ -2,7 +2,7 @@ import { AuthProvider } from './../../providers/api/auth.provider';
 import { Component, OnInit } from '@angular/core';
 import { AlertProvider } from '@providers/ionic/alert.provider';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
 import { StorageProvider } from '@providers/ionic/storage.provider';
 import { Gtag } from 'angular-gtag';
@@ -13,12 +13,12 @@ import { Gtag } from 'angular-gtag';
   styleUrls: ['./login.page.scss']
 })
 export class LoginPage implements OnInit {
-  credentials: FormGroup;
+  credentials: UntypedFormGroup;
   constructor(
     private authProvider: AuthProvider,
     private alertProvider: AlertProvider,
     private router: Router,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private loadingCtrl: LoadingController,
     private storageProvider: StorageProvider,
     private gtag: Gtag

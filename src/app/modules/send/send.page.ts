@@ -2,7 +2,7 @@ import { QuestionsProvider } from '@providers/api/questions.provider';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Gtag } from 'angular-gtag';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { QuestionI } from '@interfaces/question.interface';
 import { AlertProvider } from '@providers/ionic/alert.provider';
 
@@ -12,12 +12,12 @@ import { AlertProvider } from '@providers/ionic/alert.provider';
   styleUrls: ['./send.page.scss'],
 })
 export class SendPage implements OnInit {
-  question: FormGroup;
+  question: UntypedFormGroup;
   constructor(
     private gtag: Gtag,
     private router: Router,
     private questionsProvider: QuestionsProvider,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private alertProvider: AlertProvider
   ) {}
 

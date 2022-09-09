@@ -6,7 +6,7 @@ import { StorageProvider } from '@providers/ionic/storage.provider';
 import { OptionsI } from 'app/interfaces/init-options.interface';
 import { ParticipantI } from '@interfaces/participant.interface';
 import { Gtag } from 'angular-gtag';
-import { Camera } from '@ionic-native/camera/ngx';
+// import { Camera } from '@ionic-native/camera/ngx';
 
 @Component({
   selector: 'app-options',
@@ -34,7 +34,7 @@ export class InitOptionsPage {
     private questionsProvider: QuestionsProvider,
     private router: Router,
     private gtag: Gtag,
-    private camera: Camera
+    // private camera: Camera
   ) {}
 
   async ionViewWillEnter() {

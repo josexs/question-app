@@ -23,14 +23,18 @@ export class DashboardPage {
   ) {}
 
   async ionViewWillEnter(): Promise<void> {
+    this.lockSwipes()
+    this.getMenuOptions();
+    await this.questionsProvider.getQuestions();
+    this.getTotalOfQuestionOfType();
+  }
+  
+  lockSwipes() {
     setTimeout(() => {
       if (this.slides) {
         this.slides.lockSwipes(true);
       }
     }, 500);
-    this.getMenuOptions();
-    await this.questionsProvider.getQuestions();
-    this.getTotalOfQuestionOfType();
   }
 
   async getMenuOptions(): Promise<void> {
