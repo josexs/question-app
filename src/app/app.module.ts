@@ -21,29 +21,28 @@ import { environment } from '../environments/environment';
 import { GtagModule } from 'angular-gtag';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    IonicStorageModule.forRoot(),
-    IonicModule.forRoot(),
-    AppRoutingModule,
-    GtagModule.forRoot({ trackingId: 'G-KW4L8CBSK4', trackPageviews: true }),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-  ],
-  providers: [
-    Camera,
-    GameProvider,
-    QuestionsProvider,
-    UtilsProvider,
-    StatusBar,
-    SplashScreen,
-    AlertProvider,
-    LoadingProvider,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-  ],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        IonicStorageModule.forRoot(),
+        IonicModule.forRoot(),
+        AppRoutingModule,
+        GtagModule.forRoot({ trackingId: 'G-KW4L8CBSK4', trackPageviews: true }),
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ],
+    providers: [
+        Camera,
+        GameProvider,
+        QuestionsProvider,
+        UtilsProvider,
+        StatusBar,
+        SplashScreen,
+        AlertProvider,
+        LoadingProvider,
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}
