@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1102.19",
-    "@angular/cli": "~11.2.19",
+    "@angular/cli": "14.2.2",
     "@angular/compiler": "~11.2.14",
     "@angular/compiler-cli": "~11.2.14",
     "@angular/language-service": "~11.2.14",
@@ -61,7 +61,6 @@
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
-    "codelyzer": "^6.0.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~6.4.0",
