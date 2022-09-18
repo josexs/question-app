@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { StorageProvider } from 'app/shared/providers/ionic/storage.provider';
+import { AlertProvider, StorageProvider } from '@providers';
 import { ParticipantI, OptionsGameI } from '@interfaces';
 import { Router } from '@angular/router';
-import { AlertProvider } from 'app/shared/providers/ionic/alert.provider';
 
 @Component({
   selector: 'classification',

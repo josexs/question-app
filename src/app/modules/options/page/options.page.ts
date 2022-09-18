@@ -1,11 +1,8 @@
 import { Router } from '@angular/router';
-import { QuestionsProvider } from 'app/shared/providers/api/questions.provider';
 import { Component } from '@angular/core';
-import { AlertProvider } from 'app/shared/providers/ionic/alert.provider';
-import { StorageProvider } from 'app/shared/providers/ionic/storage.provider';
-import { OptionsGameI } from '@interfaces';
-import { ParticipantI } from 'app/shared/interfaces/participant.interface';
 import { Gtag } from 'angular-gtag';
+import { AlertProvider, QuestionsProvider, StorageProvider } from '@providers';
+import { OptionsGameI, ParticipantI } from '@interfaces';
 import { OptionsGameM } from '@models';
 
 @Component({

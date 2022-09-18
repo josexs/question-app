@@ -1,6 +1,6 @@
-import { StorageProvider } from 'app/shared/providers/ionic/storage.provider';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { StorageProvider } from '@providers';
 
 @Component({
   selector: 'admin-dashboard',

@@ -1,16 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { QuestionResumePage } from './question-resume.page';
+import { SharedModule } from '@shared';
+import { QuestionResumePage } from './page/question-resume.page';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ReactiveFormsModule,
+    SharedModule,
     RouterModule.forChild([
       {
         path: '',

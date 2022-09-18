@@ -1,2 +1,2 @@
-import { QuestionI } from 'app/shared/interfaces/question.interface';
+import { QuestionI } from '@interfaces';
 export const questionsMock: QuestionI[] = [];

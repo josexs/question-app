@@ -1,7 +1,7 @@
-import { QuestionsProvider } from 'app/shared/providers/api/questions.provider';
 import { Component } from '@angular/core';
-import { QuestionI } from 'app/shared/interfaces/question.interface';
 import { NavigationExtras, Router } from '@angular/router';
+import { QuestionsProvider } from '@providers';
+import { QuestionI } from '@interfaces';
 
 @Component({
   selector: 'admin-list-sent',

@@ -1,10 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { QuestionsProvider } from 'app/shared/providers/api/questions.provider';
-import { StorageProvider } from 'app/shared/providers/ionic/storage.provider';
-import { CountdownComponent, CountdownConfig } from 'ngx-countdown';
-import { OptionsGameI, QuestionI, ParticipantI } from '@interfaces';
-import { Gtag } from 'angular-gtag';
 import { Router } from '@angular/router';
+import { CountdownComponent, CountdownConfig } from 'ngx-countdown';
+import { Gtag } from 'angular-gtag';
+import { QuestionsProvider, StorageProvider } from '@providers';
+import { OptionsGameI, QuestionI, ParticipantI } from '@interfaces';
 
 @Component({
   selector: 'page-question',

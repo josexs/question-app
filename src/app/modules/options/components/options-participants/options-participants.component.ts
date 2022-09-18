@@ -6,8 +6,8 @@ import {
   ElementRef,
   ViewChild,
 } from '@angular/core';
-import { ParticipantI } from 'app/shared/interfaces/participant.interface';
-import { AlertProvider } from 'app/shared/providers/ionic/alert.provider';
+import { ParticipantI } from '@interfaces';
+import { AlertProvider } from '@providers';
 
 @Component({
   selector: 'options-participants',

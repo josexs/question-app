@@ -1,14 +1,12 @@
-import { QuestionsProvider } from 'app/shared/providers/api/questions.provider';
 import { Component, OnInit } from '@angular/core';
-import { QuestionI } from 'app/shared/interfaces/question.interface';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AlertProvider } from 'app/shared/providers/ionic/alert.provider';
+import { Router } from '@angular/router';
 import {
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { LoadingController } from '@ionic/angular';
+import { AlertProvider, QuestionsProvider } from '@providers';
+import { QuestionI } from '@interfaces';
 
 @Component({
   selector: 'admin-create-question',
@@ -22,11 +20,9 @@ export class AdminCreateQuestionPage implements OnInit {
   routeBack: string;
   constructor(
     private questionsProvider: QuestionsProvider,
-    private route: ActivatedRoute,
     private alertProvider: AlertProvider,
     private router: Router,
-    private formBuilder: UntypedFormBuilder,
-    private loadingCtrl: LoadingController
+    private formBuilder: UntypedFormBuilder
   ) {}
 
   ngOnInit() {

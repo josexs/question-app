@@ -1,6 +1,3 @@
-import { GameProvider } from './shared/providers/api/game.provider';
-import { LoadingProvider } from './shared/providers/ionic/loading.provider';
-import { AlertProvider } from './shared/providers/ionic/alert.provider';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -9,13 +6,18 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { FormsModule } from '@angular/forms';
-import { QuestionsProvider } from 'app/shared/providers/api/questions.provider';
-import { UtilsProvider } from 'app/shared/providers/misc/utils.provider';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { GtagModule } from 'angular-gtag';
 import { navAnimation } from '@animations';
+import {
+  AlertProvider,
+  GameProvider,
+  LoadingProvider,
+  QuestionsProvider,
+  UtilsProvider,
+} from '@providers';
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,11 +38,11 @@ import { navAnimation } from '@animations';
     }),
   ],
   providers: [
+    AlertProvider,
     GameProvider,
+    LoadingProvider,
     QuestionsProvider,
     UtilsProvider,
-    AlertProvider,
-    LoadingProvider,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent],

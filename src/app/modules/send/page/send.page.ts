@@ -1,14 +1,13 @@
-import { QuestionsProvider } from 'app/shared/providers/api/questions.provider';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Gtag } from 'angular-gtag';
 import {
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { QuestionI } from 'app/shared/interfaces/question.interface';
-import { AlertProvider } from 'app/shared/providers/ionic/alert.provider';
+import { Gtag } from 'angular-gtag';
+import { AlertProvider, QuestionsProvider } from '@providers';
+
 
 @Component({
   selector: 'app-send',

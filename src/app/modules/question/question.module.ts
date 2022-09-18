@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { QuestionPage } from './question.page';
-import { CountdownModule } from 'ngx-countdown';
 import { RouterModule } from '@angular/router';
+import { CountdownModule } from 'ngx-countdown';
+import { QuestionPage } from './page/question.page';
 import { QuestionHeaderComponent } from './components/header/question-header.component';
 import { QuestionCountdownComponent } from './components/countdown/question-countdown.component';
 import { QuestionInfoComponent } from './components/info/question-info.component';

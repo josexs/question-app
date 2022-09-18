@@ -1,7 +1,7 @@
-import { OptionsGameI, ParticipantI } from '@interfaces';
-import { StorageProvider } from 'app/shared/providers/ionic/storage.provider';
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { OptionsGameI, ParticipantI } from '@interfaces';
+import { StorageProvider } from '@providers';
 
 @Component({
   selector: 'app-end-game',

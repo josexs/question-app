@@ -1,14 +1,11 @@
 import { Platform } from '@ionic/angular';
-import { questionsMock } from './questions.mock';
 import { Injectable } from '@angular/core';
-import { ParticipantI } from 'app/shared/interfaces/participant.interface';
-import { UtilsProvider } from 'app/shared/providers/misc/utils.provider';
-import { QuestionI } from '@interfaces';
-import { StorageProvider } from 'app/shared/providers/ionic/storage.provider';
-import { OptionsGameI } from '@interfaces';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TextToSpeech } from '@capacitor-community/text-to-speech';
 import { environment } from 'environments/environment';
+import { QuestionI, OptionsGameI, ParticipantI } from '@interfaces';
+import { StorageProvider, UtilsProvider } from '@providers';
+import { questionsMock } from './questions.mock';
 
 @Injectable({ providedIn: 'root' })
 export class QuestionsProvider {

@@ -1,7 +1,7 @@
-import { QuestionsProvider } from 'app/shared/providers/api/questions.provider';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Gtag } from 'angular-gtag';
+import { QuestionsProvider } from '@providers';
 
 @Component({
   selector: 'app-credits',

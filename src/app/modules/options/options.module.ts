@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { InitOptionsPage } from './options.page';
+import { InitOptionsPage } from './page/options.page';
 import { OptionsParticipantsComponent } from './components/options-participants/options-participants.component';
 import { RouterModule } from '@angular/router';
 import { OptionsInitComponent } from './components/options-init/options-init.component';

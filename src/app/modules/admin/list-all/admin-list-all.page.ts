@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
-import { QuestionI } from 'app/shared/interfaces/question.interface';
-import { QuestionsProvider } from 'app/shared/providers/api/questions.provider';
+import { QuestionI } from '@interfaces';
+import { QuestionsProvider } from '@providers';
 
 @Component({
   selector: 'admin-list-all',

@@ -1,6 +1,4 @@
-import { AuthProvider } from '../../shared/providers/api/auth.provider';
 import { Component, OnInit } from '@angular/core';
-import { AlertProvider } from 'app/shared/providers/ionic/alert.provider';
 import { Router } from '@angular/router';
 import {
   UntypedFormBuilder,
@@ -8,8 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
-import { StorageProvider } from 'app/shared/providers/ionic/storage.provider';
 import { Gtag } from 'angular-gtag';
+import { AlertProvider, AuthProvider, StorageProvider } from '@providers';
 
 @Component({
   selector: 'page-login',

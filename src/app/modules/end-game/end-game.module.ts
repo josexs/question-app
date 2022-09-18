@@ -1,13 +1,18 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
-import { EndGamePage } from './end-game.page';
-
-import { EndGamePageRoutingModule } from './end-game-routing.module';
+import { EndGamePage } from './page/end-game.page';
+import { SharedModule } from '@shared';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, EndGamePageRoutingModule],
+  imports: [
+    SharedModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: EndGamePage,
+      },
+    ]),
+  ],
   declarations: [EndGamePage],
 })
 export class EndGameModule {}
