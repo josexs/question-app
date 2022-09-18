@@ -1,0 +1,58 @@
+<ion-row>
+    <div class="w-100">
+        <ion-item lines="none" class="ion-item-input w-100">
+            <ion-label color="primary" position="stacked">Tipo de preguntas</ion-label>
+            <ion-select value="2" multiple="false" placeholder="Seleciona tipo" okText="Ok" cancelText="Cancelar"
+                [(ngModel)]="options.type" (ionChange)="getTotalOfQuestionOfType.emit()">
+                <ion-select-option *ngFor="let type of typesOfGame" [value]="type.value">
+                    {{ type.name }}
+                </ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item lines="none" class="ion-item-input ">
+            <ion-label color="primary" position="stacked">Duracion de la pregunta (seg)</ion-label>
+            <ion-select value="2" multiple="false" okText="Ok" cancelText="Cancelar"
+                placeholder="Selecciona duracion pregunta" [(ngModel)]="options.durationQuestion">
+                <ion-select-option value="5">5 segundos</ion-select-option>
+                <ion-select-option value="10">10 segundos</ion-select-option>
+                <ion-select-option value="15">15 segundos</ion-select-option>
+                <ion-select-option value="20">20 segundos</ion-select-option>
+                <ion-select-option value="25">25 segundos</ion-select-option>
+                <ion-select-option value="30">30 segundos</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item lines="none" class="ion-item-input ">
+            <ion-label color="primary" position="stacked">Participantes</ion-label>
+            <ion-select value="2" multiple="false" okText="Ok" cancelText="Cancelar"
+                placeholder="Selecciona participantes" [(ngModel)]="options.totalParticipants"
+                (ionChange)="changeNumberOfParticipants.emit()">
+                <ion-select-option value="2">2</ion-select-option>
+                <ion-select-option value="3">3</ion-select-option>
+                <ion-select-option value="4">4</ion-select-option>
+                <ion-select-option value="5">5</ion-select-option>
+                <ion-select-option value="6">6</ion-select-option>
+                <ion-select-option value="7">7</ion-select-option>
+                <ion-select-option value="8">8</ion-select-option>
+                <ion-select-option value="9">9</ion-select-option>
+                <ion-select-option value="10">10</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item lines="none" class="ion-item-input ">
+            <ion-label color="primary" position="stacked">Rondas</ion-label>
+            <ion-input placeholder="Introduce numero de rondas" [(ngModel)]="options.rounds">
+            </ion-input>
+        </ion-item>
+    </div>
+
+    <div (click)="continue.emit()" class="ion-item-custom w-100 m-t-05 m-lr-0">
+        Continuar
+        <ion-icon class="ion-icon-right" name="chevron-forward-outline"></ion-icon>
+    </div>
+    <div (click)="goToDashboard.emit()" class="ion-item-custom w-100 m-t-05 m-lr-0">
+        <ion-icon class="ion-icon-left" name="chevron-back-outline"></ion-icon>
+        Volver
+    </div>
+</ion-row>

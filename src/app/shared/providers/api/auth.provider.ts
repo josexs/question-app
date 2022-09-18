@@ -1,7 +1,7 @@
-import { environment } from './../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { QuestionI } from '@interfaces/question.interface';
+import { QuestionI } from 'app/shared/interfaces/question.interface';
 
 @Injectable({ providedIn: 'root' })
 export class AuthProvider {

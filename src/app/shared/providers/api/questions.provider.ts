@@ -1,11 +1,11 @@
 import { Platform } from '@ionic/angular';
 import { questionsMock } from './questions.mock';
 import { Injectable } from '@angular/core';
-import { ParticipantI } from '@interfaces/participant.interface';
-import { UtilsProvider } from '@providers/misc/utils.provider';
-import { QuestionI } from '@interfaces/question.interface';
-import { StorageProvider } from '@providers/ionic/storage.provider';
-import { OptionsI } from '@interfaces/init-options.interface';
+import { ParticipantI } from 'app/shared/interfaces/participant.interface';
+import { UtilsProvider } from 'app/shared/providers/misc/utils.provider';
+import { QuestionI } from 'app/shared/interfaces/question.interface';
+import { StorageProvider } from 'app/shared/providers/ionic/storage.provider';
+import { OptionsGameI } from '@interfaces/options-game.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TextToSpeech } from '@capacitor-community/text-to-speech';
 import { environment } from 'environments/environment';
@@ -56,7 +56,7 @@ export class QuestionsProvider {
     return this.httpClient.get<any[]>(url, {}).toPromise();
   }
 
-  async getRandomQuestion(options: OptionsI): Promise<QuestionI> {
+  async getRandomQuestion(options: OptionsGameI): Promise<QuestionI> {
     return new Promise(async (resolve, reject) => {
       try {
         if (this.questions.length === 0) {

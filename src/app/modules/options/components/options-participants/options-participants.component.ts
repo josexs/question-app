@@ -1,11 +1,10 @@
 import { Component, Input, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
-import { ParticipantI } from '@interfaces/participant.interface';
-// import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { AlertProvider } from '@providers/ionic/alert.provider';
+import { ParticipantI } from 'app/shared/interfaces/participant.interface';
+import { AlertProvider } from 'app/shared/providers/ionic/alert.provider';
 
 @Component({
-  selector: 'init-options-participants',
-  templateUrl: 'init-options-participants.component.html',
+  selector: 'options-participants',
+  templateUrl: 'options-participants.component.html',
 })
 export class OptionsParticipantsComponent {
   @ViewChild('pwaphoto') pwaphoto: ElementRef;
@@ -24,17 +23,10 @@ export class OptionsParticipantsComponent {
     { name: '', gender: '', photo: '', positive: 0, negative: 0 },
     { name: '', gender: '', photo: '', positive: 0, negative: 0 },
   ];
-  // optionsCamera: CameraOptions = {
-  //   quality: 30,
-  //   destinationType: this.camera.DestinationType.DATA_URL,
-  //   encodingType: this.camera.EncodingType.JPEG,
-  //   mediaType: this.camera.MediaType.PICTURE,
-  // };
+
   clickedImage: string;
 
-  constructor(private alertProvider: AlertProvider,
-    // private camera: Camera
-  ) { }
+  constructor(private alertProvider: AlertProvider) {}
 
   goToConfirm() {
     const users = this.users.filter((item) => item.name !== '' && item.gender !== '');
