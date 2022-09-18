@@ -5,7 +5,6 @@ import { StorageProvider } from '@providers';
 @Component({
   selector: 'admin-dashboard',
   templateUrl: 'admin-dashboard.page.html',
-  styleUrls: ['./admin-dashboard.page.scss'],
 })
 export class AdminDashboardPage {
   items = [];
