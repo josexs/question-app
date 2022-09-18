@@ -1,5 +1,5 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
-import { OptionsGameI } from '@interfaces/options-game.interface';
+import { OptionsGameI } from '@interfaces';
 
 @Component({
   selector: 'options-init',

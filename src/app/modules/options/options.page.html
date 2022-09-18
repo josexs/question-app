@@ -3,12 +3,14 @@
         <div class="swipe-fake">
             <div class="ion-no-margin">
                 <ion-row>
-                    <options-init *ngIf="options.state === 'todo'" class="w-100" [options]="options" [typesOfGame]="typesOfGame"
+                    <!-- <options-init *ngIf="options.state === 'todo'" class="w-100" [options]="options" [typesOfGame]="typesOfGame"
                         (getTotalOfQuestionOfType)="getTotalOfQuestionOfType()" (continue)="continue()"
                         (changeNumberOfParticipants)="changeNumberOfParticipants()" (goToDashboard)="goToDashboard()">
-                    </options-init>
+                    </options-init> -->
 
-                    <options-participants *ngIf="options.state === 'todoB'" [participants]="options.totalParticipants"
+                    <!-- <options-participants *ngIf="options.state === 'todoB'" [participants]="options.totalParticipants"
+                        (confirm)="saveInitOptions($event)"></options-participants> -->
+                    <options-participants [participants]="options.totalParticipants"
                         (confirm)="saveInitOptions($event)"></options-participants>
 
                 </ion-row>

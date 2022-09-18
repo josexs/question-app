@@ -4,15 +4,15 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ClassificationPage } from './classification.page';
-import { PipesModule } from 'app/pipes/pipes.module';
+import { SharedModule } from '@shared';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     ReactiveFormsModule,
-    PipesModule,
     RouterModule.forChild([
       {
         path: '',

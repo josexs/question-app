@@ -4,7 +4,7 @@ import { AdminDashboardPage } from './dashboard/admin-dashboard.page';
 import { AdminListAllPage } from './list-all/admin-list-all.page';
 import { AdminListSentPage } from './list-sent/admin-list-sent.page';
 import { AdminEditQuestionPage } from './edit-question/admin-edit-question.page';
-import { AdminGuard } from '@core/guards/admin.guard';
+import { AdminGuard } from '@guards';
 import { AdminCreateQuestionPage } from './create/admin-create-question.page';
 
 const routes: Routes = [

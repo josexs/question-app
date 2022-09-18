@@ -5,12 +5,15 @@
     "paths": {
       "@environment/*": ["environment/*"],
       "@modules/*": ["app/modules/*"],
-      "@components/*": ["app/shared/components/*"],
-      "@providers/*": ["app/shared/providers/*"],
-      "@interfaces/*": ["app/shared/interfaces/*"],
-      "@models/*": ["app/shared/models/*"],
-      "@core/*": ["app/core/*"],
-      "@pipes/*": ["app/shared/pipes/*"]
+      "@components": ["app/shared/components"],
+      "@providers": ["app/shared/providers"],
+      "@interfaces": ["app/shared/interfaces"],
+      "@models": ["app/shared/models"],
+      "@core": ["app/core"],
+      "@pipes": ["app/shared/pipes"],
+      "@shared": ["app/shared"],
+      "@guards": ["app/core/guards"],
+      "@animations": ["app/core/animations"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,

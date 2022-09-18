@@ -4,7 +4,6 @@ import { AlertProvider } from './shared/providers/ionic/alert.provider';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -16,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { GtagModule } from 'angular-gtag';
-import { navAnimation } from '@core/animations/animations';
+import { navAnimation } from '@animations';
 
 @NgModule({
   declarations: [AppComponent],

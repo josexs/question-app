@@ -1,5 +1,4 @@
-import { OptionsGameI } from '@interfaces/options-game.interface';
-import { ParticipantI } from '@interfaces/participant.interface';
+import { OptionsGameI, ParticipantI } from '@interfaces';
 
 export class OptionsGameM implements OptionsGameI {
   totalParticipants: string;

@@ -2,9 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { QuestionsProvider } from 'app/shared/providers/api/questions.provider';
 import { StorageProvider } from 'app/shared/providers/ionic/storage.provider';
 import { CountdownComponent, CountdownConfig } from 'ngx-countdown';
-import { OptionsGameI } from '@interfaces/options-game.interface';
-import { ParticipantI } from 'app/shared/interfaces/participant.interface';
-import { QuestionI } from 'app/shared/interfaces/question.interface';
+import { OptionsGameI, QuestionI, ParticipantI } from '@interfaces';
 import { Gtag } from 'angular-gtag';
 import { Router } from '@angular/router';
 

@@ -1,9 +1,8 @@
+import { Component } from '@angular/core';
 import { StorageProvider } from 'app/shared/providers/ionic/storage.provider';
-import { Component, ViewChild } from '@angular/core';
-import { ParticipantI } from 'app/shared/interfaces/participant.interface';
+import { ParticipantI, OptionsGameI } from '@interfaces';
 import { Router } from '@angular/router';
 import { AlertProvider } from 'app/shared/providers/ionic/alert.provider';
-import { OptionsGameI } from '@interfaces/options-game.interface';
 
 @Component({
   selector: 'classification',

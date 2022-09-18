@@ -1,13 +1,6 @@
-import { OptionsGameI } from '@interfaces/options-game.interface';
+import { OptionsGameI, ParticipantI } from '@interfaces';
 import { StorageProvider } from 'app/shared/providers/ionic/storage.provider';
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  ViewChild,
-} from '@angular/core';
-import { ParticipantI } from 'app/shared/interfaces/participant.interface';
+import { Component, ViewChild } from '@angular/core';
 import { Gtag } from 'angular-gtag';
 import { Router } from '@angular/router';
 import { AlertProvider } from 'app/shared/providers/ionic/alert.provider';

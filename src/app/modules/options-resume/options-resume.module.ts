@@ -4,14 +4,14 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { OptionsResumePage } from './options-resume.page';
-import { PipesModule } from 'app/pipes/pipes.module';
+import { SharedModule } from '@shared';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PipesModule,
+    SharedModule,
     RouterModule.forChild([
       {
         path: '',

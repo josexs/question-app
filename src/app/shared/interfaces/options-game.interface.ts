@@ -1,4 +1,4 @@
-import { ParticipantI } from './participant.interface';
+import { ParticipantI } from '@interfaces';
 
 export interface OptionsGameI {
   totalParticipants: string;

@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { OptionsGameI } from '@interfaces/options-game.interface';
-import { ParticipantI } from 'app/shared/interfaces/participant.interface';
+import { OptionsGameI, ParticipantI } from '@interfaces';
 import { StorageProvider } from 'app/shared/providers/ionic/storage.provider';
 
 @Component({

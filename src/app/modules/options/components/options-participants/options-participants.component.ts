@@ -18,7 +18,7 @@ export class OptionsParticipantsComponent {
   @Input() participants: number;
   @Output() confirm = new EventEmitter<ParticipantI[]>();
   imgURI: string = null;
-  users = [
+  users: ParticipantI[] = [
     { name: '', gender: '', photo: '', positive: 0, negative: 0 },
     { name: '', gender: '', photo: '', positive: 0, negative: 0 },
     { name: '', gender: '', photo: '', positive: 0, negative: 0 },

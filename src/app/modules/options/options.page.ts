@@ -3,10 +3,10 @@ import { QuestionsProvider } from 'app/shared/providers/api/questions.provider';
 import { Component } from '@angular/core';
 import { AlertProvider } from 'app/shared/providers/ionic/alert.provider';
 import { StorageProvider } from 'app/shared/providers/ionic/storage.provider';
-import { OptionsGameI } from '@interfaces/options-game.interface';
+import { OptionsGameI } from '@interfaces';
 import { ParticipantI } from 'app/shared/interfaces/participant.interface';
 import { Gtag } from 'angular-gtag';
-import { OptionsGameM } from '@models/options.model';
+import { OptionsGameM } from '@models';
 
 @Component({
   selector: 'app-options',
