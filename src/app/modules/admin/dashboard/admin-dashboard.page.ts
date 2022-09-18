@@ -9,7 +9,10 @@ import { Router } from '@angular/router';
 })
 export class AdminDashboardPage {
   items = [];
-  constructor(private router: Router, private storageProvider: StorageProvider) {}
+  constructor(
+    private router: Router,
+    private storageProvider: StorageProvider
+  ) {}
 
   async ionViewWillEnter(): Promise<void> {
     this.createItems();

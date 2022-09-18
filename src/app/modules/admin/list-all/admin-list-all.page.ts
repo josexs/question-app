@@ -11,7 +11,10 @@ export class AdminListAllPage {
   items: QuestionI[] = [];
   loading = true;
   error = false;
-  constructor(private questionsProvider: QuestionsProvider, private router: Router) {}
+  constructor(
+    private questionsProvider: QuestionsProvider,
+    private router: Router
+  ) {}
 
   ionViewWillEnter(): void {
     this.getAllQuestions();

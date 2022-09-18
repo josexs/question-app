@@ -1,4 +1,11 @@
-import { Component, Input, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  Input,
+  EventEmitter,
+  Output,
+  ElementRef,
+  ViewChild,
+} from '@angular/core';
 import { ParticipantI } from 'app/shared/interfaces/participant.interface';
 import { AlertProvider } from 'app/shared/providers/ionic/alert.provider';
 
@@ -29,7 +36,9 @@ export class OptionsParticipantsComponent {
   constructor(private alertProvider: AlertProvider) {}
 
   goToConfirm() {
-    const users = this.users.filter((item) => item.name !== '' && item.gender !== '');
+    const users = this.users.filter(
+      (item) => item.name !== '' && item.gender !== ''
+    );
     if (users.length > 1) {
       this.users = users;
       this.confirm.emit(this.users);

@@ -32,7 +32,9 @@ import { navAnimation } from '@core/animations/animations';
     }),
     AppRoutingModule,
     GtagModule.forRoot({ trackingId: 'G-KW4L8CBSK4', trackPageviews: true }),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+    }),
   ],
   providers: [
     GameProvider,

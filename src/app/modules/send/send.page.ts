@@ -2,7 +2,11 @@ import { QuestionsProvider } from 'app/shared/providers/api/questions.provider';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Gtag } from 'angular-gtag';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { QuestionI } from 'app/shared/interfaces/question.interface';
 import { AlertProvider } from 'app/shared/providers/ionic/alert.provider';
 
@@ -56,7 +60,10 @@ export class SendPage implements OnInit {
     };
     this.questionsProvider.createUserCuestion(question).then(
       () => {
-        this.alertProvider.presentAlert('¡Vale!', 'La pregunta ha sido enviada');
+        this.alertProvider.presentAlert(
+          '¡Vale!',
+          'La pregunta ha sido enviada'
+        );
         this.router.navigate(['/dashboard']);
       },
       (error) => {

@@ -23,7 +23,10 @@ export class OptionsResumePage implements OnInit {
     { name: 'Normal', value: 'normal' },
     { name: 'Fuerte', value: 'hard' },
   ];
-  constructor(private router: Router, private storageProvider: StorageProvider) {}
+  constructor(
+    private router: Router,
+    private storageProvider: StorageProvider
+  ) {}
 
   async ngOnInit() {
     setTimeout(() => {

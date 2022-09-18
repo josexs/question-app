@@ -10,4 +10,4 @@ import { TypePipe } from './type.pipe';
   declarations: [GenderPipe, TypePipe, ImagePipe, TimeAgoPipe],
   providers: [],
 })
-export class PipesModule { }
+export class PipesModule {}

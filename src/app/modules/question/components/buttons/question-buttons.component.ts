@@ -6,7 +6,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./question-buttons.component.scss'],
 })
 export class QuestionButtonsComponent {
-  @Input() states: { buttonStart: boolean; question: boolean; countdownQuestion: boolean };
+  @Input() states: {
+    buttonStart: boolean;
+    question: boolean;
+    countdownQuestion: boolean;
+  };
   @Input() isFirstQuestion: boolean;
   @Output() startQuestion: EventEmitter<void> = new EventEmitter();
   @Output() voteQuestion: EventEmitter<string> = new EventEmitter<string>();

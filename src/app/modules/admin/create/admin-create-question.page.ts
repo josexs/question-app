@@ -3,7 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { QuestionI } from 'app/shared/interfaces/question.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertProvider } from 'app/shared/providers/ionic/alert.provider';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
 
 @Component({
@@ -72,20 +76,27 @@ export class AdminCreateQuestionPage implements OnInit {
     };
     this.questionsProvider.createAdminCuestion(question).then(
       () => {
-        this.alertProvider.presentAlertWithButtons('¡Vale!', 'La pregunta ha sido publicada', [
-          { text: 'Publicar otra', handler: () => this.createInputs() },
-          {
-            text: 'OK',
-            handler: () => {
-              const route = this.state.value ? '/admin/all' : '/admin/sent';
-              this.router.navigate([route]);
+        this.alertProvider.presentAlertWithButtons(
+          '¡Vale!',
+          'La pregunta ha sido publicada',
+          [
+            { text: 'Publicar otra', handler: () => this.createInputs() },
+            {
+              text: 'OK',
+              handler: () => {
+                const route = this.state.value ? '/admin/all' : '/admin/sent';
+                this.router.navigate([route]);
+              },
             },
-          },
-        ]);
+          ]
+        );
       },
       (error) => {
         console.error(error);
-        this.alertProvider.presentAlert('¡Vaya!', 'Hemos tenido un problema...');
+        this.alertProvider.presentAlert(
+          '¡Vaya!',
+          'Hemos tenido un problema...'
+        );
       }
     );
   }

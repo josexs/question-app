@@ -2,7 +2,11 @@ import { AuthProvider } from '../../shared/providers/api/auth.provider';
 import { Component, OnInit } from '@angular/core';
 import { AlertProvider } from 'app/shared/providers/ionic/alert.provider';
 import { Router } from '@angular/router';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
 import { StorageProvider } from 'app/shared/providers/ionic/storage.provider';
 import { Gtag } from 'angular-gtag';
@@ -10,7 +14,7 @@ import { Gtag } from 'angular-gtag';
 @Component({
   selector: 'page-login',
   templateUrl: 'login.page.html',
-  styleUrls: ['./login.page.scss']
+  styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
   credentials: UntypedFormGroup;
@@ -56,7 +60,10 @@ export class LoginPage implements OnInit {
           if (error.error && error.error.message) {
             this.alertProvider.presentAlert('Vaya!', error.error.message);
           } else {
-            this.alertProvider.presentAlert('Vaya!', 'Ha ocurrido un error, intentalo mas tarde');
+            this.alertProvider.presentAlert(
+              'Vaya!',
+              'Ha ocurrido un error, intentalo mas tarde'
+            );
           }
         }
       );

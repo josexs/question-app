@@ -16,7 +16,10 @@ export class EndGamePage {
   state = false;
   rounds = 0;
   options: OptionsGameI;
-  constructor(private storageProvider: StorageProvider, private router: Router) {}
+  constructor(
+    private storageProvider: StorageProvider,
+    private router: Router
+  ) {}
 
   async ionViewWillEnter(): Promise<void> {
     setTimeout(() => {

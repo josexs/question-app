@@ -73,8 +73,14 @@ export class QuestionsProvider {
   }
 
   async getRandomQuestionWithQuestionsValues(options) {
-    const questions = this.questions.filter((item) => item.type.indexOf(options.type) !== -1);
-    const randomNumber = this.utilsProvider.randomNumber(questions.length - 1, 0, false);
+    const questions = this.questions.filter(
+      (item) => item.type.indexOf(options.type) !== -1
+    );
+    const randomNumber = this.utilsProvider.randomNumber(
+      questions.length - 1,
+      0,
+      false
+    );
     const randomQuestion = questions[randomNumber];
     this.questions = questions.filter((_item, i) => i !== Number(randomNumber));
     await this.incrementCounterOfQuestion(randomQuestion._id);
@@ -85,7 +91,9 @@ export class QuestionsProvider {
     if (type === 'all') {
       return this.questions.length;
     } else {
-      return this.questions.filter((item: QuestionI) => item.type.indexOf(type) !== -1).length;
+      return this.questions.filter(
+        (item: QuestionI) => item.type.indexOf(type) !== -1
+      ).length;
     }
   }
 
@@ -126,8 +134,8 @@ export class QuestionsProvider {
       this.getSupportedVoices();
       let rate = 0;
       if (participant.gender === 'male') {
-          const nameFemale = isiOS ? 'Mónica' : 'Monica';
-          rate = 1.1;
+        const nameFemale = isiOS ? 'Mónica' : 'Monica';
+        rate = 1.1;
         // if (this.voicesSupported.indexOf(nameFemale) !== -1) {
         //   this.speech.setVoice(nameFemale);
         // } else {
@@ -142,14 +150,17 @@ export class QuestionsProvider {
         //   this.speech.setRate(1.2);
         //   this.speech.setVoice('español España');
         // }
-          rate = 1.2;
+        rate = 1.2;
       }
-        await this.speak(msg, rate, this.utilsProvider.rand(2, true, 2));
-        resolve();
+      await this.speak(msg, rate, this.utilsProvider.rand(2, true, 2));
+      resolve();
     });
   }
 
-  async voteQuestion(type: string, participant: ParticipantI): Promise<ParticipantI> {
+  async voteQuestion(
+    type: string,
+    participant: ParticipantI
+  ): Promise<ParticipantI> {
     this.shifts = await this.storageProvider.get<ParticipantI[]>('shifts');
     for (const shift of this.shifts) {
       if (shift.name === participant.name) {

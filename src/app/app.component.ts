@@ -9,10 +9,7 @@ import { Gtag } from 'angular-gtag';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(
-    private platform: Platform,
-    private gtag: Gtag
-  ) {
+  constructor(private platform: Platform, private gtag: Gtag) {
     // this.initializeApp();
   }
 

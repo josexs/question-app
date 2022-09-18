@@ -13,7 +13,8 @@ import { Router } from '@angular/router';
   templateUrl: 'question.page.html',
 })
 export class QuestionPage {
-  @ViewChild('cdQuestion', { static: false }) public countdownQuestion: CountdownComponent;
+  @ViewChild('cdQuestion', { static: false })
+  public countdownQuestion: CountdownComponent;
   options: OptionsGameI;
   question: QuestionI;
   participant: ParticipantI;
@@ -69,12 +70,18 @@ export class QuestionPage {
   }
 
   async getRandomQuestion(): Promise<void> {
-    this.participant = await this.storageProvider.get<ParticipantI>('currentShift');
-    this.question = await this.questionsProvider.getRandomQuestion(this.options);
+    this.participant = await this.storageProvider.get<ParticipantI>(
+      'currentShift'
+    );
+    this.question = await this.questionsProvider.getRandomQuestion(
+      this.options
+    );
   }
 
   async checkFirstQuestion() {
-    const isFirstQuestion = await this.storageProvider.get<boolean>('firstQuestion');
+    const isFirstQuestion = await this.storageProvider.get<boolean>(
+      'firstQuestion'
+    );
     if (isFirstQuestion !== null) {
       this.isFirstQuestion = isFirstQuestion;
     } else {
@@ -107,7 +114,10 @@ export class QuestionPage {
   }
 
   async voteQuestion(type: string): Promise<void> {
-    this.participant = await this.questionsProvider.voteQuestion(type, this.participant);
+    this.participant = await this.questionsProvider.voteQuestion(
+      type,
+      this.participant
+    );
     this.gtag.event('voteQuestion');
     this.states.question = false;
     // GOTO RESUME

@@ -41,7 +41,10 @@ export class AdminEditQuestionPage {
       },
       (error) => {
         console.error(error);
-        this.alertProvider.presentAlert('¡Vaya!', 'Hemos tenido un problema...');
+        this.alertProvider.presentAlert(
+          '¡Vaya!',
+          'Hemos tenido un problema...'
+        );
       }
     );
   }
@@ -51,22 +54,29 @@ export class AdminEditQuestionPage {
   }
 
   delete() {
-    this.alertProvider.presentAlertWithButtons('¿Estas seguro?', 'Vas a eliminar la pregunta', [
-      {
-        text: 'No',
-        role: 'cancel',
-      },
-      {
-        text: 'Si',
-        handler: () => this.deleteConfirm(),
-      },
-    ]);
+    this.alertProvider.presentAlertWithButtons(
+      '¿Estas seguro?',
+      'Vas a eliminar la pregunta',
+      [
+        {
+          text: 'No',
+          role: 'cancel',
+        },
+        {
+          text: 'Si',
+          handler: () => this.deleteConfirm(),
+        },
+      ]
+    );
   }
 
   deleteConfirm() {
     this.questionsProvider.deleteQuestion(this.item._id).then(
       () => {
-        this.alertProvider.presentAlert('¡Vale!', 'La pregunta ha sido eliminada');
+        this.alertProvider.presentAlert(
+          '¡Vale!',
+          'La pregunta ha sido eliminada'
+        );
         this.router.navigate([this.routeBack]);
       },
       () =>

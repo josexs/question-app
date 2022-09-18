@@ -45,7 +45,9 @@ export class InitOptionsPage {
       const options = await this.storageProvider.get<OptionsGameI>('options');
       if (options) {
         if (options.state === 'resume') {
-          this.shifts = await this.storageProvider.get<ParticipantI[]>('shifts');
+          this.shifts = await this.storageProvider.get<ParticipantI[]>(
+            'shifts'
+          );
           this.options = options;
         } else if (options.state === 'inProgress') {
           this.router.navigate(['/question']);
@@ -62,7 +64,13 @@ export class InitOptionsPage {
   }
 
   changeNumberOfParticipants() {
-    const participant: ParticipantI = { name: '', gender: '', photo: '', positive: 0, negative: 0 };
+    const participant: ParticipantI = {
+      name: '',
+      gender: '',
+      photo: '',
+      positive: 0,
+      negative: 0,
+    };
     this.options.participants = [];
     for (let i = 0; i < Number(this.options.totalParticipants); i++) {
       this.options.participants.push(participant);
@@ -106,16 +114,25 @@ export class InitOptionsPage {
     };
 
     if (this.options.type === '') {
-      return { message: 'Tienes que seleccionar el tipo de juego', state: false };
+      return {
+        message: 'Tienes que seleccionar el tipo de juego',
+        state: false,
+      };
     }
 
     for (let i = 0; i < this.options.participants.length; i++) {
       const participant = this.options.participants[i];
       if (participant.name === '') {
-        return { message: `El participante numero ${i + 1} tiene que tener nombre`, state: false };
+        return {
+          message: `El participante numero ${i + 1} tiene que tener nombre`,
+          state: false,
+        };
       }
       if (participant.gender === '') {
-        return { message: `El participante numero ${i + 1} tiene que tener genero`, state: false };
+        return {
+          message: `El participante numero ${i + 1} tiene que tener genero`,
+          state: false,
+        };
       }
     }
 
@@ -139,7 +156,7 @@ export class InitOptionsPage {
     this.router.navigate(['/dashboard']);
   }
 
-    continue() {
-      this.options.state = 'todoB'
+  continue() {
+    this.options.state = 'todoB';
   }
 }

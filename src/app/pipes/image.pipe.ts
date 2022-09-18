@@ -10,6 +10,5 @@ export class ImagePipe implements PipeTransform {
     } else {
       return value;
     }
-
   }
 }

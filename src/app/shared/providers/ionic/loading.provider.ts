@@ -5,7 +5,9 @@ import { LoadingController } from '@ionic/angular';
 export class LoadingProvider {
   constructor(private loadingCtrl: LoadingController) {}
 
-  presentLoading(message = 'Por favor, espera'): Promise<HTMLIonLoadingElement> {
+  presentLoading(
+    message = 'Por favor, espera'
+  ): Promise<HTMLIonLoadingElement> {
     return this.loadingCtrl.create({
       message,
       duration: 5000,

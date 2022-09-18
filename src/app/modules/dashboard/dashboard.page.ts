@@ -108,7 +108,8 @@ export class DashboardPage {
   }
 
   getTotalOfQuestionOfType(): void {
-    this.totalQuestions = this.questionsProvider.getTotalOfQuestionOfType('all');
+    this.totalQuestions =
+      this.questionsProvider.getTotalOfQuestionOfType('all');
   }
 
   goToAdmin() {

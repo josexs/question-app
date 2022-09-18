@@ -21,6 +21,10 @@ import { OptionsInitComponent } from './components/options-init/options-init.com
       },
     ]),
   ],
-  declarations: [InitOptionsPage, OptionsInitComponent, OptionsParticipantsComponent],
+  declarations: [
+    InitOptionsPage,
+    OptionsInitComponent,
+    OptionsParticipantsComponent,
+  ],
 })
 export class InitOptionsModule {}

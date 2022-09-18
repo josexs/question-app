@@ -4,35 +4,46 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./modules/home/home.module').then((m) => m.HomeModule),
+    loadChildren: () =>
+      import('./modules/home/home.module').then((m) => m.HomeModule),
   },
   {
     path: 'dashboard',
     loadChildren: () =>
-      import('./modules/dashboard/dashboard.module').then((m) => m.DashboardModule),
+      import('./modules/dashboard/dashboard.module').then(
+        (m) => m.DashboardModule
+      ),
   },
   {
     path: 'send',
-    loadChildren: () => import('./modules/send/send.module').then((m) => m.SendModule),
+    loadChildren: () =>
+      import('./modules/send/send.module').then((m) => m.SendModule),
   },
   {
     path: 'login',
-    loadChildren: () => import('./modules/login/login.module').then((m) => m.LoginModule),
+    loadChildren: () =>
+      import('./modules/login/login.module').then((m) => m.LoginModule),
   },
   {
     path: 'options',
     loadChildren: () =>
-      import('./modules/options/options.module').then((m) => m.InitOptionsModule),
+      import('./modules/options/options.module').then(
+        (m) => m.InitOptionsModule
+      ),
   },
   {
     path: 'options-resume',
     loadChildren: () =>
-      import('./modules/options-resume/options-resume.module').then((m) => m.OptionsResumeModule),
+      import('./modules/options-resume/options-resume.module').then(
+        (m) => m.OptionsResumeModule
+      ),
   },
   {
     path: 'question',
     loadChildren: () =>
-      import('./modules/question/question.module').then((m) => m.QuestionModule),
+      import('./modules/question/question.module').then(
+        (m) => m.QuestionModule
+      ),
   },
   {
     path: 'question-resume',
@@ -50,11 +61,15 @@ const routes: Routes = [
   },
   {
     path: 'credits',
-    loadChildren: () => import('./modules/credits/credits.module').then((m) => m.CreditsPageModule),
+    loadChildren: () =>
+      import('./modules/credits/credits.module').then(
+        (m) => m.CreditsPageModule
+      ),
   },
   {
     path: 'create',
-    loadChildren: () => import('./modules/send/send.module').then((m) => m.SendModule),
+    loadChildren: () =>
+      import('./modules/send/send.module').then((m) => m.SendModule),
   },
   {
     path: 'end-game',
@@ -63,7 +78,8 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: () => import('./modules/admin/admin.module').then((m) => m.AdminModule),
+    loadChildren: () =>
+      import('./modules/admin/admin.module').then((m) => m.AdminModule),
   },
   {
     path: '',
@@ -73,7 +89,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, relativeLinkResolution: 'legacy' })],
+  imports: [
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadAllModules,
+      relativeLinkResolution: 'legacy',
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
