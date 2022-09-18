@@ -156,8 +156,6 @@ ion-toolbar {
 
 .alert-info .alert-wrapper {
   border-radius: 10px;
-  border-radius: 10px;
-  // border: 8px solid #f0f0f0;
 }
 
 .alert-info .alert-message,
@@ -177,9 +175,7 @@ ion-toolbar {
 
 .alert-warning .alert-wrapper {
   border-radius: 25px;
-  border-radius: 25px;
   background: var(--ion-color-warning);
-  // border: 8px solid #e0bb2e;
 }
 
 .alert-warning .alert-message,
@@ -201,9 +197,7 @@ ion-toolbar {
 
 .alert-danger .alert-wrapper {
   border-radius: 25px;
-  border-radius: 25px;
   background: var(--ion-color-danger);
-  // border: 8px solid #b30101;
 }
 
 .alert-danger .alert-message,

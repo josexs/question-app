@@ -44,14 +44,15 @@ export class EndGamePage {
 
   async getClassification(): Promise<void> {
     let shifts: ParticipantI[] = await this.storageProvider.get('shifts');
-    this.shifts = shifts.sort((a, b) => {
+    shifts.sort((a, b) => {
       if (a.positive - a.negative > b.positive - b.negative) {
         return -1;
       }
-      if (a.positive - a.positive < b.positive - b.negative) {
+      if (a.positive - a.negative < b.positive - b.negative) {
         return 1;
       }
     });
+    this.shifts = shifts;
     this.winner = this.shifts[0];
     this.loser = this.shifts[this.shifts.length - 1];
     this.rounds = this.winner.positive + this.winner.negative;
