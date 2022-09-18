@@ -1,34 +1,21 @@
 <ion-content>
-  <ion-slides #slider style="height: 100%; width: 100%" mode="ios" pager="false" scrollbar="ios">
-    <ion-slide>
-      <ion-row class="animate fadeIn" style="width: 100%">
-        <ion-col size="12" sizeLg="8" offsetLg="2">
-          <ion-row
-            style=" margin-bottom: 4.5rem; margin-right: 2rem; margin-left: 2rem"
-          >
-            <ion-col size="7" (click)="goToAdmin()">
-              <img style="padding-left: 1rem" src="./assets/images/dashboard.svg" alt="" />
-            </ion-col>
-            <ion-col size="5">
-              <div class="box-counter" style="margin-bottom: 0.8rem">
-                <span class="box-counter-number"> {{ totalQuestions }} </span>
-                <span class="box-counter-text"> Preguntas </span>
-              </div>
-              <div class="box-counter">
-                <span class="box-counter-number">2</span>
-                <span class="box-counter-text">Modos</span>
-              </div>
-            </ion-col>
-          </ion-row>
+    <div class="swipe-container-fake animate fadeIn">
+        <div class="swipe-fake">
+            <div class="ion-no-margin">
+                <ion-row>
 
-          <div *ngFor="let item of menuOptions">
-            <div (click)="actionButton(item.action)" class="ion-item-custom" *ngIf="!item.disabled">
-              {{ item.name }}
-              <ion-icon class="ion-icon-dashboard" name="chevron-forward-outline"></ion-icon>
+                    <dashboard-header class="w-100" [totalQuestions]="totalQuestions" (goToAdmin)="goToAdmin()">
+                    </dashboard-header>
+
+                    <ng-container *ngFor="let menuItem of menuOptions">
+                        <div (click)="actionButton(menuItem.action)" class="ion-item-custom w-100 m-lr-05 m-t-05"
+                            *ngIf="!menuItem.disabled">
+                            {{ menuItem.name }}
+                            <ion-icon class="ion-icon-right" name="chevron-forward-outline"></ion-icon>
+                        </div>
+                    </ng-container>
+                </ion-row>
             </div>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-slide>
-  </ion-slides>
+        </div>
+    </div>
 </ion-content>

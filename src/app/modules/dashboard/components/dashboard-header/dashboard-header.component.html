@@ -1,0 +1,17 @@
+<div class="w-100 p-lr-05" style="display: flex;">
+
+    <div style="width: 50%" (click)="goToAdmin.emit()">
+        <img clas="w-100" style="padding-left: 1rem" src="./assets/images/dashboard.svg" alt="" />
+    </div>
+    <div style="width: 50%">
+        <div class="box-counter" style="margin-bottom: 0.8rem">
+            <span class="box-counter-number"> {{ totalQuestions }} </span>
+            <span class="box-counter-text"> Preguntas </span>
+        </div>
+        <div class="box-counter">
+            <span class="box-counter-number">2</span>
+            <span class="box-counter-text">Modos</span>
+        </div>
+    </div>
+</div>
+<br>

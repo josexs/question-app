@@ -11,7 +11,6 @@ import { OptionsI } from '@interfaces/init-options.interface';
   styleUrls: ['./classification.page.scss'],
 })
 export class ClassificationPage {
-  @ViewChild('slider') slides: any;
   shifts: ParticipantI[] = [];
   options: any[] = [];
   constructor(
@@ -21,21 +20,17 @@ export class ClassificationPage {
   ) {}
 
   async ionViewWillEnter(): Promise<void> {
-    setTimeout(() => {
-      if (this.slides) {
-        this.slides.lockSwipes(true);
-      }
-    }, 500);
     const shifts = await this.storageProvider.get<ParticipantI[]>('shifts');
     this.getOptions();
-    this.shifts = shifts.sort((a, b) => {
+    shifts.sort((a, b) => {
       if (a.positive - a.negative > b.positive - b.negative) {
         return -1;
       }
-      if (a.positive - a.positive < b.positive - b.negative) {
+      if (a.positive - a.negative < b.positive - b.negative) {
         return 1;
       }
     });
+    this.shifts = shifts;
   }
 
   getOptions() {

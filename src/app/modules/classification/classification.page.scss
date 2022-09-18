@@ -1,13 +1,12 @@
 .next-turno {
   width: 100%;
   width: 100%;
-  background: #eeeeee;
+//   background: #eeeeee;
   border: 1px solid #eeeeee;
 }
 
 .resumen-user-div {
   font-size: 0.9rem;
-  width: 100%;
 }
 
 .resumen-user-rows {
@@ -20,4 +19,10 @@
   color: var(--ion-color-primary);
   transition: 100ms;
   cursor: pointer;
+}
+
+h3 {
+    font-size: 22px;
+    border-bottom: 1px solid #00000026;
+    padding-bottom: 0.5rem;
 }

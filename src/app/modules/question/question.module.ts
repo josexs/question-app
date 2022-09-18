@@ -7,6 +7,10 @@ import { QuestionPage } from './question.page';
 import { CountdownModule } from 'ngx-countdown';
 import { QuestionMenuComponent } from './components/menu-popover/question-menu.component';
 import { RouterModule } from '@angular/router';
+import { QuestionHeaderComponent } from './components/header/question-header.component';
+import { QuestionCountdownComponent } from './components/countdown/question-countdown.component';
+import { QuestionInfoComponent } from './components/info/question-info.component';
+import { QuestionButtonsComponent } from './components/buttons/question-buttons.component';
 
 @NgModule({
   imports: [
@@ -20,11 +24,15 @@ import { RouterModule } from '@angular/router';
         path: '',
         component: QuestionPage,
       },
-    ])
+    ]),
   ],
   declarations: [
     QuestionPage,
+    QuestionHeaderComponent,
     QuestionMenuComponent,
+    QuestionCountdownComponent,
+      QuestionInfoComponent,
+    QuestionButtonsComponent
   ],
 })
 export class QuestionModule {}

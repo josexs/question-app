@@ -1,54 +1,46 @@
 <ion-content>
-  <ion-slides #slider style="height: 100%; width: 100%" mode="ios" pager="false" scrollbar="ios">
-    <ion-slide>
-      <ion-row class="animate fadeIn" style="width: 100%" *ngIf="currentShift">
-        <ion-col size="12" sizeLg="8" offsetLg="2">
-          <ion-row>
-            <div color="dark" class="next-turno">
-              <div class="ion-text-center">
-                <h1>Ronda {{currentShift?.positive + currentShift?.negative + 1}}</h1>
-                <h2 style="font-size: 20px; font-weight: 700; padding-bottom: 0.5rem">
-                  Siguiente turno
-                </h2>
-                <p class="">Le toca a <strong>{{ currentShift?.name }}</strong></p>
-              </div>
-            </div>
+    <div class="swipe-container-fake animate fadeIn">
+        <div class="swipe-fake">
 
-            <div
-              class="resumen-user-div"
-              color="light"
-              style="margin-top: 1rem; margin-bottom: 1rem"
-            >
-              <div class="ion-text-center">
+            <div class="ion-no-margin" *ngIf="currentShift">
                 <ion-row>
-                  <ion-col>
-                    <p class="resumen-user-rows">{{ currentShift?.positive }}</p>
-                    <p>Aciertos</p>
-                  </ion-col>
-                  <ion-col>
-                    <p class="resumen-user-rows">{{ currentShift?.negative }}</p>
-                    <p>Fallos</p>
-                  </ion-col>
-                  <ion-col>
-                    <p class="resumen-user-rows">{{ position + 1 }}º</p>
-                    <p>Posicion</p>
-                  </ion-col>
-                </ion-row>
-              </div>
-            </div>
-          </ion-row>
-          <div
-            *ngFor="let item of options"
-            (click)="actionButton(item.action)"
-            class="ion-item-custom"
-          >
-            {{ item.name }}
-            <ion-icon class="ion-icon-dashboard" name="chevron-forward-outline"></ion-icon>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-slide>
-  </ion-slides>
-</ion-content>
+                    <ion-card color="dark" class="next-turno ion-no-margin m-lr-05">
+                        <div class="ion-text-center">
+                            <h1>Ronda {{currentShift?.positive + currentShift?.negative + 1}}</h1>
+                            <h2 style="font-size: 20px; font-weight: 700; padding-bottom: 0.5rem">
+                                Siguiente turno
+                            </h2>
+                            <p class="">Le toca a <strong>{{ currentShift?.name }}</strong></p>
+                        </div>
+                    </ion-card>
 
-<ion-footer class="ion-no-border"> </ion-footer>
+                    <ion-card class="resumen-user-div ion-no-margin m-lr-05" color="light"
+                        style="margin-top: 1rem; margin-bottom: .5rem">
+                        <div class="ion-text-center">
+                            <ion-row>
+                                <ion-col>
+                                    <p class="resumen-user-rows">{{ currentShift?.positive }}</p>
+                                    <p>Aciertos</p>
+                                </ion-col>
+                                <ion-col>
+                                    <p class="resumen-user-rows">{{ currentShift?.negative }}</p>
+                                    <p>Fallos</p>
+                                </ion-col>
+                                <ion-col>
+                                    <p class="resumen-user-rows">{{ position + 1 }}º</p>
+                                    <p>Posicion</p>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-card>
+
+                    <div *ngFor="let item of options" (click)="actionButton(item.action)" class="ion-item-custom w-100 m-lr-05 m-t-05">
+                        {{ item.name }}
+                        <ion-icon class="ion-icon-right" name="chevron-forward-outline"></ion-icon>
+                    </div>
+                </ion-row>
+
+            </div>
+        </div>
+    </div>
+</ion-content>

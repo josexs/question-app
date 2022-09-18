@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { GtagModule } from 'angular-gtag';
+import { navAnimation } from '@core/animations/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +25,11 @@ import { GtagModule } from 'angular-gtag';
     FormsModule,
     HttpClientModule,
     IonicStorageModule.forRoot(),
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      navAnimation: navAnimation,
+      statusTap: true,
+      mode: 'ios',
+    }),
     AppRoutingModule,
     GtagModule.forRoot({ trackingId: 'G-KW4L8CBSK4', trackPageviews: true }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),

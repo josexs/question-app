@@ -1,41 +1,37 @@
 <ion-content>
-  <ion-slides #slider style="height: 100%; width: 100%" mode="ios" pager="false" scrollbar="ios">
-    <ion-slide>
-      <ion-row class="animate fadeIn" style="width: 100%">
-        <ion-col size="12" sizeLg="8" offsetLg="2">
-          <div class="resumen-user-div" color="light" *ngFor="let item of shifts; let i = index">
-            <div class="ion-text-center">
-              <ion-row>
-                <ion-col size="12">
-                  <h3>{{ item.name }}</h3>
-                </ion-col>
-                <ion-col>
-                  <p class="resumen-user-rows">{{ item?.positive }}</p>
-                  <p>Aciertos</p>
-                </ion-col>
-                <ion-col>
-                  <p class="resumen-user-rows">{{ item?.negative }}</p>
-                  <p>Fallos</p>
-                </ion-col>
-                <ion-col>
-                  <p class="resumen-user-rows">{{ i + 1}}º</p>
-                  <p>Posicion</p>
-                </ion-col>
-              </ion-row>
-            </div>
-          </div>
+    <div class="swipe-container-fake animate fadeIn">
+        <div class="swipe-fake">
+            <div class="ion-no-margin">
+                <ion-row>
+                    <ion-card class="ion-no-margin m-05 w-100" color="light" *ngFor="let item of shifts; let i = index">
+                        <div class="ion-text-center">
+                            <ion-row>
+                                <ion-col size="12">
+                                    <h3>{{ item.name }}</h3>
+                                </ion-col>
+                                <ion-col>
+                                    <p class="resumen-user-rows">{{ item?.positive }}</p>
+                                    <p>Aciertos</p>
+                                </ion-col>
+                                <ion-col>
+                                    <p class="resumen-user-rows">{{ item?.negative }}</p>
+                                    <p>Fallos</p>
+                                </ion-col>
+                                <ion-col>
+                                    <p class="resumen-user-rows">{{ i + 1}}º</p>
+                                    <p>Posicion</p>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-card>
 
-          <div
-            style="margin-top: 1rem"
-            *ngFor="let item of options"
-            (click)="actionButton(item.action)"
-            class="ion-item-custom"
-          >
-            {{ item.name }}
-            <ion-icon class="ion-icon-dashboard" name="chevron-forward-outline"></ion-icon>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-slide>
-  </ion-slides>
+                    <div *ngFor="let item of options" (click)="actionButton(item.action)"
+                        class="ion-item-custom w-100 m-lr-05 m-t-05">
+                        {{ item.name }}
+                        <ion-icon class="ion-icon-right" name="chevron-forward-outline"></ion-icon>
+                    </div>
+                </ion-row>
+            </div>
+        </div>
+    </div>
 </ion-content>

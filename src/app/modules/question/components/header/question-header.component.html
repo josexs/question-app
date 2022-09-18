@@ -1,0 +1,12 @@
+<div class="w-100 p-lr-05 ion-text-center">
+    <div class="ion-text-center  header-wrapper">
+        <ion-label class="participant-name">
+            {{ participant.name }}
+        </ion-label>
+        <br />
+        <span class="points">
+            {{ participant.positive - participant.negative }} {{ participant.positive -
+            participant.negative === 1 ? 'punto' : 'puntos' }}
+        </span>
+    </div>
+</div>

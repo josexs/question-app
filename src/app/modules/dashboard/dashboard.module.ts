@@ -5,16 +5,21 @@ import { FormsModule } from '@angular/forms';
 import { PipesModule } from 'app/pipes/pipes.module';
 import { DashboardPage } from './dashboard.page';
 import { RouterModule } from '@angular/router';
+import { DashboardHeaderComponent } from './components/dashboard-header/dashboard-header.component';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, PipesModule, RouterModule.forChild(
-    [
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    PipesModule,
+    RouterModule.forChild([
       {
         path: '',
         component: DashboardPage,
       },
-    ]
-  )],
-  declarations: [DashboardPage],
+    ]),
+  ],
+  declarations: [DashboardPage, DashboardHeaderComponent],
 })
 export class DashboardModule {}

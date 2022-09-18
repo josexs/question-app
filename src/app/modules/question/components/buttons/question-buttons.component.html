@@ -1,0 +1,21 @@
+<ion-row>
+    <ng-container *ngIf="states?.buttonStart && !isFirstQuestion">
+        <div (click)="startQuestion.emit()" class="ion-item-custom w-100 m-lr-05 m-t-05">
+            Iniciar Pregunta
+            <ion-icon class="ion-icon-right" name="chevron-forward-outline"></ion-icon>
+        </div>
+    </ng-container>
+
+    <div class="animate fadeIn w-100" *ngIf="states.question && !states.buttonStart && !isFirstQuestion" style="display: contents">
+        <div (click)="voteQuestion.emit('positive')" class="ion-item-custom b-green w-100 m-lr-05 m-t-05"
+            [ngClass]="{'ion-item-custom-disabled': !states.buttonStart && !isFirstQuestion && states.countdownQuestion }">
+            <ion-icon style="zoom: 1.5; padding-top: 0.1rem" class="c-light" name="checkmark"></ion-icon>
+        </div>
+        
+        <div (click)="voteQuestion.emit('negative')" class="ion-item-custom b-red w-100 m-lr-05 m-t-05"
+            [ngClass]="{'ion-item-custom-disabled': !states.buttonStart && !isFirstQuestion && states.countdownQuestion }">
+            <ion-icon style="zoom: 1.5; padding-top: 0.1rem" class="c-light" name="close-outline"></ion-icon>
+        </div>
+       
+    </div>
+</ion-row>

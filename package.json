@@ -5,7 +5,8 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ionic serve",
+    "start:prod": "ionic serve --configuration=production",
     "build": "ng build",
     "android:run:live": "ionic cordova run android -lc",
     "android:run:dev": "ionic cordova run android",
@@ -82,7 +83,6 @@
     "@capacitor/cli": "4.0.1",
     "@ionic/angular-toolkit": "7.0.0",
     "@ionic/cli": "6.20.1",
-    "@types/cypress": "^1.1.3",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~12.11.1",

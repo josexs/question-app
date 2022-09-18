@@ -1,35 +1,41 @@
-<ion-content class="ion-text-center">
-  <ion-slides style="height: 100%; width: 100%" mode="ios" pager="false" scrollbar="ios">
-    <ion-slide>
-      <ion-row class="animate fadeIn" style="width: 100%">
-        <ion-col size="12" sizeLg="8" offsetLg="2">
-          <ng-container *ngIf="state">
-            <h2>¡Juego terminado!</h2>
-            <h6>Rondas: {{ rounds }}</h6>
-            <img style="margin-top: 1rem; width: 50%" src="assets/images/trophy.png" alt="" />
+<ion-content>
+    <div class="swipe-container-fake animate fadeIn">
+        <div class="swipe-fake">
+            <div class="ion-no-margin">
+                <ion-row>
+                    <ng-container *ngIf="state">
+                        <div class="ion-text-center">
 
-            <div class="ion-item-custom">
-              <h2 style="text-transform: uppercase;">{{ winner.name }}</h2>
-              <ion-row>
-                <ion-col>
-                  Aciertos<br />
-                  {{ winner.positive }}
-                </ion-col>
-                <ion-col>
-                  Fallos<br />
-                  {{ winner.negative }}
-                </ion-col>
-              </ion-row>
-              <br />
+                            <img style="margin-top: 1rem; width: 50%" src="assets/images/trophy.png" alt="" />
+
+                            <ion-card class="ion-no-margin m-05 w-100" color="light">
+                                <h2>¡Juego terminado!</h2>
+                                <h6>Rondas: {{ rounds }}</h6>
+                            </ion-card>
+                            <ion-card class="ion-no-margin m-05 w-100" color="light">
+                                <h2 style="text-transform: uppercase;">{{ winner.name }}</h2>
+                                <hr style="background: rgba(0,0,0,0.15);margin:.5rem">
+                                <ion-row>
+                                    <ion-col>
+                                        Aciertos<br />
+                                        {{ winner.positive }}
+                                    </ion-col>
+                                    <ion-col>
+                                        Fallos<br />
+                                        {{ winner.negative }}
+                                    </ion-col>
+                                </ion-row>
+                                <br />
+                            </ion-card>
+
+                            <div class="ion-item-custom w-100 m-lr-05 m-t-05" (click)="goToDashboard()">
+                                Ir al inicio
+                                <ion-icon class="ion-icon-right" name="chevron-forward-outline"></ion-icon>
+                            </div>
+                        </div>
+                    </ng-container>
+                </ion-row>
             </div>
-            <div style="text-align: center; margin: 1rem 0rem 1rem 0rem">
-              <ion-button expand="block" (click)="goToDashboard()">Ir al inicio</ion-button>
-            </div>
-          </ng-container>
-        </ion-col>
-      </ion-row>
-    </ion-slide>
-  </ion-slides>
+        </div>
+    </div>
 </ion-content>
-
-<ion-footer> </ion-footer>

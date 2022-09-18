@@ -16,16 +16,16 @@ export class StorageProvider {
     return this.storage.get(key);
   }
 
-  set(key: string, value: any): void {
+  async set(key: string, value: any): Promise<void> {
     this.startDB();
-    this.storage.set(key, value);
+    await this.storage.set(key, value);
   }
 
-  remove(key: string): void {
+  async remove(key: string): Promise<void> {
     this.storage.remove(key);
   }
 
-  clear(): void {
+  async clear(): Promise<void> {
     this.storage.clear();
   }
 

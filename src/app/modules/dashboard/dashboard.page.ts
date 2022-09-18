@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuOptionsI } from '@interfaces/menu-options.interface';
 import { QuestionsProvider } from '@providers/api/questions.provider';
 import { AlertProvider } from '@providers/ionic/alert.provider';
 import { StorageProvider } from '@providers/ionic/storage.provider';
@@ -13,7 +14,7 @@ import { Gtag } from 'angular-gtag';
 export class DashboardPage {
   @ViewChild('slider') slides: any;
   totalQuestions: number;
-  menuOptions: { name: string; action: string; disabled: boolean }[] = [];
+  menuOptions: MenuOptionsI[] = [];
   constructor(
     private router: Router,
     private questionsProvider: QuestionsProvider,
@@ -23,12 +24,12 @@ export class DashboardPage {
   ) {}
 
   async ionViewWillEnter(): Promise<void> {
-    this.lockSwipes()
+    this.lockSwipes();
     this.getMenuOptions();
     await this.questionsProvider.getQuestions();
     this.getTotalOfQuestionOfType();
   }
-  
+
   lockSwipes() {
     setTimeout(() => {
       if (this.slides) {
@@ -101,7 +102,7 @@ export class DashboardPage {
   }
 
   async confirmStart() {
-    await this.storageProvider.clear();
+    this.storageProvider.clear();
     this.gtag.event('goToInitOptions');
     this.router.navigate(['/options']);
   }

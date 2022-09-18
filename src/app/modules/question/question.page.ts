@@ -15,7 +15,6 @@ import { Router } from '@angular/router';
   templateUrl: 'question.page.html',
 })
 export class QuestionPage {
-  @ViewChild('slider') slides: any;
   @ViewChild('cdQuestion', { static: false }) public countdownQuestion: CountdownComponent;
   options: OptionsI;
   question: QuestionI;
@@ -40,11 +39,6 @@ export class QuestionPage {
   ) {}
 
   async ionViewWillEnter(): Promise<void> {
-    setTimeout(() => {
-      if (this.slides) {
-        this.slides.lockSwipes(true);
-      }
-    }, 500);
     await this.getOptions();
     this.resetSstates();
     await this.getRandomQuestion();
@@ -164,6 +158,7 @@ export class QuestionPage {
   countDown() {
     return new Promise((resolve) => {
       const interval = setInterval(() => {
+        console.log(this.countdownCurrent);
         this.countdownCurrent -= 1;
         this.countdownCurrentPercentage = (
           this.countdownCurrent / Number(this.options.durationQuestion)

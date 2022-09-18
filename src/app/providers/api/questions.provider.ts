@@ -1,21 +1,19 @@
 import { Platform } from '@ionic/angular';
-import { environment } from './../../../environments/environment';
 import { questionsMock } from './questions.mock';
 import { Injectable } from '@angular/core';
 import { ParticipantI } from '@interfaces/participant.interface';
 import { UtilsProvider } from '@providers/misc/utils.provider';
 import { QuestionI } from '@interfaces/question.interface';
 import { StorageProvider } from '@providers/ionic/storage.provider';
-import Speech from 'speak-tts';
 import { OptionsI } from '@interfaces/init-options.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TextToSpeech } from '@capacitor-community/text-to-speech';
+import { environment } from 'environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class QuestionsProvider {
   questions = [];
   shifts: ParticipantI[] = [];
-  speech = new Speech();
   voicesSupported: SpeechSynthesisVoice[] = [];
   constructor(
     private utilsProvider: UtilsProvider,
@@ -146,7 +144,8 @@ export class QuestionsProvider {
         // }
           rate = 1.2;
       }
-      await this.speak(msg, rate, this.utilsProvider.rand(2, true, 2));
+        await this.speak(msg, rate, this.utilsProvider.rand(2, true, 2));
+        resolve();
     });
   }
 
