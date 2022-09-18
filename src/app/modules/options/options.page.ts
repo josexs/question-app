@@ -1,30 +1,24 @@
 import { Router } from '@angular/router';
-import { QuestionsProvider } from '@providers/api/questions.provider';
+import { QuestionsProvider } from 'app/shared/providers/api/questions.provider';
 import { Component } from '@angular/core';
-import { AlertProvider } from '@providers/ionic/alert.provider';
-import { StorageProvider } from '@providers/ionic/storage.provider';
-import { OptionsI } from 'app/interfaces/init-options.interface';
-import { ParticipantI } from '@interfaces/participant.interface';
+import { AlertProvider } from 'app/shared/providers/ionic/alert.provider';
+import { StorageProvider } from 'app/shared/providers/ionic/storage.provider';
+import { OptionsGameI } from '@interfaces/options-game.interface';
+import { ParticipantI } from 'app/shared/interfaces/participant.interface';
 import { Gtag } from 'angular-gtag';
-// import { Camera } from '@ionic-native/camera/ngx';
+import { OptionsGameM } from '@models/options.model';
 
 @Component({
   selector: 'app-options',
   templateUrl: 'options.page.html',
 })
 export class InitOptionsPage {
-  options: OptionsI = {
-    numberParticipants: '2',
-    type: 'normal',
-    state: 'todo',
-    durationQuestion: '15',
-    participants: [],
-  };
-  shifts: ParticipantI[] = [];
+  options = new OptionsGameM();
   typesOfGame = [
     { name: 'Normal', value: 'normal' },
     { name: 'Fuerte', value: 'hard' },
   ];
+  shifts: ParticipantI[] = [];
   totalQuestions = 0;
   clickedImage: string;
 
@@ -33,12 +27,11 @@ export class InitOptionsPage {
     private storageProvider: StorageProvider,
     private questionsProvider: QuestionsProvider,
     private router: Router,
-    private gtag: Gtag,
-    // private camera: Camera
+    private gtag: Gtag
   ) {}
 
   async ionViewWillEnter() {
-    const options = await this.storageProvider.get<OptionsI>('options');
+    const options = await this.storageProvider.get<OptionsGameI>('options');
     if (options) {
       if (options.state === 'resume') {
         this.shifts = await this.storageProvider.get<ParticipantI[]>('shifts');
@@ -49,7 +42,7 @@ export class InitOptionsPage {
     } else {
       await this.questionsProvider.getQuestions();
       this.getTotalOfQuestionOfType();
-      const options = await this.storageProvider.get<OptionsI>('options');
+      const options = await this.storageProvider.get<OptionsGameI>('options');
       if (options) {
         if (options.state === 'resume') {
           this.shifts = await this.storageProvider.get<ParticipantI[]>('shifts');
@@ -71,7 +64,7 @@ export class InitOptionsPage {
   changeNumberOfParticipants() {
     const participant: ParticipantI = { name: '', gender: '', photo: '', positive: 0, negative: 0 };
     this.options.participants = [];
-    for (let i = 0; i < Number(this.options.numberParticipants); i++) {
+    for (let i = 0; i < Number(this.options.totalParticipants); i++) {
       this.options.participants.push(participant);
     }
   }
@@ -131,24 +124,22 @@ export class InitOptionsPage {
 
   resetGame() {
     this.storageProvider.clear();
-    this.options = {
-      numberParticipants: '2',
-      type: 'hard',
-      state: 'todo',
-      durationQuestion: '15',
-      participants: [],
-    };
+    this.options = new OptionsGameM();
   }
 
   generateShifts() {
-    this.shifts = this.options.participants.sort(() => Math.random() - 0.5);
+    const shifts = this.options.participants;
+    shifts.sort(() => Math.random() - 0.5);
+    this.shifts = shifts;
     this.storageProvider.set('shifts', this.shifts);
   }
-
-  goToAdmin() {}
 
   goToDashboard() {
     this.gtag.event('goToDashboard');
     this.router.navigate(['/dashboard']);
+  }
+
+    continue() {
+      this.options.state = 'todoB'
   }
 }

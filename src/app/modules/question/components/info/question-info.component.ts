@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { QuestionI } from '@interfaces/question.interface';
+import { QuestionI } from 'app/shared/interfaces/question.interface';
 
 @Component({
   selector: 'question-info',

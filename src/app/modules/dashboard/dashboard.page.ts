@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuOptionsI } from '@interfaces/menu-options.interface';
-import { QuestionsProvider } from '@providers/api/questions.provider';
-import { AlertProvider } from '@providers/ionic/alert.provider';
-import { StorageProvider } from '@providers/ionic/storage.provider';
+import { MenuOptionsI } from 'app/shared/interfaces/menu-options.interface';
+import { QuestionsProvider } from 'app/shared/providers/api/questions.provider';
+import { AlertProvider } from 'app/shared/providers/ionic/alert.provider';
+import { StorageProvider } from 'app/shared/providers/ionic/storage.provider';
 import { Gtag } from 'angular-gtag';
 
 @Component({

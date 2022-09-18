@@ -1,12 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { QuestionsProvider } from '@providers/api/questions.provider';
-import { StorageProvider } from '@providers/ionic/storage.provider';
-import { PopoverController } from '@ionic/angular';
+import { QuestionsProvider } from 'app/shared/providers/api/questions.provider';
+import { StorageProvider } from 'app/shared/providers/ionic/storage.provider';
 import { CountdownComponent, CountdownConfig } from 'ngx-countdown';
-import { OptionsI } from '@interfaces/init-options.interface';
-import { ParticipantI } from '@interfaces/participant.interface';
-import { QuestionI } from '@interfaces/question.interface';
-import { QuestionMenuComponent } from './components/menu-popover/question-menu.component';
+import { OptionsGameI } from '@interfaces/options-game.interface';
+import { ParticipantI } from 'app/shared/interfaces/participant.interface';
+import { QuestionI } from 'app/shared/interfaces/question.interface';
 import { Gtag } from 'angular-gtag';
 import { Router } from '@angular/router';
 
@@ -16,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class QuestionPage {
   @ViewChild('cdQuestion', { static: false }) public countdownQuestion: CountdownComponent;
-  options: OptionsI;
+  options: OptionsGameI;
   question: QuestionI;
   participant: ParticipantI;
   countdownQuestionConfig: CountdownConfig = {};
@@ -33,7 +31,6 @@ export class QuestionPage {
   constructor(
     private questionsProvider: QuestionsProvider,
     private storageProvider: StorageProvider,
-    public popoverController: PopoverController,
     private gtag: Gtag,
     private router: Router
   ) {}
@@ -59,7 +56,7 @@ export class QuestionPage {
   }
 
   async getOptions(): Promise<void> {
-    this.options = await this.storageProvider.get<OptionsI>('options');
+    this.options = await this.storageProvider.get<OptionsGameI>('options');
     if (this.options) {
       this.countdownQuestionConfig = {
         leftTime: Number(this.options.durationQuestion),
@@ -98,11 +95,6 @@ export class QuestionPage {
     this.states.countdownQuestion = true;
     this.states.buttonStart = false;
     await this.questionsProvider.readQuestion(this.participant, this.question);
-    // this.countdownQuestion.begin();
-
-    // this.countdownQuestion.event.subscribe(() => {
-    //   this.states.countdownQuestion = false;
-    // });
     this.gtag.event('startQuestion');
     await this.countDown();
     this.states.countdownQuestion = false;
@@ -113,8 +105,6 @@ export class QuestionPage {
     this.gtag.event('resetGame');
     this.router.navigate(['/dashboard']);
   }
-
-  endGame() {}
 
   async voteQuestion(type: string): Promise<void> {
     this.participant = await this.questionsProvider.voteQuestion(type, this.participant);
@@ -133,26 +123,6 @@ export class QuestionPage {
   goToResume() {
     this.gtag.event('goToResume');
     this.states.classification = false;
-  }
-
-  async openPopover(ev: any) {
-    const popover = await this.popoverController.create({
-      component: QuestionMenuComponent,
-      event: ev,
-      translucent: true,
-      componentProps: { state: this.states.pause },
-    });
-    this.gtag.event('openPopover');
-    await popover.present();
-    const response = await popover.onDidDismiss();
-    if (response.data && response.data.action) {
-      const action = response.data.action;
-      if (action === 'pause') {
-      } else if (action === 'play') {
-      } else if (action === 'reload') {
-        this.resetGame();
-      }
-    }
   }
 
   countDown() {

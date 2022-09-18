@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { OptionsI } from '@interfaces/init-options.interface';
-import { ParticipantI } from '@interfaces/participant.interface';
-import { StorageProvider } from '@providers/ionic/storage.provider';
+import { OptionsGameI } from '@interfaces/options-game.interface';
+import { ParticipantI } from 'app/shared/interfaces/participant.interface';
+import { StorageProvider } from 'app/shared/providers/ionic/storage.provider';
 
 @Component({
   selector: 'app-options-resume',
@@ -10,12 +10,13 @@ import { StorageProvider } from '@providers/ionic/storage.provider';
 })
 export class OptionsResumePage implements OnInit {
   @ViewChild('slider') slides: any;
-  options: OptionsI = {
-    numberParticipants: '2',
+  options: OptionsGameI = {
+    totalParticipants: '2',
     type: 'normal',
     state: 'todo',
     durationQuestion: '15',
     participants: [],
+    rounds: '0',
   };
   shifts: ParticipantI[] = [];
   typesOfGame = [

@@ -1,6 +1,6 @@
-import { QuestionsProvider } from '@providers/api/questions.provider';
+import { QuestionsProvider } from 'app/shared/providers/api/questions.provider';
 import { Component } from '@angular/core';
-import { QuestionI } from '@interfaces/question.interface';
+import { QuestionI } from 'app/shared/interfaces/question.interface';
 import { NavigationExtras, Router } from '@angular/router';
 
 @Component({

@@ -1,8 +1,8 @@
-import { QuestionsProvider } from '@providers/api/questions.provider';
+import { QuestionsProvider } from 'app/shared/providers/api/questions.provider';
 import { Component } from '@angular/core';
-import { QuestionI } from '@interfaces/question.interface';
+import { QuestionI } from 'app/shared/interfaces/question.interface';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertProvider } from '@providers/ionic/alert.provider';
+import { AlertProvider } from 'app/shared/providers/ionic/alert.provider';
 
 @Component({
   selector: 'admin-edit-question',

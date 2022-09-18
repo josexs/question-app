@@ -1,10 +1,10 @@
-import { QuestionsProvider } from '@providers/api/questions.provider';
+import { QuestionsProvider } from 'app/shared/providers/api/questions.provider';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Gtag } from 'angular-gtag';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { QuestionI } from '@interfaces/question.interface';
-import { AlertProvider } from '@providers/ionic/alert.provider';
+import { QuestionI } from 'app/shared/interfaces/question.interface';
+import { AlertProvider } from 'app/shared/providers/ionic/alert.provider';
 
 @Component({
   selector: 'app-send',
@@ -32,7 +32,7 @@ export class SendPage implements OnInit {
 
   create() {
     this.alertProvider.presentAlertWithButtons(
-      '¡Oye!',
+      '',
       'Vas a enviar la pregunta, ¿estas seguro?',
       [
         {

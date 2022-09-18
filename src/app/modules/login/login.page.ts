@@ -1,10 +1,10 @@
-import { AuthProvider } from './../../providers/api/auth.provider';
+import { AuthProvider } from '../../shared/providers/api/auth.provider';
 import { Component, OnInit } from '@angular/core';
-import { AlertProvider } from '@providers/ionic/alert.provider';
+import { AlertProvider } from 'app/shared/providers/ionic/alert.provider';
 import { Router } from '@angular/router';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
-import { StorageProvider } from '@providers/ionic/storage.provider';
+import { StorageProvider } from 'app/shared/providers/ionic/storage.provider';
 import { Gtag } from 'angular-gtag';
 
 @Component({

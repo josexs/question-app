@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { PipesModule } from 'app/pipes/pipes.module';
 import { QuestionPage } from './question.page';
 import { CountdownModule } from 'ngx-countdown';
-import { QuestionMenuComponent } from './components/menu-popover/question-menu.component';
 import { RouterModule } from '@angular/router';
 import { QuestionHeaderComponent } from './components/header/question-header.component';
 import { QuestionCountdownComponent } from './components/countdown/question-countdown.component';
@@ -29,10 +28,9 @@ import { QuestionButtonsComponent } from './components/buttons/question-buttons.
   declarations: [
     QuestionPage,
     QuestionHeaderComponent,
-    QuestionMenuComponent,
     QuestionCountdownComponent,
-      QuestionInfoComponent,
-    QuestionButtonsComponent
+    QuestionInfoComponent,
+    QuestionButtonsComponent,
   ],
 })
 export class QuestionModule {}

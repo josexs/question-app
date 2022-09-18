@@ -1,6 +1,6 @@
-import { OptionsI } from '@interfaces/init-options.interface';
-import { ParticipantI } from '@interfaces/participant.interface';
-import { StorageProvider } from '@providers/ionic/storage.provider';
+import { OptionsGameI } from '@interfaces/options-game.interface';
+import { ParticipantI } from 'app/shared/interfaces/participant.interface';
+import { StorageProvider } from 'app/shared/providers/ionic/storage.provider';
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -15,7 +15,7 @@ export class EndGamePage {
   loser: any;
   state = false;
   rounds = 0;
-  options: OptionsI;
+  options: OptionsGameI;
   constructor(private storageProvider: StorageProvider, private router: Router) {}
 
   async ionViewWillEnter(): Promise<void> {

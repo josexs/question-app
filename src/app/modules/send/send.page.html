@@ -1,71 +1,62 @@
-<!-- <ion-header class="ion-no-border">
-  <ion-toolbar mode="ios">
-    <ion-title class="ion-text-center">Enviar pregunta </ion-title>
-    <ion-buttons slot="start">
-      <ion-button color="dark" fill="clear" (click)="goToDashboard()">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header> -->
-
 <ion-content>
-  <ion-row class="animate fadeIn center ion-no-margin">
-    <ion-col size="12" sizeLg="8" offsetLg="2">
-      <form [formGroup]="question">
-        <ion-item lines="none" class="ion-item-input">
-          <ion-label color="primary" position="stacked">Tu nombre</ion-label>
-          <ion-input formControlName="author" placeholder="Introduce tu nombre"></ion-input>
-        </ion-item>
-        <div *ngIf="(author.dirty || author.touched) && author.errors" class="errors">
-          <span *ngIf="author.errors?.required">El nombre del autor es obligatorio</span>
-          <span *ngIf="author.errors?.minlength">Tienes que introducir minimo 4 caracteres</span>
-        </div>
+    <div class="swipe-container-fake animate fadeIn">
+        <div class="swipe-fake">
+            <div class="ion-no-margin">
+                <ion-row>
+                    <form [formGroup]="question" class="w-100 m-lr-05">
+                        <ion-item lines="none" class="ion-item-input">
+                            <ion-label color="primary" position="stacked">Tu nombre</ion-label>
+                            <ion-input formControlName="author" placeholder="Introduce tu nombre"></ion-input>
+                            <div *ngIf="(author.dirty || author.touched) && author.errors" class="errors">
+                                <span *ngIf="author.errors?.required">❌ Mi nombre es QuestionsApp, ¿y el tuyo? 😒</span>
+                                <span *ngIf="author.errors?.minlength"> ❌ Tienes que introducir minimo 4
+                                    caracteres</span>
+                            </div>
+                        </ion-item>
 
-        <ion-item lines="none" class="ion-item-input">
-          <ion-label color="primary" position="stacked">Tu ciudad</ion-label>
-          <ion-input formControlName="city" placeholder="Introduce tu ciudad"></ion-input>
-        </ion-item>
-        <div *ngIf="(city.dirty || city.touched) && city.errors" class="errors">
-          <span *ngIf="city.errors?.required">La ciudad o zona es obligatorio</span>
-          <span *ngIf="city.errors?.minlength">Tienes que introducir minimo 4 caracteres</span>
-        </div>
+                        <ion-item lines="none" class="ion-item-input">
+                            <ion-label color="primary" position="stacked">Tu ciudad</ion-label>
+                            <ion-input formControlName="city" placeholder="Introduce tu ciudad"></ion-input>
+                            <div *ngIf="(city.dirty || city.touched) && city.errors" class="errors">
+                                <span *ngIf="city.errors?.required">❌ Yo soy de Madrid, ¿y tu? 😅</span>
+                                <span *ngIf="city.errors?.minlength">❌ Tienes que introducir minimo 4 caracteres, no racanees 😅 </span>
+                            </div>
+                        </ion-item>
 
-        <ion-item lines="none" class="ion-item-input">
-          <ion-label color="primary" position="stacked">Tipo</ion-label>
-          <ion-select
-            formControlName="type"
-            placeholder="Selecciona"
-            okText="Ok"
-            cancelText="Cancelar"
-          >
-            <ion-select-option value="normal">Normal</ion-select-option>
-            <ion-select-option value="hard">Fuerte</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <div *ngIf="(type.dirty || type.touched) && type.errors" class="errors">
-          <span *ngIf="type.errors?.required">El tipo es obligatorio</span>
-        </div>
+                        <ion-item lines="none" class="ion-item-input">
+                            <ion-label color="primary" position="stacked">Tipo</ion-label>
+                            <ion-select formControlName="type" placeholder="Selecciona" okText="Ok"
+                                cancelText="Cancelar">
+                                <ion-select-option value="normal">Normal</ion-select-option>
+                                <ion-select-option value="hard">Fuerte</ion-select-option>
+                            </ion-select>
+                            <div *ngIf="(type.dirty || type.touched) && type.errors" class="errors">
+                                <span *ngIf="type.errors?.required">❌ El tipo es obligatorio</span>
+                            </div>
+                        </ion-item>
 
-        <ion-item lines="none" class="ion-item-input">
-          <ion-label color="primary" position="stacked">Pregunta</ion-label>
-          <ion-textarea
-            type="text"
-            placeholder="Escribe la pregunta"
-            formControlName="text"
-            rows="5"
-          ></ion-textarea>
-        </ion-item>
-        <div *ngIf="(text.dirty || text.touched) && text.errors" class="errors">
-          <span *ngIf="text.errors?.required">Pregunta obligatoria</span>
-          <span *ngIf="text.errors?.minlength">La pregunta necesita minimo 10 caracteres</span>
+                        <ion-item lines="none" class="ion-item-input">
+                            <ion-label color="primary" position="stacked">Pregunta</ion-label>
+                            <ion-textarea type="text" placeholder="Escribe la pregunta" formControlName="text" rows="5">
+                            </ion-textarea>
+                            <div *ngIf="(text.dirty || text.touched) && text.errors" class="errors">
+                                <span *ngIf="text.errors?.required">❌ Si no añades la pregunta... ¿Que nos envias? 😫</span>
+                                <span *ngIf="text.errors?.minlength">❌ La pregunta necesita minimo 10 caracteres, escribe mas, que es gratis 😎</span>
+                            </div>
+                        </ion-item>
+                    </form>
+
+                    <div (click)="!question.valid ? null : create()" class="ion-item-custom w-100 m-lr-05 m-t-05"
+                        [ngClass]="{'ion-item-custom-disabled': !question.valid}">
+                        Enviar pregunta
+                        <ion-icon class="ion-icon-right" name="chevron-forward-outline"></ion-icon>
+                    </div>
+                    <div (click)="goToDashboard()" class="ion-item-custom w-100 m-lr-05 m-t-05">
+                        <ion-icon class="ion-icon-left" name="chevron-back-outline"></ion-icon>
+                        Volver
+                    </div>
+                </ion-row>
+            </div>
         </div>
-      </form>
-      
-      <div style="text-align: center; margin: 1rem 0rem 1rem 0rem">
-        <ion-button [disabled]="!question.valid" (click)="create()" expand="block">Enviar pregunta</ion-button>
-        <ion-button fill="outline" (click)="goToDashboard()" expand="block">Volver</ion-button>
-      </div>
-    </ion-col>
-  </ion-row>
+    </div>
 </ion-content>

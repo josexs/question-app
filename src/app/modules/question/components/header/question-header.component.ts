@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ParticipantI } from '@interfaces/participant.interface';
+import { ParticipantI } from 'app/shared/interfaces/participant.interface';
 
 @Component({
   selector: 'question-header',

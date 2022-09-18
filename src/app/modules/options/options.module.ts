@@ -4,8 +4,9 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { InitOptionsPage } from './options.page';
 import { PipesModule } from 'app/pipes/pipes.module';
-import { OptionsParticipantsComponent } from './components/init-options-participants.component';
+import { OptionsParticipantsComponent } from './components/options-participants/options-participants.component';
 import { RouterModule } from '@angular/router';
+import { OptionsInitComponent } from './components/options-init/options-init.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,6 @@ import { RouterModule } from '@angular/router';
       },
     ]),
   ],
-  declarations: [InitOptionsPage, OptionsParticipantsComponent],
+  declarations: [InitOptionsPage, OptionsInitComponent, OptionsParticipantsComponent],
 })
 export class InitOptionsModule {}

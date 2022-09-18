@@ -1,10 +1,10 @@
-import { OptionsI } from '@interfaces/init-options.interface';
-import { StorageProvider } from '@providers/ionic/storage.provider';
+import { OptionsGameI } from '@interfaces/options-game.interface';
+import { StorageProvider } from 'app/shared/providers/ionic/storage.provider';
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { ParticipantI } from '@interfaces/participant.interface';
+import { ParticipantI } from 'app/shared/interfaces/participant.interface';
 import { Gtag } from 'angular-gtag';
 import { Router } from '@angular/router';
-import { AlertProvider } from '@providers/ionic/alert.provider';
+import { AlertProvider } from 'app/shared/providers/ionic/alert.provider';
 
 @Component({
   selector: 'question-resume',
@@ -119,7 +119,7 @@ export class QuestionResumePage {
   }
 
   async goToEndConfirm() {
-    const gameOptions: OptionsI = await this.storageProvider.get('options');
+    const gameOptions: OptionsGameI = await this.storageProvider.get('options');
     gameOptions.state = 'end';
     await this.storageProvider.set('options', gameOptions);
     this.router.navigate(['/end-game']);

@@ -5,11 +5,12 @@
 }
 
 .errors {
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  width: 100%;
   font-size: small;
-  color: #fff;
-  background: var(--ion-color-danger);
-  padding-left: 15px;
+  color: #000;
+  text-align: left;
   padding-top: 5px;
-  padding-bottom: 5px;
-  border-radius: 8px;
+  padding-bottom: 0.75rem;
+  font-weight: 700;
 }

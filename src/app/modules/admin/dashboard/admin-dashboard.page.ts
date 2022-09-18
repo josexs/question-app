@@ -1,4 +1,4 @@
-import { StorageProvider } from '@providers/ionic/storage.provider';
+import { StorageProvider } from 'app/shared/providers/ionic/storage.provider';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
