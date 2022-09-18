@@ -47,7 +47,7 @@ export class OptionsParticipantsComponent {
     }
   }
 
-  uploadPWA(index: number) {
+  uploadPWA() {
     if (this.pwaphoto == null) {
       return;
     }
@@ -58,15 +58,14 @@ export class OptionsParticipantsComponent {
         (result: string) => {
           this.imgURI = result;
         },
-        (err: any) => {
-          // Ignore error, do nothing
+        () => {
           this.imgURI = null;
         }
       );
     }
   }
 
-  private firstFileToBase64(fileImage: File): Promise<{}> {
+  private firstFileToBase64(fileImage: File): Promise<any> {
     return new Promise((resolve, reject) => {
       const fileReader: FileReader = new FileReader();
       if (fileReader && fileImage != null) {
@@ -85,17 +84,6 @@ export class OptionsParticipantsComponent {
   }
 
   captureImage() {
-    // this.camera.getPicture(this.optionsCamera).then(
-    //   (imageData) => {
-    //     // imageData is either a base64 encoded string or a file URI
-    //     // If it's base64 (DATA_URL):
-    //     let base64Image = 'data:image/jpeg;base64,' + imageData;
-    //     this.clickedImage = base64Image;
-    //   },
-    //   (err) => {
-    //     console.log(err);
-    //     // Handle error
-    //   }
-    // );
+    return true;
   }
 }

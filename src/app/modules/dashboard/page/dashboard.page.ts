@@ -7,7 +7,6 @@ import { AlertProvider, QuestionsProvider, StorageProvider } from '@providers';
 @Component({
   selector: 'page-dashboard',
   templateUrl: 'dashboard.page.html',
-  styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage {
   @ViewChild('slider') slides: any;

@@ -124,29 +124,14 @@ export class QuestionsProvider {
   }
 
   readQuestion(participant: ParticipantI, question: QuestionI): Promise<void> {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve) => {
       const msg = `Pregunta para ${participant.name}.......${question.text}`;
-      const isiOS = this.platform.is('ios');
       console.log(participant.gender);
       this.getSupportedVoices();
       let rate = 0;
       if (participant.gender === 'male') {
-        const nameFemale = isiOS ? 'Mónica' : 'Monica';
         rate = 1.1;
-        // if (this.voicesSupported.indexOf(nameFemale) !== -1) {
-        //   this.speech.setVoice(nameFemale);
-        // } else {
-        //   this.speech.setRate(1.3);
-        //   this.speech.setVoice('español España');
-        // }
       } else if (participant.gender === 'female') {
-        // const nameMale = isiOS ? 'Mónica' : 'Jorge';
-        // if (this.voicesSupported.indexOf(nameMale) !== -1) {
-        //   this.speech.setVoice(nameMale);
-        // } else {
-        //   this.speech.setRate(1.2);
-        //   this.speech.setVoice('español España');
-        // }
         rate = 1.2;
       }
       await this.speak(msg, rate, this.utilsProvider.rand(2, true, 2));

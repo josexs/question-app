@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class UtilsProvider {
-  constructor() {}
 
   randomNumber(max: number, min = 1, decimal = false): string {
     if (!decimal) {

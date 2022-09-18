@@ -4,8 +4,8 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '@shared';
 
 @NgModule({
-    imports: [
-      SharedModule,
+  imports: [
+    SharedModule,
     RouterModule.forChild([
       {
         path: '',

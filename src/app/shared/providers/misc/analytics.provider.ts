@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-declare var ga;
+declare let ga;
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnalyticsProvider {
-  constructor() {}
 
   setTracker(tracker) {
     if (!localStorage.getItem('ga:clientId')) {

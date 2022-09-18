@@ -43,7 +43,7 @@ export class EndGamePage {
   }
 
   async getClassification(): Promise<void> {
-    let shifts: ParticipantI[] = await this.storageProvider.get('shifts');
+    const shifts: ParticipantI[] = await this.storageProvider.get('shifts');
     shifts.sort((a, b) => {
       if (a.positive - a.negative > b.positive - b.negative) {
         return -1;

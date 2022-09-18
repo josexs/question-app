@@ -9,11 +9,7 @@ import { AdminCreateQuestionPage } from './create/admin-create-question.page';
 import { SharedModule } from '@shared';
 
 @NgModule({
-  imports: [
-    AdminRoutingModule,
-    SharedModule,
-    ReactiveFormsModule,
-  ],
+  imports: [AdminRoutingModule, SharedModule, ReactiveFormsModule],
   declarations: [
     AdminDashboardPage,
     AdminListAllPage,

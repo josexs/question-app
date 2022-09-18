@@ -8,7 +8,6 @@ import {
 import { Gtag } from 'angular-gtag';
 import { AlertProvider, QuestionsProvider } from '@providers';
 
-
 @Component({
   selector: 'app-send',
   templateUrl: 'send.page.html',

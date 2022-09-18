@@ -8,5 +8,4 @@ import { ParticipantI } from '@interfaces';
 })
 export class QuestionHeaderComponent {
   @Input() participant: ParticipantI;
-  constructor() {}
 }

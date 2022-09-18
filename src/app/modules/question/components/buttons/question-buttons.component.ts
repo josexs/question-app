@@ -14,5 +14,4 @@ export class QuestionButtonsComponent {
   @Input() isFirstQuestion: boolean;
   @Output() startQuestion: EventEmitter<void> = new EventEmitter();
   @Output() voteQuestion: EventEmitter<string> = new EventEmitter<string>();
-  constructor() {}
 }

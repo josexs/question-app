@@ -1,1 +1,1 @@
-export { navAnimation } from "./animations";
+export { navAnimation } from './animations';

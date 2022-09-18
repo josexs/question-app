@@ -8,5 +8,4 @@ import { Component, Input } from '@angular/core';
 export class QuestionCountdownComponent {
   @Input() countdownCurrent: number;
   @Input() countdownCurrentPercentage: string;
-  constructor() {}
 }
